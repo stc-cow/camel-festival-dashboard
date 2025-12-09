@@ -1,8 +1,16 @@
 import { cn } from "@/lib/utils";
-import { COWUnit } from "@/data/cowNetworkData";
+
+interface COWUnitPower {
+  id: string;
+  name: string;
+  status: "active" | "warning" | "inactive";
+  latitude: number;
+  longitude: number;
+  power: "critical" | "high" | "normal";
+}
 
 interface SiteMapProps {
-  cowUnits: COWUnit[];
+  cowUnits: COWUnitPower[];
 }
 
 export function SiteMap({ cowUnits }: SiteMapProps) {
