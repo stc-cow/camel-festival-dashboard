@@ -131,15 +131,15 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
         <div className="grid grid-cols-3 gap-4 text-xs">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-400" />
-            <span className="text-purple-200">Normal Power</span>
+            <span className="text-purple-200">Normal ({normalPower})</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-yellow-400" />
-            <span className="text-purple-200">High Alert</span>
+            <span className="text-purple-200">High ({highPower})</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-red-500" />
-            <span className="text-purple-200">Critical</span>
+            <span className="text-purple-200">Critical ({criticalPower})</span>
           </div>
         </div>
       </div>
