@@ -3,9 +3,10 @@ import { Card } from "@/components/ui/card";
 interface KPIMetric {
   label: string;
   value: number;
-  target: number;
+  target?: number;
   color: string;
   icon: React.ReactNode;
+  unit?: string;
 }
 
 interface PerformanceKPIProps {
