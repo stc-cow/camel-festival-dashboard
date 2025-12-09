@@ -61,7 +61,7 @@ export function SiteMap({ cowUnits = [] }: SiteMapProps) {
         <rect width="100" height="100" fill="url(#grid)" />
 
         {/* COW Unit markers - Power Status */}
-        {cowUnits.map((unit) => {
+        {units.map((unit) => {
           const coords = getMapCoordinates(unit.latitude, unit.longitude);
           const markerColor =
             unit.power === "critical"
