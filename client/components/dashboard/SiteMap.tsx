@@ -71,37 +71,55 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
         <rect width="100" height="100" fill="url(#mapGradient)" />
         <rect width="100" height="100" fill="url(#grid)" />
 
-        {/* COW Unit markers */}
+        {/* COW Unit markers - Power Status */}
         {cowUnits.map((unit) => {
           const coords = getMapCoordinates(unit.latitude, unit.longitude);
+          const markerColor =
+            unit.power === "critical"
+              ? "#EF4444"
+              : unit.power === "high"
+                ? "#FBBF24"
+                : "#22C55E";
+
           return (
             <g key={unit.name}>
-              {/* Pulse effect for active units */}
+              {/* Pulse effect for critical/high */}
               <circle
                 cx={coords.x}
                 cy={coords.y}
                 r="2.5"
                 className={cn(
                   "opacity-50",
-                  unit.status === "active" && "animate-pulse"
+                  (unit.power === "critical" || unit.power === "high") &&
+                    "animate-pulse"
                 )}
-                fill={
-                  unit.status === "active"
-                    ? "#22C55E"
-                    : unit.status === "warning"
-                      ? "#F59E0B"
-                      : "#EF4444"
-                }
+                fill={markerColor}
               />
               {/* Main marker */}
-              <circle
-                cx={coords.x}
-                cy={coords.y}
-                r="1.5"
-                className={getStatusColor(unit.status)}
-              />
+              <circle cx={coords.x} cy={coords.y} r="1.5" fill={markerColor} />
+              {/* X mark for critical/high */}
+              {(unit.power === "critical" || unit.power === "high") && (
+                <>
+                  <line
+                    x1={coords.x - 1.2}
+                    y1={coords.y - 1.2}
+                    x2={coords.x + 1.2}
+                    y2={coords.y + 1.2}
+                    stroke={markerColor}
+                    strokeWidth="0.3"
+                  />
+                  <line
+                    x1={coords.x + 1.2}
+                    y1={coords.y - 1.2}
+                    x2={coords.x - 1.2}
+                    y2={coords.y + 1.2}
+                    stroke={markerColor}
+                    strokeWidth="0.3"
+                  />
+                </>
+              )}
               {/* Label on hover (text element) */}
-              <title>{unit.name}</title>
+              <title>{unit.name} - {unit.power}</title>
             </g>
           );
         })}
