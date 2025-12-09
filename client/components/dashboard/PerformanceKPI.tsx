@@ -65,7 +65,9 @@ export function PerformanceKPI({ metrics }: PerformanceKPIProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {metrics.map((metric, index) => {
-        const percentage = (metric.value / metric.target) * 100;
+        const percentage = metric.target
+          ? (metric.value / metric.target) * 100
+          : metric.value;
 
         return (
           <Card
@@ -77,10 +79,15 @@ export function PerformanceKPI({ metrics }: PerformanceKPIProps) {
                 <p className="text-sm text-slate-400 mb-1">{metric.label}</p>
                 <div className="text-2xl font-bold text-white">
                   {metric.value.toLocaleString()}
+                  {metric.unit && (
+                    <span className="text-lg ml-1">{metric.unit}</span>
+                  )}
                 </div>
-                <p className="text-xs text-slate-500 mt-1">
-                  of {metric.target.toLocaleString()} target
-                </p>
+                {metric.target && (
+                  <p className="text-xs text-slate-500 mt-1">
+                    of {metric.target.toLocaleString()} target
+                  </p>
+                )}
               </div>
               <div className="text-slate-600">{metric.icon}</div>
             </div>
@@ -93,7 +100,7 @@ export function PerformanceKPI({ metrics }: PerformanceKPIProps) {
             {/* Progress bar */}
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-xs text-slate-400">Progress</span>
+                <span className="text-xs text-slate-400">Status</span>
                 <span className="text-xs font-semibold text-emerald-400">
                   {Math.round(percentage)}%
                 </span>
