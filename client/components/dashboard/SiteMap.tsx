@@ -32,7 +32,7 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
   const criticalPower = cowUnits.filter((u) => u.power === "critical").length;
 
   return (
-    <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 rounded-lg overflow-hidden relative">
+    <div className="h-full bg-gradient-to-br from-purple-900 via-purple-800 to-slate-900 rounded-lg overflow-hidden relative">
       {/* Network map background */}
       <svg
         className="w-full h-full"
