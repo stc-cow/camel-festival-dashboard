@@ -127,25 +127,29 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
 
       {/* COW info overlay */}
       <div className="absolute top-4 left-4 right-4 flex flex-col gap-2 max-h-28 overflow-y-auto">
-        {cowUnits.slice(0, 3).map((unit) => (
-          <div
-            key={unit.name}
-            className={cn(
-              "px-3 py-2 rounded-lg text-xs backdrop-blur-sm",
-              unit.status === "active" &&
-                "bg-green-500/20 border border-green-400/30",
-              unit.status === "warning" &&
-                "bg-amber-500/20 border border-amber-400/30",
-              unit.status === "inactive" &&
-                "bg-red-500/20 border border-red-400/30"
-            )}
-          >
-            <div className="font-semibold text-white">{unit.name}</div>
-            <div className="text-slate-300 text-xs">
-              {unit.tech} • Signal: {unit.signalStrength}%
+        {cowUnits.slice(0, 3).map((unit) => {
+          const powerColor =
+            unit.power === "critical"
+              ? "bg-red-500/20 border-red-400/30"
+              : unit.power === "high"
+                ? "bg-yellow-500/20 border-yellow-400/30"
+                : "bg-green-500/20 border-green-400/30";
+
+          return (
+            <div
+              key={unit.name}
+              className={cn(
+                "px-3 py-2 rounded-lg text-xs backdrop-blur-sm border",
+                powerColor
+              )}
+            >
+              <div className="font-semibold text-white">{unit.name}</div>
+              <div className="text-purple-200 text-xs">
+                Power: {unit.power === "critical" ? "🔴 Critical" : unit.power === "high" ? "🟡 High" : "🟢 Normal"}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
