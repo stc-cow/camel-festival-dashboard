@@ -1,23 +1,23 @@
 import { useState } from "react";
+import { PowerTicketsStats } from "@/components/dashboard/PowerTicketsStats";
+import { AvailabilityMetric } from "@/components/dashboard/AvailabilityMetric";
+import { PowerOutagesTable } from "@/components/dashboard/PowerOutagesTable";
 import { SiteMap } from "@/components/dashboard/SiteMap";
-import { PerformanceKPI } from "@/components/dashboard/PerformanceKPI";
-import { COWUnitsTable } from "@/components/dashboard/COWUnitsTable";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  TrendingUp,
-  Radio,
-  Users,
-  Activity,
-  RefreshCw,
-  Wifi,
-  AlertTriangle,
-} from "lucide-react";
-import { cowUnits, getNetworkStats } from "@/data/cowNetworkData";
+import { RefreshCw, AlertTriangle } from "lucide-react";
+import { powerTickets, getPowerStats } from "@/data/powerOutageData";
 
 export default function Dashboard() {
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const stats = getNetworkStats();
+  const stats = getPowerStats();
+  const lastUpdated = new Date().toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -25,55 +25,81 @@ export default function Dashboard() {
     setIsRefreshing(false);
   };
 
-  const networkMetrics = [
+  // Get COW units for map
+  const cowUnits = [
     {
-      label: "Active COW Units",
-      value: stats.activeCOWs,
-      target: stats.totalCOWs,
-      color: "#10B981",
-      icon: <Radio className="w-5 h-5" />,
+      id: "COW076",
+      name: "COW076",
+      status: "active" as const,
+      latitude: 25.59805,
+      longitude: 46.87754,
+      power: "critical",
     },
     {
-      label: "Avg Signal Strength",
-      value: stats.avgSignalStrength,
-      color: "#3B82F6",
-      icon: <Wifi className="w-5 h-5" />,
-      unit: "%",
+      id: "COW022",
+      name: "COW022",
+      status: "warning" as const,
+      latitude: 25.63587,
+      longitude: 46.83091,
+      power: "critical",
     },
     {
-      label: "Active Users",
-      value: stats.totalActiveUsers,
-      color: "#F59E0B",
-      icon: <Users className="w-5 h-5" />,
+      id: "COW188",
+      name: "COW188",
+      status: "warning" as const,
+      latitude: 25.64236,
+      longitude: 46.81855,
+      power: "high",
     },
     {
-      label: "Network Uptime",
-      value: stats.networkUptime,
-      color: "#8B5CF6",
-      icon: <Activity className="w-5 h-5" />,
-      unit: "%",
+      id: "COW094",
+      name: "COW094",
+      status: "active" as const,
+      latitude: 25.67764,
+      longitude: 46.85573,
+      power: "high",
+    },
+    {
+      id: "COW652",
+      name: "COW652",
+      status: "active" as const,
+      latitude: 25.67445,
+      longitude: 46.8308,
+      power: "normal",
+    },
+    {
+      id: "CWS808",
+      name: "CWS808",
+      status: "active" as const,
+      latitude: 25.6609,
+      longitude: 46.86093,
+      power: "normal",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-slate-950">
       {/* Header */}
-      <div className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
+      <div className="border-b border-purple-500/30 bg-purple-900/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-6 flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-                <Radio className="w-8 h-8 text-blue-400" />
-                GSM COW Network Dashboard
-              </h1>
-              <p className="text-slate-400 mt-1">
-                Real-time monitoring of Cell on Wheel network performance (2G/4G/5G)
-              </p>
+          <div className="py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                <span className="text-white font-bold text-lg">⚡</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-white">
+                  Power & Outage Insight
+                </h1>
+                <p className="text-purple-300 text-xs">
+                  Real-time power system monitoring
+                </p>
+              </div>
             </div>
             <Button
               onClick={handleRefresh}
               disabled={isRefreshing}
-              className="gap-2 bg-slate-700 hover:bg-slate-600 text-white"
+              className="gap-2 bg-purple-700 hover:bg-purple-600 text-white"
               size="sm"
             >
               <RefreshCw
@@ -85,137 +111,92 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Main Content - Two Column Layout */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Alerts */}
-        {stats.warningCOWs > 0 && (
-          <div className="mb-8 p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+        {/* Alert Bar */}
+        {stats.openCount > 0 && (
+          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-semibold text-amber-300 mb-1">Network Alert</h3>
-              <p className="text-sm text-amber-200">
-                {stats.warningCOWs} COW unit{stats.warningCOWs > 1 ? "s" : ""} requiring attention
+              <h3 className="font-semibold text-red-300 mb-1">
+                Active Power Issues
+              </h3>
+              <p className="text-sm text-red-200">
+                {stats.openCount} open ticket{stats.openCount > 1 ? "s" : ""}{" "}
+                requiring attention
               </p>
             </div>
           </div>
         )}
 
-        {/* Performance Metrics */}
-        <div className="mb-8">
-          <div className="mb-4">
-            <h2 className="text-xl font-bold text-white">Network Performance</h2>
-            <p className="text-sm text-slate-400">
-              Key performance indicators across the COW network
-            </p>
-          </div>
-          <PerformanceKPI metrics={networkMetrics} />
-        </div>
-
-        {/* Map and Quick Stats Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {/* Network Coverage Map */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Panel - Power Tickets Stats */}
           <div className="lg:col-span-1">
-            <div className="mb-4">
-              <h2 className="text-xl font-bold text-white">Network Coverage Map</h2>
-              <p className="text-sm text-slate-400">
-                COW unit locations and status
-              </p>
-            </div>
-            <div className="h-96 rounded-lg overflow-hidden shadow-xl border border-slate-700">
-              <SiteMap cowUnits={cowUnits} />
-            </div>
+            <PowerTicketsStats
+              criticalCount={stats.criticalCount}
+              highCount={stats.highCount}
+              mediumCount={stats.mediumCount}
+              lowCount={stats.lowCount}
+              openCount={stats.openCount}
+              inProgressCount={stats.inProgressCount}
+            />
           </div>
 
-          {/* Quick Stats */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="mb-4">
-              <h2 className="text-xl font-bold text-white">Network Summary</h2>
-              <p className="text-sm text-slate-400">
-                Current network status snapshot
-              </p>
+          {/* Right Panel - Map and Availability */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Map Section */}
+            <div>
+              <div className="mb-4">
+                <h2 className="text-lg font-bold text-white">
+                  Coverage Map - Power Status
+                </h2>
+                <p className="text-sm text-purple-300">
+                  Outage locations and affected areas
+                </p>
+              </div>
+              <div className="h-80 rounded-lg overflow-hidden shadow-lg border border-purple-500/30">
+                <SiteMap cowUnits={cowUnits} />
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card className="bg-gradient-to-br from-blue-900/20 to-blue-800/10 border-blue-700/30 p-6 hover:border-blue-600/50 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-blue-300 mb-1">Total COW Units</p>
-                    <div className="text-3xl font-bold text-blue-400">
-                      {stats.totalCOWs}
-                    </div>
-                    <p className="text-xs text-blue-600 mt-1">
-                      {stats.activeCOWs} active, {stats.warningCOWs} warning
-                    </p>
-                  </div>
-                  <div className="text-blue-600/40">
-                    <Radio className="w-8 h-8" />
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-cyan-900/20 to-cyan-800/10 border-cyan-700/30 p-6 hover:border-cyan-600/50 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-cyan-300 mb-1">Avg Signal</p>
-                    <div className="text-3xl font-bold text-cyan-400">
-                      {stats.avgSignalStrength}%
-                    </div>
-                    <p className="text-xs text-cyan-600 mt-1">
-                      Network coverage quality
-                    </p>
-                  </div>
-                  <div className="text-cyan-600/40">
-                    <Wifi className="w-8 h-8" />
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-purple-900/20 to-purple-800/10 border-purple-700/30 p-6 hover:border-purple-600/50 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-purple-300 mb-1">Active Users</p>
-                    <div className="text-3xl font-bold text-purple-400">
-                      {(stats.totalActiveUsers / 1000).toFixed(1)}K
-                    </div>
-                    <p className="text-xs text-purple-600 mt-1">
-                      Connected devices
-                    </p>
-                  </div>
-                  <div className="text-purple-600/40">
-                    <Users className="w-8 h-8" />
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-emerald-900/20 to-emerald-800/10 border-emerald-700/30 p-6 hover:border-emerald-600/50 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-emerald-300 mb-1">Uptime</p>
-                    <div className="text-3xl font-bold text-emerald-400">
-                      {stats.networkUptime}%
-                    </div>
-                    <p className="text-xs text-emerald-600 mt-1">
-                      Network availability
-                    </p>
-                  </div>
-                  <div className="text-emerald-600/40">
-                    <Activity className="w-8 h-8" />
-                  </div>
-                </div>
-              </Card>
+            {/* Availability Metric */}
+            <div>
+              <AvailabilityMetric
+                availability={parseFloat(stats.availability as string)}
+                affectedDevices={stats.totalAffectedDevices}
+                lastUpdated={lastUpdated}
+              />
             </div>
           </div>
         </div>
 
-        {/* COW Units Table */}
-        <div>
-          <div className="mb-4">
-            <h2 className="text-xl font-bold text-white">COW Units Details</h2>
-            <p className="text-sm text-slate-400">
-              Complete list of all Cell on Wheel units with performance metrics
+        {/* Full Width - Power Outages Table */}
+        <div className="mt-8">
+          <PowerOutagesTable tickets={powerTickets} />
+        </div>
+
+        {/* Summary Stats Footer */}
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <Card className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 border-purple-500/30 p-4">
+            <p className="text-xs text-purple-300 mb-2">Total Tickets</p>
+            <p className="text-2xl font-bold text-white">{stats.totalTickets}</p>
+          </Card>
+          <Card className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 border-purple-500/30 p-4">
+            <p className="text-xs text-purple-300 mb-2">Total Outage Time</p>
+            <p className="text-2xl font-bold text-yellow-400">
+              {stats.totalOutageDuration}
             </p>
-          </div>
-          <COWUnitsTable cowUnits={cowUnits} />
+            <p className="text-xs text-purple-400 mt-1">minutes (8h)</p>
+          </Card>
+          <Card className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 border-purple-500/30 p-4">
+            <p className="text-xs text-purple-300 mb-2">System Status</p>
+            <p className="text-2xl font-bold text-green-400">Operational</p>
+          </Card>
+          <Card className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 border-purple-500/30 p-4">
+            <p className="text-xs text-purple-300 mb-2">Next Review</p>
+            <p className="text-lg font-bold text-white">15:30</p>
+            <p className="text-xs text-purple-400 mt-1">Today</p>
+          </Card>
         </div>
       </div>
     </div>
