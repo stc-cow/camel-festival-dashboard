@@ -42,14 +42,14 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
         {/* Gradient background */}
         <defs>
           <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{ stopColor: "#0F172A", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#1E293B", stopOpacity: 1 }} />
+            <stop offset="0%" style={{ stopColor: "#2D1B4E", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#1E1B4E", stopOpacity: 1 }} />
           </linearGradient>
           <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
             <path
               d="M 10 0 L 0 0 0 10"
               fill="none"
-              stroke="#3B82F6"
+              stroke="#A855F7"
               strokeWidth="0.1"
               opacity="0.3"
             />
