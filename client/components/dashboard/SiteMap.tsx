@@ -134,7 +134,7 @@ export function SiteMap({ cowUnits = [] }: SiteMapProps) {
 
       {/* COW info overlay */}
       <div className="absolute top-4 left-4 right-4 flex flex-col gap-2 max-h-28 overflow-y-auto">
-        {cowUnits.slice(0, 3).map((unit) => {
+        {units.slice(0, 3).map((unit) => {
           const powerColor =
             unit.power === "critical"
               ? "bg-red-500/20 border-red-400/30"
