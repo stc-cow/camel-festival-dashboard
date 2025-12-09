@@ -1,4 +1,3 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import { Card } from "@/components/ui/card";
 
 interface KPIMetric {
@@ -13,20 +12,65 @@ interface PerformanceKPIProps {
   metrics: KPIMetric[];
 }
 
+function CircularProgress({
+  percentage,
+  color,
+}: {
+  percentage: number;
+  color: string;
+}) {
+  const circumference = 2 * Math.PI * 45;
+  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+  return (
+    <svg className="w-24 h-24" viewBox="0 0 100 100">
+      <circle
+        cx="50"
+        cy="50"
+        r="45"
+        fill="none"
+        stroke="#334155"
+        strokeWidth="8"
+      />
+      <circle
+        cx="50"
+        cy="50"
+        r="45"
+        fill="none"
+        stroke={color}
+        strokeWidth="8"
+        strokeDasharray={circumference}
+        strokeDashoffset={strokeDashoffset}
+        strokeLinecap="round"
+        className="transition-all duration-500"
+        style={{
+          transform: "rotate(-90deg)",
+          transformOrigin: "50px 50px",
+        }}
+      />
+      <text
+        x="50"
+        y="55"
+        textAnchor="middle"
+        className="text-sm font-bold fill-white"
+      >
+        {Math.round(percentage)}%
+      </text>
+    </svg>
+  );
+}
+
 export function PerformanceKPI({ metrics }: PerformanceKPIProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {metrics.map((metric, index) => {
         const percentage = (metric.value / metric.target) * 100;
-        const data = [
-          { name: "Achieved", value: metric.value },
-          { name: "Remaining", value: metric.target - metric.value },
-        ];
-
-        const colors = [metric.color, "#E2E8F0"];
 
         return (
-          <Card key={index} className="p-6 bg-gradient-to-br from-slate-800 to-slate-900 border-slate-700 hover:border-slate-600 transition-colors">
+          <Card
+            key={index}
+            className="p-6 bg-gradient-to-br from-slate-800 to-slate-900 border-slate-700 hover:border-slate-600 transition-colors"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
                 <p className="text-sm text-slate-400 mb-1">{metric.label}</p>
@@ -40,38 +84,13 @@ export function PerformanceKPI({ metrics }: PerformanceKPIProps) {
               <div className="text-slate-600">{metric.icon}</div>
             </div>
 
-            {/* Donut Chart */}
-            <div className="h-24 -mx-2">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={data}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={28}
-                    outerRadius={40}
-                    paddingAngle={0}
-                    dataKey="value"
-                  >
-                    {colors.map((color, i) => (
-                      <Cell key={`cell-${i}`} fill={color} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#1E293B",
-                      border: "1px solid #475569",
-                      borderRadius: "6px",
-                    }}
-                    labelStyle={{ color: "#F1F5F9" }}
-                    formatter={(value: number) => value.toLocaleString()}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+            {/* Circular Progress Chart */}
+            <div className="flex justify-center mb-4">
+              <CircularProgress percentage={percentage} color={metric.color} />
             </div>
 
-            {/* Progress indicator */}
-            <div className="mt-4">
+            {/* Progress bar */}
+            <div>
               <div className="flex justify-between items-center mb-2">
                 <span className="text-xs text-slate-400">Progress</span>
                 <span className="text-xs font-semibold text-emerald-400">
