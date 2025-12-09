@@ -13,7 +13,7 @@ interface SiteMapProps {
   cowUnits: COWUnitPower[];
 }
 
-export function SiteMap({ cowUnits }: SiteMapProps) {
+export function SiteMap({ cowUnits = [] }: SiteMapProps) {
   // Normalize coordinates to map dimensions
   const minLat = 25.59;
   const maxLat = 25.74;
@@ -26,10 +26,10 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
     return { x, y };
   };
 
-
-  const normalPower = cowUnits.filter((u) => u.power === "normal").length;
-  const highPower = cowUnits.filter((u) => u.power === "high").length;
-  const criticalPower = cowUnits.filter((u) => u.power === "critical").length;
+  const units = cowUnits || [];
+  const normalPower = units.filter((u) => u.power === "normal").length;
+  const highPower = units.filter((u) => u.power === "high").length;
+  const criticalPower = units.filter((u) => u.power === "critical").length;
 
   return (
     <div className="h-full bg-gradient-to-br from-purple-900 via-purple-800 to-slate-900 rounded-lg overflow-hidden relative">
