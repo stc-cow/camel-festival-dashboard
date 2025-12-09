@@ -103,8 +103,13 @@
     @apply border-border;
   }
 
+  html {
+    /* Force dark theme for the dashboard */
+    color-scheme: dark;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-foreground;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
@@ -116,5 +121,24 @@
   code {
     overflow-x: auto;
     white-space: pre;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--slate-600));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--slate-500));
   }
 }
