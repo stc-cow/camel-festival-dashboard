@@ -39,8 +39,9 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
     }
   };
 
-  const activeCOWs = cowUnits.filter((u) => u.status === "active").length;
-  const warningCOWs = cowUnits.filter((u) => u.status === "warning").length;
+  const normalPower = cowUnits.filter((u) => u.power === "normal").length;
+  const highPower = cowUnits.filter((u) => u.power === "high").length;
+  const criticalPower = cowUnits.filter((u) => u.power === "critical").length;
 
   return (
     <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 rounded-lg overflow-hidden relative">
