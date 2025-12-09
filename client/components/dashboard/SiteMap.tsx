@@ -26,18 +26,6 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
     return { x, y };
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "active":
-        return "fill-green-500 animate-pulse";
-      case "warning":
-        return "fill-amber-500";
-      case "inactive":
-        return "fill-red-500";
-      default:
-        return "fill-blue-500";
-    }
-  };
 
   const normalPower = cowUnits.filter((u) => u.power === "normal").length;
   const highPower = cowUnits.filter((u) => u.power === "high").length;
