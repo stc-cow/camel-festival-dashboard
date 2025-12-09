@@ -108,19 +108,19 @@ export function SiteMap({ cowUnits }: SiteMapProps) {
       </svg>
 
       {/* Legend */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-4">
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-purple-950 via-purple-950/80 to-transparent p-4">
         <div className="grid grid-cols-3 gap-4 text-xs">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-500" />
-            <span className="text-slate-300">Active ({activeCOWs})</span>
+            <div className="w-2 h-2 rounded-full bg-green-400" />
+            <span className="text-purple-200">Normal Power</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-amber-500" />
-            <span className="text-slate-300">Warning ({warningCOWs})</span>
+            <div className="w-2 h-2 rounded-full bg-yellow-400" />
+            <span className="text-purple-200">High Alert</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-red-500" />
-            <span className="text-slate-300">Inactive</span>
+            <span className="text-purple-200">Critical</span>
           </div>
         </div>
       </div>
