@@ -83,8 +83,8 @@ export function FestivalSiteMap({
         {/* Gradients and Patterns */}
         <defs>
           <linearGradient id="mapBackground" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{ stopColor: "#1E293B", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#0F172A", stopOpacity: 1 }} />
+            <stop offset="0%" style={{ stopColor: "#F5F3FF", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#E8E4F8", stopOpacity: 1 }} />
           </linearGradient>
 
           {/* Satellite texture */}
