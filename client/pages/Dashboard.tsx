@@ -101,10 +101,10 @@ export default function Dashboard() {
 
         {/* Main Content Area - Flexible Grid */}
         <div className="flex-1 overflow-hidden p-4 sm:p-6">
-          <div className="w-full h-full grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
-            {/* Center Panel - KPI Gauge (Centered) */}
-            <div className="md:col-start-4 md:col-span-5 flex flex-col h-full">
-              <div className="flex-1 min-h-0">
+          <div className="w-full h-full flex flex-col gap-6">
+            {/* Top Row - Centered KPI Gauge */}
+            <div className="flex justify-center">
+              <div className="w-full md:max-w-sm">
                 <KPIGauge
                   value={parseInt(stats.availability)}
                   label="Network Availability"
@@ -114,23 +114,26 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Bottom Left Panel - 3D Satellite Map */}
-            <div className="md:col-span-6 flex flex-col h-full md:row-start-2">
-              <div className="flex-1 min-h-0">
-                <FestivalSiteMap
-                  sites={sites}
-                  onSiteSelect={setSelectedSite}
-                />
+            {/* Bottom Row - Map and Sites List */}
+            <div className="flex-1 overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              {/* Left Panel - 3D Satellite Map */}
+              <div className="flex flex-col h-full min-h-0">
+                <div className="flex-1 min-h-0">
+                  <FestivalSiteMap
+                    sites={sites}
+                    onSiteSelect={setSelectedSite}
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Bottom Right Panel - Sites List */}
-            <div className="md:col-span-6 flex flex-col h-full md:row-start-2">
-              <div className="flex-1 min-h-0">
-                <SitesList
-                  sites={sites}
-                  onSiteSelect={setSelectedSite}
-                />
+              {/* Right Panel - Sites List */}
+              <div className="flex flex-col h-full min-h-0">
+                <div className="flex-1 min-h-0">
+                  <SitesList
+                    sites={sites}
+                    onSiteSelect={setSelectedSite}
+                  />
+                </div>
               </div>
             </div>
           </div>
