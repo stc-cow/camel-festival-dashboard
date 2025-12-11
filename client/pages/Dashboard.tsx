@@ -55,19 +55,19 @@ export default function Dashboard() {
       {/* Main Container */}
       <div className="relative z-10 w-full h-screen flex flex-col">
         {/* Header */}
-        <header className="bg-gradient-to-r from-purple-600 to-purple-700 backdrop-blur-md border-b border-purple-500/50 px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-between gap-4">
+        <header className="bg-gradient-to-r from-purple-600 to-purple-700 backdrop-blur-md border-b border-purple-500/50 px-4 sm:px-6 py-1 sm:py-2 flex items-center justify-between gap-4">
           {/* Left: STC Logo */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F7b8e4dc97baf45f1befa845a6b1010f6?format=webp&width=800"
               alt="STC Logo"
-              className="h-8 sm:h-10 object-contain"
+              className="h-6 sm:h-8 object-contain"
             />
           </div>
 
           {/* Center: Title */}
           <div className="flex-1 text-center min-w-0">
-            <h1 className="text-base sm:text-xl font-bold text-white truncate sm:truncate">
+            <h1 className="text-sm sm:text-lg font-bold text-white truncate sm:truncate">
               King Abdalaziz Camel Festival Tickets Performance Dashboard
             </h1>
           </div>
@@ -78,7 +78,7 @@ export default function Dashboard() {
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F76fe7c8a618a4f37aefd6179ec954af9?format=webp&width=800"
                 alt="ACES Logo"
-                className="h-12 sm:h-16 object-contain"
+                className="h-8 sm:h-12 object-contain"
               />
             </div>
           </div>
