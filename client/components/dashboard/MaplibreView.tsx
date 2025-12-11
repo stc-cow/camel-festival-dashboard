@@ -159,7 +159,16 @@ export function MaplibreView({
       }
     };
 
+    // Also suppress AbortError from regular error events
+    const errorHandler = (event: ErrorEvent) => {
+      if (event.message?.includes?.("AbortError")) {
+        event.preventDefault();
+        return true;
+      }
+    };
+
     window.addEventListener("unhandledrejection", unhandledRejectionHandler);
+    window.addEventListener("error", errorHandler);
 
     // Create style link for Maplibre
     const linkEl = document.createElement("link");
