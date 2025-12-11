@@ -499,8 +499,8 @@ export function MaplibreView({
     // Create image marker with telecom tower icon - MINIMIZED
     const iconContainer = document.createElement("div");
     iconContainer.style.position = "relative";
-    iconContainer.style.width = "32px";
-    iconContainer.style.height = "32px";
+    iconContainer.style.width = "20px";
+    iconContainer.style.height = "20px";
     iconContainer.style.filter = "drop-shadow(0 1px 4px rgba(0,0,0,0.3))";
 
     const img = document.createElement("img");
