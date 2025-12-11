@@ -76,9 +76,6 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                 Ticket ID
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                Site
-              </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Issue
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
@@ -88,7 +85,10 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                 Status
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                Created
+                Created At
+              </th>
+              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                Last Update
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Notes
