@@ -18,15 +18,15 @@ export default function Dashboard() {
     availability: "0",
   });
 
-  // Suppress ResizeObserver and other benign console errors from third-party libraries
+  // Suppress benign console errors from third-party libraries
   useEffect(() => {
     const originalError = console.error;
     const originalWarn = console.warn;
 
     (console as any).error = function (...args: any[]) {
       const message = args.map((arg) => String(arg)).join(" ");
-      // Suppress ResizeObserver warnings from Deck.gl
-      if (/ResizeObserver loop/i.test(message)) {
+      // Suppress ResizeObserver warnings and WebGL context errors
+      if (/ResizeObserver loop|maxTextureDimension2D|WebGLCanvasContext|cannot read properties|reading 'max/i.test(message)) {
         return;
       }
       originalError.apply(console, args);
@@ -34,17 +34,17 @@ export default function Dashboard() {
 
     (console as any).warn = function (...args: any[]) {
       const message = args.map((arg) => String(arg)).join(" ");
-      // Suppress ResizeObserver warnings
-      if (/ResizeObserver loop/i.test(message)) {
+      // Suppress benign warnings
+      if (/ResizeObserver loop|maxTextureDimension2D|WebGLCanvasContext/i.test(message)) {
         return;
       }
       originalWarn.apply(console, args);
     };
 
-    // Add global error handler for ResizeObserver errors thrown as exceptions
+    // Add global error handler for benign errors
     const handleError = (event: ErrorEvent) => {
       const message = event.message || "";
-      if (/ResizeObserver/i.test(message)) {
+      if (/ResizeObserver|maxTextureDimension2D|WebGLCanvasContext/i.test(message)) {
         event.preventDefault();
         return true;
       }
