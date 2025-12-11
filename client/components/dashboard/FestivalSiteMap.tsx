@@ -218,20 +218,20 @@ export function FestivalSiteMap({
       </svg>
 
       {/* Legend - Bottom Left */}
-      <div className="absolute bottom-4 left-4 bg-slate-950/60 backdrop-blur-md rounded-lg p-3 border border-slate-700/50">
-        <div className="text-xs font-semibold text-slate-300 mb-2">Status</div>
+      <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-md rounded-lg p-3 border border-purple-200/50">
+        <div className="text-xs font-semibold text-slate-800 mb-2">Status</div>
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
-            <span className="text-slate-400">Operational ({statusCounts.operational})</span>
+            <span className="text-slate-600">Operational ({statusCounts.operational})</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-amber-500" />
-            <span className="text-slate-400">Warning ({statusCounts.warning})</span>
+            <span className="text-slate-600">Warning ({statusCounts.warning})</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-red-500" />
-            <span className="text-slate-400">Critical ({statusCounts.critical})</span>
+            <span className="text-slate-600">Critical ({statusCounts.critical})</span>
           </div>
         </div>
       </div>
