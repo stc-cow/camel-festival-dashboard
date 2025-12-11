@@ -232,6 +232,18 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     window.addEventListener("unhandledrejection", unhandledRejectionHandler, true);
     window.addEventListener("error", errorEventHandler, true);
 
+    // Additional handler for errors that escape other handlers
+    const fallbackErrorHandler = (event: ErrorEvent | Event) => {
+      if ("message" in event && "error" in event) {
+        const message = event.message || "";
+        const error = (event as ErrorEvent).error;
+        if (error && (error.name === "AbortError" || /signal is aborted/i.test(String(error)) || /abort/i.test(String(error)))) {
+          event.preventDefault();
+        }
+      }
+    };
+    window.addEventListener("error", fallbackErrorHandler, { capture: true, passive: false } as any);
+
     // Create style link for Maplibre
     const linkEl = document.createElement("link");
     linkEl.href =
