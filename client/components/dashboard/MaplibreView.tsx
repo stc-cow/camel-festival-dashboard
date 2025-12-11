@@ -518,14 +518,14 @@ export function MaplibreView({
     // Add site name label - not bold, smaller
     const nameLabel = document.createElement("div");
     nameLabel.textContent = site.name;
-    nameLabel.style.fontSize = "8px";
+    nameLabel.style.fontSize = "6px";
     nameLabel.style.fontWeight = "normal";
     nameLabel.style.color = "#000";
     nameLabel.style.textAlign = "center";
-    nameLabel.style.maxWidth = "60px";
+    nameLabel.style.maxWidth = "50px";
     nameLabel.style.whiteSpace = "normal";
     nameLabel.style.pointerEvents = "none";
-    nameLabel.style.lineHeight = "1.1";
+    nameLabel.style.lineHeight = "1";
     container.appendChild(nameLabel);
 
     return container;
