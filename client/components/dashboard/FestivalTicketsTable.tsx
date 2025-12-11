@@ -102,27 +102,27 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
               tickets.map((ticket) => (
                 <tr
                   key={ticket.id}
-                  className="bg-white/20 hover:bg-white/40 transition-colors duration-200 border-b border-purple-200/30"
+                  className="bg-white/20 hover:bg-white/40 transition-colors duration-200 border-b border-purple-500"
                 >
                   {/* Ticket ID */}
-                  <td className="px-6 py-3 border-r border-purple-200/30">
+                  <td className="px-6 py-3 border-r border-purple-500">
                     <code className="text-xs font-bold text-black">
                       {ticket.id}
                     </code>
                   </td>
 
                   {/* Site Name */}
-                  <td className="px-6 py-3 border-r border-purple-200/30">
+                  <td className="px-6 py-3 border-r border-purple-500">
                     <div className="text-black font-bold text-xs">{ticket.siteName}</div>
                   </td>
 
                   {/* Issue */}
-                  <td className="px-6 py-3 max-w-xs border-r border-purple-200/30">
+                  <td className="px-6 py-3 max-w-xs border-r border-purple-500">
                     <p className="text-black font-bold text-xs truncate">{ticket.issue}</p>
                   </td>
 
                   {/* Severity */}
-                  <td className="px-6 py-3 border-r border-purple-200/30">
+                  <td className="px-6 py-3 border-r border-purple-500">
                     <span
                       className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium border capitalize ${getSeverityColor(
                         ticket.severity
@@ -133,7 +133,7 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                   </td>
 
                   {/* Status */}
-                  <td className="px-6 py-3 border-r border-purple-200/30">
+                  <td className="px-6 py-3 border-r border-purple-500">
                     <span
                       className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium border capitalize ${getStatusColor(
                         ticket.status
@@ -144,12 +144,12 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                   </td>
 
                   {/* Created Time */}
-                  <td className="px-6 py-3 text-black font-bold text-xs border-r border-purple-200/30">
+                  <td className="px-6 py-3 text-black font-bold text-xs border-r border-purple-500">
                     {getTimeString(ticket.createdAt)}
                   </td>
 
                   {/* Notes */}
-                  <td className="px-6 py-3 max-w-sm">
+                  <td className="px-6 py-3 max-w-sm border-l border-purple-500">
                     <p className="text-black font-bold text-xs truncate">
                       {ticket.dispatcherNotes}
                     </p>
@@ -158,7 +158,7 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
               ))
             ) : (
               <tr>
-                <td colSpan={7} className="px-6 py-8 text-center border border-purple-200/30">
+                <td colSpan={7} className="px-6 py-8 text-center border border-purple-500">
                   <p className="text-black font-bold text-sm">
                     No tickets at this time
                   </p>
