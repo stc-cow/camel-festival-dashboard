@@ -51,7 +51,10 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
   };
 
   return (
-    <div className="w-full bg-transparent backdrop-blur-none rounded-xl border-0 overflow-hidden">
+    <div className="w-full bg-transparent backdrop-blur-none rounded-xl overflow-hidden" style={{
+      border: "3px solid rgb(168, 85, 247)",
+      boxShadow: "inset 0 0 0 2px rgb(236, 72, 153), 0 0 0 1px rgb(168, 85, 247)"
+    }}>
       {/* Header - One Line */}
       <div className="bg-transparent border-b border-purple-200/30 px-6 py-3 flex items-center justify-between">
         <h3 className="text-sm font-bold text-black">
