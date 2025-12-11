@@ -308,19 +308,19 @@ export function MaplibreView({
 
       {/* Map Controls Info */}
       <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md rounded-lg p-2 sm:p-3 border border-purple-200/50 text-xs sm:text-sm z-20 max-w-xs">
-        <div className="text-slate-800 font-semibold mb-2">Interactive 3D Map</div>
+        <div className="text-slate-800 font-semibold mb-2">Hybrid Satellite + Street Map</div>
         <div className="text-slate-600 text-xs space-y-1">
+          <p>• Showing {sites.length} sites</p>
           <p>• Click and drag to rotate</p>
-          <p>• Right-click and drag to tilt</p>
           <p>• Scroll to zoom</p>
-          <p>• Click markers for site details</p>
+          <p>• Click markers for details</p>
         </div>
       </div>
 
       {/* Attribution */}
       <div className="absolute bottom-4 right-4 text-xs text-slate-600 z-20 pointer-events-none">
         <span className="bg-white/80 px-2 py-1 rounded border border-purple-200/50 backdrop-blur-sm inline-block">
-          © OpenStreetMap contributors
+          © OpenStreetMap & CARTO
         </span>
       </div>
     </div>
