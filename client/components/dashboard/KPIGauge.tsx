@@ -50,9 +50,9 @@ export function KPIGauge({
   const strokeDashoffset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-transparent backdrop-blur-none rounded-xl border-0 p-4 sm:p-6">
-      {/* SVG Gauge */}
-      <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mb-4 sm:mb-6 flex-shrink-0">
+    <div className="flex flex-col items-center justify-center h-full w-full bg-transparent backdrop-blur-none rounded-xl border-0 p-2 sm:p-3">
+      {/* SVG Gauge - Smaller size */}
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mb-2 flex-shrink-0">
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
           {/* Background circle */}
           <circle
@@ -78,37 +78,22 @@ export function KPIGauge({
             className="transition-all duration-500"
           />
 
-          {/* Center circle for 3D effect */}
-          <circle cx="50" cy="50" r="35" fill="rgba(255, 255, 255, 0.95)" />
+          {/* Center circle for 3D effect - transparent */}
+          <circle cx="50" cy="50" r="35" fill="rgba(255, 255, 255, 0.3)" />
         </svg>
 
-        {/* Center text */}
+        {/* Center text - % on same line */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900">{value}</div>
-          <div className="text-sm sm:text-base md:text-lg text-slate-700 font-semibold">{unit}</div>
+          <div className="flex items-baseline">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{value}</div>
+            <div className="text-xs sm:text-sm md:text-base text-black font-bold ml-0.5">{unit}</div>
+          </div>
         </div>
       </div>
 
-      {/* Label and status */}
-      <div className="text-center mb-3 sm:mb-4 w-full">
-        <h3 className="text-sm sm:text-base md:text-xl font-bold text-slate-800">{label}</h3>
-        <p className="text-xs sm:text-sm md:text-base font-semibold mt-1 sm:mt-2" style={{ color: color.main }}>
-          {color.label}
-        </p>
-      </div>
-
-      {/* Threshold indicators */}
-      <div className="w-full space-y-2 text-xs sm:text-sm flex-shrink-0">
-        <div className="flex justify-between items-center text-slate-700 font-medium">
-          <span>Excellent</span>
-          <span>{threshold.excellent}%</span>
-        </div>
-        <div className="w-full h-1.5 sm:h-2 bg-slate-300 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
-            style={{ width: "100%" }}
-          />
-        </div>
+      {/* Label only */}
+      <div className="text-center w-full">
+        <h3 className="text-xs sm:text-sm md:text-base font-bold text-black">{label}</h3>
       </div>
     </div>
   );
