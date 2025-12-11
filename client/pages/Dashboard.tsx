@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GoogleMapsView } from "@/components/dashboard/GoogleMapsView";
+import { MapboxView } from "@/components/dashboard/MapboxView";
 import { KPIGauge } from "@/components/dashboard/KPIGauge";
 import { SitesList } from "@/components/dashboard/SitesList";
 import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
