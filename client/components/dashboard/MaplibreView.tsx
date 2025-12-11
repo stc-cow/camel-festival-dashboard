@@ -182,7 +182,9 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
         /signal is aborted/i.test(reasonStr) ||
         /signal is aborted/i.test(message) ||
         isAbortError(reason) ||
-        (typeof reason === "object" && reason !== null && (reason as any).name === "AbortError");
+        (typeof reason === "object" &&
+          reason !== null &&
+          (reason as any).name === "AbortError");
 
       if (isAbort) {
         event.preventDefault();
@@ -248,7 +250,11 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       }
     };
 
-    window.addEventListener("unhandledrejection", unhandledRejectionHandler, true);
+    window.addEventListener(
+      "unhandledrejection",
+      unhandledRejectionHandler,
+      true,
+    );
     window.addEventListener("error", errorEventHandler, true);
 
     // Create style link for Maplibre
@@ -267,12 +273,24 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       if (isMountedRef.current) {
         // Suppress maplibre's internal AbortErrors after library loads
         const originalError = window.onerror;
-        window.onerror = function(msg: any, url: any, lineNo: any, colNo: any, error: any) {
+        window.onerror = function (
+          msg: any,
+          url: any,
+          lineNo: any,
+          colNo: any,
+          error: any,
+        ) {
           const errorString = String(msg || "");
-          if (/abort/i.test(errorString) || /signal is aborted/i.test(errorString) || error?.name === "AbortError") {
+          if (
+            /abort/i.test(errorString) ||
+            /signal is aborted/i.test(errorString) ||
+            error?.name === "AbortError"
+          ) {
             return true; // Suppress error
           }
-          return originalError ? originalError(msg, url, lineNo, colNo, error) : false;
+          return originalError
+            ? originalError(msg, url, lineNo, colNo, error)
+            : false;
         };
         initializeMap();
       }
@@ -296,7 +314,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       window.removeEventListener(
         "unhandledrejection",
         unhandledRejectionHandler,
-        true
+        true,
       );
       window.removeEventListener("error", errorEventHandler, true);
 
@@ -382,9 +400,13 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     // Wrap map's error function to suppress AbortError at source
     if (map && map._errorHandler) {
       const originalErrorHandler = map._errorHandler;
-      map._errorHandler = function(error: any) {
+      map._errorHandler = function (error: any) {
         const errorStr = String(error || "");
-        if (/abort/i.test(errorStr) || /signal is aborted/i.test(errorStr) || error?.name === "AbortError") {
+        if (
+          /abort/i.test(errorStr) ||
+          /signal is aborted/i.test(errorStr) ||
+          error?.name === "AbortError"
+        ) {
           return;
         }
         return originalErrorHandler.call(this, error);
@@ -583,7 +605,8 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
 
     // Create image element with mobile tower icon
     const img = document.createElement("img");
-    img.src = "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F66c1a170eb074992ac9bd6a2c264983e?format=webp&width=800";
+    img.src =
+      "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F66c1a170eb074992ac9bd6a2c264983e?format=webp&width=800";
     img.alt = site.name;
     img.style.width = "100%";
     img.style.height = "100%";
@@ -593,9 +616,12 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
 
     // Apply color filter based on status
     const colorFilters: Record<string, string> = {
-      operational: "brightness(0) saturate(100%) invert(75%) sepia(96%) saturate(491%) hue-rotate(108deg) brightness(105%) contrast(104%)", // green
-      warning: "brightness(0) saturate(100%) invert(73%) sepia(83%) saturate(478%) hue-rotate(3deg) brightness(106%) contrast(105%)", // amber
-      critical: "brightness(0) saturate(100%) invert(36%) sepia(88%) saturate(1567%) hue-rotate(359deg) brightness(102%) contrast(106%)", // red
+      operational:
+        "brightness(0) saturate(100%) invert(75%) sepia(96%) saturate(491%) hue-rotate(108deg) brightness(105%) contrast(104%)", // green
+      warning:
+        "brightness(0) saturate(100%) invert(73%) sepia(83%) saturate(478%) hue-rotate(3deg) brightness(106%) contrast(105%)", // amber
+      critical:
+        "brightness(0) saturate(100%) invert(36%) sepia(88%) saturate(1567%) hue-rotate(359deg) brightness(102%) contrast(106%)", // red
     };
 
     img.style.filter = colorFilters[site.status] || colorFilters.operational;

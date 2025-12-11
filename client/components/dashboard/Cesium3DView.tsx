@@ -42,7 +42,11 @@ export function Cesium3DView({ sites, onSiteSelect }: Cesium3DViewProps) {
       viewer.scene.mode = Cesium.SceneMode.SCENE3D;
 
       // Set initial camera position (Al Ula, Saudi Arabia)
-      const initialPosition = Cesium.Cartesian3.fromDegrees(37.9833, 26.6868, 50000);
+      const initialPosition = Cesium.Cartesian3.fromDegrees(
+        37.9833,
+        26.6868,
+        50000,
+      );
       viewer.camera.setView({
         destination: initialPosition,
         orientation: {
@@ -84,7 +88,11 @@ export function Cesium3DView({ sites, onSiteSelect }: Cesium3DViewProps) {
 
       // Create a point entity for the site
       const entity = viewerRef.current!.entities.add({
-        position: Cesium.Cartesian3.fromDegrees(site.longitude, site.latitude, 1000),
+        position: Cesium.Cartesian3.fromDegrees(
+          site.longitude,
+          site.latitude,
+          1000,
+        ),
         point: {
           pixelSize: 12,
           color: cesiumColor,
@@ -122,8 +130,8 @@ export function Cesium3DView({ sites, onSiteSelect }: Cesium3DViewProps) {
     if (sites.length > 0) {
       const boundingSphere = Cesium.BoundingSphere.fromPoints(
         sites.map((s) =>
-          Cesium.Cartesian3.fromDegrees(s.longitude, s.latitude, 1000)
-        )
+          Cesium.Cartesian3.fromDegrees(s.longitude, s.latitude, 1000),
+        ),
       );
 
       viewerRef.current.camera.flyToBoundingSphere(boundingSphere, {
@@ -136,18 +144,23 @@ export function Cesium3DView({ sites, onSiteSelect }: Cesium3DViewProps) {
   useEffect(() => {
     if (!viewerRef.current || !initialized || !onSiteSelect) return;
 
-    const handler = new Cesium.ScreenSpaceEventHandler(viewerRef.current.scene.canvas);
+    const handler = new Cesium.ScreenSpaceEventHandler(
+      viewerRef.current.scene.canvas,
+    );
 
-    handler.setInputAction((click: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
-      const pickedObject = viewerRef.current!.scene.pick(click.position);
+    handler.setInputAction(
+      (click: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+        const pickedObject = viewerRef.current!.scene.pick(click.position);
 
-      if (Cesium.defined(pickedObject) && pickedObject.id) {
-        const site = (pickedObject.id as any).site;
-        if (site) {
-          onSiteSelect(site);
+        if (Cesium.defined(pickedObject) && pickedObject.id) {
+          const site = (pickedObject.id as any).site;
+          if (site) {
+            onSiteSelect(site);
+          }
         }
-      }
-    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+      },
+      Cesium.ScreenSpaceEventType.LEFT_CLICK,
+    );
 
     return () => {
       handler.destroy();
@@ -182,7 +195,9 @@ export function Cesium3DView({ sites, onSiteSelect }: Cesium3DViewProps) {
       {!initialized && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-200/50 backdrop-blur-sm z-10">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
-          <span className="text-slate-700 font-medium">Loading 3D Globe...</span>
+          <span className="text-slate-700 font-medium">
+            Loading 3D Globe...
+          </span>
         </div>
       )}
     </div>
