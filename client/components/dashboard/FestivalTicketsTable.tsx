@@ -108,11 +108,6 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                     </code>
                   </td>
 
-                  {/* Site Name */}
-                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                    <div className="text-black font-bold text-xs">{ticket.siteName}</div>
-                  </td>
-
                   {/* Issue */}
                   <td className="px-2 py-1 max-w-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     <p className="text-black font-bold text-xs truncate">{ticket.issue}</p>
@@ -140,9 +135,14 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                     </span>
                   </td>
 
-                  {/* Created Time */}
+                  {/* Created At */}
                   <td className="px-2 py-1 text-black font-bold text-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                    {getTimeString(ticket.createdAt)}
+                    {new Date(ticket.createdAt).toLocaleString()}
+                  </td>
+
+                  {/* Last Update */}
+                  <td className="px-2 py-1 text-black font-bold text-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                    {new Date(ticket.updatedAt).toLocaleString()}
                   </td>
 
                   {/* Notes */}
