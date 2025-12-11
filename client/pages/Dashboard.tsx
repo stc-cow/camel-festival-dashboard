@@ -109,8 +109,8 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Tickets Table - Below Map - 25% height */}
-          <div className="h-1/4 overflow-hidden px-3 sm:px-4 md:px-6 pb-2 sm:pb-3 md:pb-4 flex-shrink-0 bg-white/50 backdrop-blur-md border-t border-purple-200/30">
+          {/* Tickets Table - Below Map - 20% height */}
+          <div className="h-1/5 overflow-hidden px-2 sm:px-3 md:px-4 py-1 sm:py-2 flex-shrink-0 bg-white/50 backdrop-blur-md border-t border-purple-200/30">
             <div className="h-full overflow-hidden">
               <FestivalTicketsTable tickets={tickets} />
             </div>
