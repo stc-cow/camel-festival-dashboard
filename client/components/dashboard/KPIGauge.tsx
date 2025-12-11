@@ -90,9 +90,9 @@ export function KPIGauge({
       </div>
 
       {/* Label and status */}
-      <div className="text-center mb-3">
-        <h3 className="text-sm font-semibold text-slate-700">{label}</h3>
-        <p className="text-xs font-medium mt-1" style={{ color: color.main }}>
+      <div className="text-center mb-4">
+        <h3 className="text-xl font-bold text-slate-800">{label}</h3>
+        <p className="text-base font-semibold mt-2" style={{ color: color.main }}>
           {color.label}
         </p>
       </div>
