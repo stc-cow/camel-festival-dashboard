@@ -86,10 +86,7 @@ export default function Dashboard() {
         <div className="flex-1 overflow-hidden flex flex-col">
           {/* Map Container - 75% height */}
           <div className="flex-1 overflow-hidden relative">
-            <MaplibreView
-              sites={sites}
-              onSiteSelect={setSelectedSite}
-            />
+            <MaplibreView sites={sites} onSiteSelect={setSelectedSite} />
 
             {/* KPI Overlay - Top Right */}
             <div className="absolute top-2 right-2 z-20">
@@ -119,16 +116,16 @@ export default function Dashboard() {
               Sites:{" "}
               <span className="text-slate-800 font-semibold">
                 {stats.totalSites}
-              </span>
-              {" "}| ✓{" "}
+              </span>{" "}
+              | ✓{" "}
               <span className="text-green-400 font-semibold">
                 {stats.operationalSites}
-              </span>
-              {" "}| ⚠{" "}
+              </span>{" "}
+              | ⚠{" "}
               <span className="text-amber-400 font-semibold">
                 {stats.warningSites}
-              </span>
-              {" "}| ✕{" "}
+              </span>{" "}
+              | ✕{" "}
               <span className="text-red-400 font-semibold">
                 {stats.criticalSites}
               </span>

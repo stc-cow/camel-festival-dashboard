@@ -48,7 +48,7 @@ const MAP_STYLES: Record<MapLayerStyle, any> = {
           "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
         ],
         tileSize: 256,
-        attribution: '© CARTO, © OpenStreetMap contributors',
+        attribution: "© CARTO, © OpenStreetMap contributors",
       },
     },
     layers: [
@@ -85,7 +85,7 @@ const MAP_STYLES: Record<MapLayerStyle, any> = {
           "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
         ],
         tileSize: 256,
-        attribution: '© CARTO, © OpenStreetMap contributors',
+        attribution: "© CARTO, © OpenStreetMap contributors",
       },
     },
     layers: [
@@ -139,10 +139,7 @@ const MAP_STYLES: Record<MapLayerStyle, any> = {
   },
 };
 
-export function MaplibreView({
-  sites,
-  onSiteSelect,
-}: MaplibreViewProps) {
+export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
@@ -163,12 +160,14 @@ export function MaplibreView({
       const message = reason?.message || "";
       const name = reason?.name || "";
 
-      if (name === "AbortError" ||
-          /abort/i.test(reasonStr) ||
-          /abort/i.test(message) ||
-          /abort/i.test(name) ||
-          /signal is aborted/i.test(reasonStr) ||
-          /signal is aborted/i.test(message)) {
+      if (
+        name === "AbortError" ||
+        /abort/i.test(reasonStr) ||
+        /abort/i.test(message) ||
+        /abort/i.test(name) ||
+        /signal is aborted/i.test(reasonStr) ||
+        /signal is aborted/i.test(message)
+      ) {
         event.preventDefault();
       }
     };
@@ -179,12 +178,14 @@ export function MaplibreView({
       const errorName = event.error?.name || "";
       const errorMsg = event.error?.message || "";
 
-      if (errorName === "AbortError" ||
-          /abort/i.test(message) ||
-          /abort/i.test(errorName) ||
-          /abort/i.test(errorMsg) ||
-          /signal is aborted/i.test(message) ||
-          /signal is aborted/i.test(errorMsg)) {
+      if (
+        errorName === "AbortError" ||
+        /abort/i.test(message) ||
+        /abort/i.test(errorName) ||
+        /abort/i.test(errorMsg) ||
+        /signal is aborted/i.test(message) ||
+        /signal is aborted/i.test(errorMsg)
+      ) {
         event.preventDefault();
         return true;
       }
@@ -197,19 +198,21 @@ export function MaplibreView({
     const isAbortError = (...args: any[]): boolean => {
       return args.some((arg) => {
         const str = String(arg);
-        return /abort/i.test(str) ||
-               /signal is aborted/i.test(str) ||
-               (arg instanceof Error && arg.name === "AbortError");
+        return (
+          /abort/i.test(str) ||
+          /signal is aborted/i.test(str) ||
+          (arg instanceof Error && arg.name === "AbortError")
+        );
       });
     };
 
-    (console as any).error = function(...args: any[]) {
+    (console as any).error = function (...args: any[]) {
       if (!isAbortError(...args)) {
         originalConsoleError.apply(console, args);
       }
     };
 
-    (console as any).warn = function(...args: any[]) {
+    (console as any).warn = function (...args: any[]) {
       if (!isAbortError(...args)) {
         originalConsoleWarn.apply(console, args);
       }
@@ -250,7 +253,10 @@ export function MaplibreView({
       (console as any).warn = originalConsoleWarn;
 
       // Remove event listeners
-      window.removeEventListener("unhandledrejection", unhandledRejectionHandler);
+      window.removeEventListener(
+        "unhandledrejection",
+        unhandledRejectionHandler,
+      );
       window.removeEventListener("error", errorEventHandler);
 
       // Clear any pending timeouts
@@ -294,7 +300,8 @@ export function MaplibreView({
   }, [sites, mapLoaded]);
 
   const initializeMap = () => {
-    if (!mapContainer.current || !window.maplibregl || !isMountedRef.current) return;
+    if (!mapContainer.current || !window.maplibregl || !isMountedRef.current)
+      return;
 
     // Al Ula coordinates (fallback center)
     const center = [37.9833, 26.6868] as [number, number];
@@ -318,10 +325,12 @@ export function MaplibreView({
       const errorMsg = event?.error?.message || "";
       const errorName = event?.error?.name || "";
 
-      if (/abort/i.test(errorStr) ||
-          /abort/i.test(errorMsg) ||
-          /abort/i.test(errorName) ||
-          errorName === "AbortError") {
+      if (
+        /abort/i.test(errorStr) ||
+        /abort/i.test(errorMsg) ||
+        /abort/i.test(errorName) ||
+        errorName === "AbortError"
+      ) {
         return;
       }
     });
@@ -405,7 +414,8 @@ export function MaplibreView({
   };
 
   const addMarkers = () => {
-    if (!isMountedRef.current || !mapInstanceRef.current || !window.maplibregl) return;
+    if (!isMountedRef.current || !mapInstanceRef.current || !window.maplibregl)
+      return;
 
     try {
       // Clear existing markers
@@ -456,7 +466,7 @@ export function MaplibreView({
                 Updated: ${new Date(site.lastUpdate).toLocaleTimeString()}
               </p>
             </div>
-            `
+            `,
           );
 
           marker.setPopup(popup);
@@ -477,7 +487,8 @@ export function MaplibreView({
   };
 
   const updateMarkers = () => {
-    if (!isMountedRef.current || !mapInstanceRef.current || sites.length === 0) return;
+    if (!isMountedRef.current || !mapInstanceRef.current || sites.length === 0)
+      return;
 
     try {
       addMarkers();
@@ -523,17 +534,26 @@ export function MaplibreView({
     svg.setAttribute("stroke-linejoin", "round");
 
     // Left arc (upward curve to the left)
-    const leftArc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const leftArc = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path",
+    );
     leftArc.setAttribute("d", "M7 14Q7 8 12 8");
     leftArc.setAttribute("stroke", "#22c55e");
 
     // Right arc (upward curve to the right)
-    const rightArc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const rightArc = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path",
+    );
     rightArc.setAttribute("d", "M17 14Q17 8 12 8");
     rightArc.setAttribute("stroke", "#22c55e");
 
     // Center circle
-    const centerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    const centerCircle = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle",
+    );
     centerCircle.setAttribute("cx", "12");
     centerCircle.setAttribute("cy", "16");
     centerCircle.setAttribute("r", "2.5");
@@ -582,7 +602,7 @@ export function MaplibreView({
       className="w-full h-full overflow-hidden rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 relative"
       style={{
         border: "2px solid rgb(168, 85, 247)",
-        boxShadow: "inset 0 0 0 1px rgb(236, 72, 153)"
+        boxShadow: "inset 0 0 0 1px rgb(236, 72, 153)",
       }}
     >
       <style>{`
@@ -608,7 +628,9 @@ export function MaplibreView({
         {!mapLoaded && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-200/50 backdrop-blur-sm z-10">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
-            <span className="text-slate-700 font-medium">Loading Hybrid Map...</span>
+            <span className="text-slate-700 font-medium">
+              Loading Hybrid Map...
+            </span>
           </div>
         )}
       </div>
@@ -688,8 +710,6 @@ export function MaplibreView({
           </div>
         )}
       </div>
-
-
     </div>
   );
 }

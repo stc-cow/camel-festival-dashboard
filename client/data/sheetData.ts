@@ -174,14 +174,12 @@ export async function fetchSheetData(): Promise<{
       .filter((t) => t !== null) as FestivalTicket[];
 
     // Calculate stats
-    const operationalSites = sites.filter((s) => s.status === "operational")
-      .length;
+    const operationalSites = sites.filter(
+      (s) => s.status === "operational",
+    ).length;
     const warningSites = sites.filter((s) => s.status === "warning").length;
     const criticalSites = sites.filter((s) => s.status === "critical").length;
-    const availability = (
-      (operationalSites / sites.length) *
-      100
-    ).toFixed(0);
+    const availability = ((operationalSites / sites.length) * 100).toFixed(0);
 
     return {
       sites,

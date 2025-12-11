@@ -6,10 +6,7 @@ interface MapboxViewProps {
   onSiteSelect?: (site: FestivalSite) => void;
 }
 
-export function MapboxView({
-  sites,
-  onSiteSelect,
-}: MapboxViewProps) {
+export function MapboxView({ sites, onSiteSelect }: MapboxViewProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
@@ -139,7 +136,7 @@ export function MapboxView({
             Updated: ${new Date(site.lastUpdate).toLocaleTimeString()}
           </p>
         </div>
-        `
+        `,
       );
 
       marker.setPopup(popup);
@@ -192,7 +189,10 @@ export function MapboxView({
     svg.appendChild(pole);
 
     // Tower top (antenna)
-    const top = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    const top = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle",
+    );
     top.setAttribute("cx", "20");
     top.setAttribute("cy", "10");
     top.setAttribute("r", "3.5");
@@ -202,7 +202,10 @@ export function MapboxView({
     // Wi-Fi arcs (3 concentric arcs)
     const arcRadii = [7, 12, 17];
     arcRadii.forEach((radius, index) => {
-      const arc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      const arc = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path",
+      );
       const arcPath = `M ${20 - radius} 10 A ${radius} ${radius} 0 0 1 ${20 + radius} 10`;
       arc.setAttribute("d", arcPath);
       arc.setAttribute("stroke", color);
@@ -243,14 +246,18 @@ export function MapboxView({
         {!mapLoaded && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-200/50 backdrop-blur-sm z-10">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
-            <span className="text-slate-700 font-medium">Loading 3D Satellite Map...</span>
+            <span className="text-slate-700 font-medium">
+              Loading 3D Satellite Map...
+            </span>
           </div>
         )}
       </div>
 
       {/* Map Controls Info */}
       <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md rounded-lg p-2 sm:p-3 border border-purple-200/50 text-xs sm:text-sm z-20 max-w-xs">
-        <div className="text-slate-800 font-semibold mb-2">3D Satellite View</div>
+        <div className="text-slate-800 font-semibold mb-2">
+          3D Satellite View
+        </div>
         <div className="text-slate-600 text-xs space-y-1">
           <p>• Click and drag to rotate</p>
           <p>• Right-click and drag to tilt</p>

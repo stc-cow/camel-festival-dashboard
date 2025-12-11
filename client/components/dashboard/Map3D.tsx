@@ -15,9 +15,9 @@ function MapContent({ sites, onSiteSelect }: Map3DProps) {
   // Festival boundary coordinates (Al Ula area) - normalized
   const mapBounds = {
     north: 25.645,
-    south: 25.620,
+    south: 25.62,
     east: 46.845,
-    west: 46.810,
+    west: 46.81,
   };
 
   // Normalize coordinates to 3D world space
@@ -92,7 +92,11 @@ function MapContent({ sites, onSiteSelect }: Map3DProps) {
               {/* Base cylinder */}
               <mesh position={[0, 0.5, 0]}>
                 <cylinderGeometry args={[0.4, 0.4, 1, 8]} />
-                <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} />
+                <meshStandardMaterial
+                  color={color}
+                  emissive={color}
+                  emissiveIntensity={0.5}
+                />
               </mesh>
 
               {/* Top sphere */}

@@ -53,7 +53,10 @@ export function KPIGauge({
     <div className="flex flex-col items-center justify-center h-full w-full bg-transparent backdrop-blur-none rounded-xl border-0 p-0">
       {/* SVG Gauge - Smaller size */}
       <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 flex-shrink-0">
-        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+        <svg
+          className="w-full h-full transform -rotate-90"
+          viewBox="0 0 100 100"
+        >
           {/* Background circle */}
           <circle
             cx="50"
@@ -85,8 +88,12 @@ export function KPIGauge({
         {/* Center text - % on same line */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <div className="flex items-baseline">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{value}</div>
-            <div className="text-xs sm:text-sm md:text-base text-black font-bold ml-0.5">{unit}</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">
+              {value}
+            </div>
+            <div className="text-xs sm:text-sm md:text-base text-black font-bold ml-0.5">
+              {unit}
+            </div>
           </div>
         </div>
       </div>

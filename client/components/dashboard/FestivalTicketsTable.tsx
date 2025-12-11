@@ -35,51 +35,84 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
     }
   };
 
-
   return (
-    <div className="w-full bg-transparent backdrop-blur-none rounded-xl overflow-hidden" style={{
-      border: "3px solid rgb(168, 85, 247)",
-      boxShadow: "inset 0 0 0 2px rgb(236, 72, 153), 0 0 0 1px rgb(168, 85, 247)"
-    }}>
+    <div
+      className="w-full bg-transparent backdrop-blur-none rounded-xl overflow-hidden"
+      style={{
+        border: "3px solid rgb(168, 85, 247)",
+        boxShadow:
+          "inset 0 0 0 2px rgb(236, 72, 153), 0 0 0 1px rgb(168, 85, 247)",
+      }}
+    >
       {/* Header - One Line */}
       <div className="bg-transparent border-b-2 border-purple-500 px-3 py-1 flex items-center justify-between">
         <h3 className="text-xs font-bold text-black">
           Dispatch Tickets & Issues
         </h3>
-        <p className="text-xs text-black font-bold" style={{ fontSize: "10px" }}>
-          {tickets.length} ticket{tickets.length !== 1 ? "s" : ""} | Last updated:{" "}
-          {new Date().toLocaleTimeString()}
+        <p
+          className="text-xs text-black font-bold"
+          style={{ fontSize: "10px" }}
+        >
+          {tickets.length} ticket{tickets.length !== 1 ? "s" : ""} | Last
+          updated: {new Date().toLocaleTimeString()}
         </p>
       </div>
 
       {/* Table */}
       <div className="overflow-x-auto border-0">
-        <table className="w-full text-sm" style={{ borderCollapse: "collapse" }}>
+        <table
+          className="w-full text-sm"
+          style={{ borderCollapse: "collapse" }}
+        >
           {/* Table Head */}
           <thead className="bg-transparent sticky top-0">
             <tr>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+              <th
+                className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider"
+                style={{ border: "1px solid rgb(168, 85, 247)" }}
+              >
                 COWName
               </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+              <th
+                className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider"
+                style={{ border: "1px solid rgb(168, 85, 247)" }}
+              >
                 TicketID
               </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+              <th
+                className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider"
+                style={{ border: "1px solid rgb(168, 85, 247)" }}
+              >
                 Issue
               </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+              <th
+                className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider"
+                style={{ border: "1px solid rgb(168, 85, 247)" }}
+              >
                 Severity
               </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+              <th
+                className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider"
+                style={{ border: "1px solid rgb(168, 85, 247)" }}
+              >
                 Status
               </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+              <th
+                className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider"
+                style={{ border: "1px solid rgb(168, 85, 247)" }}
+              >
                 CreatedAt
               </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+              <th
+                className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider"
+                style={{ border: "1px solid rgb(168, 85, 247)" }}
+              >
                 LastUpdate
               </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+              <th
+                className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider"
+                style={{ border: "1px solid rgb(168, 85, 247)" }}
+              >
                 Notes
               </th>
             </tr>
@@ -89,29 +122,48 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
           <tbody>
             {tickets.length > 0 ? (
               tickets.map((ticket) => (
-                <tr key={ticket.id} className="bg-white/20 hover:bg-white/40 transition-colors duration-200">
+                <tr
+                  key={ticket.id}
+                  className="bg-white/20 hover:bg-white/40 transition-colors duration-200"
+                >
                   {/* COWName */}
-                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                    <p className="text-black font-bold text-xs">{ticket.siteName}</p>
+                  <td
+                    className="px-2 py-1"
+                    style={{ border: "1px solid rgb(168, 85, 247)" }}
+                  >
+                    <p className="text-black font-bold text-xs">
+                      {ticket.siteName}
+                    </p>
                   </td>
 
                   {/* TicketID */}
-                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                  <td
+                    className="px-2 py-1"
+                    style={{ border: "1px solid rgb(168, 85, 247)" }}
+                  >
                     <code className="text-xs font-bold text-black">
                       {ticket.id}
                     </code>
                   </td>
 
                   {/* Issue */}
-                  <td className="px-2 py-1 max-w-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                    <p className="text-black font-bold text-xs truncate">{ticket.issue}</p>
+                  <td
+                    className="px-2 py-1 max-w-xs"
+                    style={{ border: "1px solid rgb(168, 85, 247)" }}
+                  >
+                    <p className="text-black font-bold text-xs truncate">
+                      {ticket.issue}
+                    </p>
                   </td>
 
                   {/* Severity */}
-                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                  <td
+                    className="px-2 py-1"
+                    style={{ border: "1px solid rgb(168, 85, 247)" }}
+                  >
                     <span
                       className={`inline-flex items-center px-1 py-0.5 rounded text-xs font-medium border capitalize ${getSeverityColor(
-                        ticket.severity
+                        ticket.severity,
                       )}`}
                     >
                       {ticket.severity}
@@ -119,10 +171,13 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                   </td>
 
                   {/* Status */}
-                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                  <td
+                    className="px-2 py-1"
+                    style={{ border: "1px solid rgb(168, 85, 247)" }}
+                  >
                     <span
                       className={`inline-flex items-center px-1 py-0.5 rounded text-xs font-medium border capitalize ${getStatusColor(
-                        ticket.status
+                        ticket.status,
                       )}`}
                     >
                       {ticket.status}
@@ -130,17 +185,26 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                   </td>
 
                   {/* CreatedAt */}
-                  <td className="px-2 py-1 text-black font-bold text-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                  <td
+                    className="px-2 py-1 text-black font-bold text-xs"
+                    style={{ border: "1px solid rgb(168, 85, 247)" }}
+                  >
                     {new Date(ticket.createdAt).toLocaleString()}
                   </td>
 
                   {/* LastUpdate */}
-                  <td className="px-2 py-1 text-black font-bold text-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                  <td
+                    className="px-2 py-1 text-black font-bold text-xs"
+                    style={{ border: "1px solid rgb(168, 85, 247)" }}
+                  >
                     {new Date(ticket.updatedAt).toLocaleString()}
                   </td>
 
                   {/* Notes */}
-                  <td className="px-2 py-1 max-w-sm" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                  <td
+                    className="px-2 py-1 max-w-sm"
+                    style={{ border: "1px solid rgb(168, 85, 247)" }}
+                  >
                     <p className="text-black font-bold text-xs truncate">
                       {ticket.dispatcherNotes}
                     </p>
@@ -149,7 +213,11 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
               ))
             ) : (
               <tr>
-                <td colSpan={8} className="px-2 py-2 text-center" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                <td
+                  colSpan={8}
+                  className="px-2 py-2 text-center"
+                  style={{ border: "1px solid rgb(168, 85, 247)" }}
+                >
                   <p className="text-black font-bold text-xs">
                     No tickets at this time
                   </p>

@@ -71,9 +71,13 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
                   <h4 className="text-sm font-semibold text-slate-800 group-hover:text-purple-600 transition-colors">
                     {site.name}
                   </h4>
-                  <p className="text-xs text-slate-600 mt-0.5">{site.location}</p>
+                  <p className="text-xs text-slate-600 mt-0.5">
+                    {site.location}
+                  </p>
                 </div>
-                <span className="text-lg leading-none">{getStatusIcon(site.status)}</span>
+                <span className="text-lg leading-none">
+                  {getStatusIcon(site.status)}
+                </span>
               </div>
 
               {/* Badges */}
@@ -81,7 +85,7 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
                 {/* Technology badge */}
                 <span
                   className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium border ${getTechColor(
-                    site.technology
+                    site.technology,
                   )}`}
                 >
                   {site.technology}
@@ -90,7 +94,7 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
                 {/* Status badge */}
                 <span
                   className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium border capitalize ${getStatusColor(
-                    site.status
+                    site.status,
                   )}`}
                 >
                   {site.status}

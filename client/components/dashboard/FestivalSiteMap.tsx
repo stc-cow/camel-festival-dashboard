@@ -5,18 +5,14 @@ interface FestivalSiteMapProps {
   onSiteSelect?: (site: FestivalSite) => void;
 }
 
-export function FestivalSiteMap({
-  sites,
-  onSiteSelect,
-}: FestivalSiteMapProps) {
-
+export function FestivalSiteMap({ sites, onSiteSelect }: FestivalSiteMapProps) {
   // Festival boundary coordinates (Al Ula area)
   const mapCenter = { lat: 25.633, lng: 46.828 };
   const mapBounds = {
     north: 25.645,
-    south: 25.620,
+    south: 25.62,
     east: 46.845,
-    west: 46.810,
+    west: 46.81,
   };
 
   // Normalize coordinates to SVG map (100x100)
@@ -82,13 +78,30 @@ export function FestivalSiteMap({
       >
         {/* Gradients and Patterns */}
         <defs>
-          <linearGradient id="mapBackground" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{ stopColor: "#F5F3FF", stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: "#E8E4F8", stopOpacity: 1 }} />
+          <linearGradient
+            id="mapBackground"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <stop
+              offset="0%"
+              style={{ stopColor: "#F5F3FF", stopOpacity: 1 }}
+            />
+            <stop
+              offset="100%"
+              style={{ stopColor: "#E8E4F8", stopOpacity: 1 }}
+            />
           </linearGradient>
 
           {/* Satellite texture */}
-          <pattern id="satellitePattern" width="4" height="4" patternUnits="userSpaceOnUse">
+          <pattern
+            id="satellitePattern"
+            width="4"
+            height="4"
+            patternUnits="userSpaceOnUse"
+          >
             <rect width="4" height="4" fill="#F5F3FF" />
             <circle cx="2" cy="2" r="0.5" fill="#D8D4E8" opacity="0.3" />
           </pattern>
@@ -133,7 +146,11 @@ export function FestivalSiteMap({
           const color = getMarkerColor(site.status);
 
           return (
-            <g key={site.id} className="cursor-pointer" onClick={() => onSiteSelect?.(site)}>
+            <g
+              key={site.id}
+              className="cursor-pointer"
+              onClick={() => onSiteSelect?.(site)}
+            >
               {/* Outer glow for critical/warning */}
               {(site.status === "critical" || site.status === "warning") && (
                 <circle
@@ -208,13 +225,7 @@ export function FestivalSiteMap({
         })}
 
         {/* Center marker for map center */}
-        <circle
-          cx="50"
-          cy="50"
-          r="0.5"
-          fill="#64748B"
-          opacity="0.3"
-        />
+        <circle cx="50" cy="50" r="0.5" fill="#64748B" opacity="0.3" />
       </svg>
 
       {/* Legend - Bottom Left */}
@@ -223,22 +234,30 @@ export function FestivalSiteMap({
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
-            <span className="text-slate-600">Operational ({statusCounts.operational})</span>
+            <span className="text-slate-600">
+              Operational ({statusCounts.operational})
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-amber-500" />
-            <span className="text-slate-600">Warning ({statusCounts.warning})</span>
+            <span className="text-slate-600">
+              Warning ({statusCounts.warning})
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-red-500" />
-            <span className="text-slate-600">Critical ({statusCounts.critical})</span>
+            <span className="text-slate-600">
+              Critical ({statusCounts.critical})
+            </span>
           </div>
         </div>
       </div>
 
       {/* Technology Legend - Bottom Right */}
       <div className="absolute bottom-4 right-4 bg-white/80 backdrop-blur-md rounded-lg p-3 border border-purple-200/50">
-        <div className="text-xs font-semibold text-slate-800 mb-2">Technology</div>
+        <div className="text-xs font-semibold text-slate-800 mb-2">
+          Technology
+        </div>
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-violet-500" />
@@ -258,7 +277,9 @@ export function FestivalSiteMap({
       {/* Location name overlay - Top */}
       <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-md rounded-lg px-3 py-2 border border-purple-200/50">
         <div className="text-xs text-slate-600">Festival Area</div>
-        <div className="text-sm font-semibold text-slate-800">Al Ula, Saudi Arabia</div>
+        <div className="text-sm font-semibold text-slate-800">
+          Al Ula, Saudi Arabia
+        </div>
       </div>
     </div>
   );

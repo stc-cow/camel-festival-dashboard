@@ -6,10 +6,7 @@ interface GoogleMapsViewProps {
   onSiteSelect?: (site: FestivalSite) => void;
 }
 
-export function GoogleMapsView({
-  sites,
-  onSiteSelect,
-}: GoogleMapsViewProps) {
+export function GoogleMapsView({ sites, onSiteSelect }: GoogleMapsViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
@@ -26,7 +23,9 @@ export function GoogleMapsView({
     }
 
     // Get API key from environment or use placeholder
-    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "AIzaSyDDJzMCdTTcG8mn1ZEsWQJPHKL-G77tZWY";
+    const apiKey =
+      import.meta.env.VITE_GOOGLE_MAPS_API_KEY ||
+      "AIzaSyDDJzMCdTTcG8mn1ZEsWQJPHKL-G77tZWY";
 
     // Load Google Maps API
     const script = document.createElement("script");
@@ -38,7 +37,9 @@ export function GoogleMapsView({
     };
     script.onerror = () => {
       console.error("Failed to load Google Maps API - check your API key");
-      setMapError("Google Maps API failed to load. Please provide a valid API key in VITE_GOOGLE_MAPS_API_KEY environment variable.");
+      setMapError(
+        "Google Maps API failed to load. Please provide a valid API key in VITE_GOOGLE_MAPS_API_KEY environment variable.",
+      );
       setMapLoaded(true); // Still set as loaded to show fallback
     };
     document.head.appendChild(script);
@@ -168,7 +169,10 @@ export function GoogleMapsView({
     svg.appendChild(pole);
 
     // Tower top
-    const top = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    const top = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle",
+    );
     top.setAttribute("cx", "20");
     top.setAttribute("cy", "10");
     top.setAttribute("r", "3");
@@ -180,7 +184,7 @@ export function GoogleMapsView({
     arcRadii.forEach((radius, index) => {
       const arc = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "path"
+        "path",
       );
       const arcPath = `M ${20 - radius} 10 A ${radius} ${radius} 0 0 1 ${20 + radius} 10`;
       arc.setAttribute("d", arcPath);
@@ -247,10 +251,13 @@ export function GoogleMapsView({
     return (
       <div className="w-full h-full overflow-hidden rounded-xl border border-purple-200/30 bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center p-6">
         <div className="bg-white rounded-lg p-6 max-w-md border border-red-300 shadow-lg">
-          <div className="text-lg font-bold text-red-600 mb-3">Map Configuration Error</div>
+          <div className="text-lg font-bold text-red-600 mb-3">
+            Map Configuration Error
+          </div>
           <p className="text-sm text-gray-700 mb-4">{mapError}</p>
           <div className="bg-gray-50 p-3 rounded text-xs text-gray-600 border border-gray-200 font-mono">
-            Set VITE_GOOGLE_MAPS_API_KEY in your .env file with a valid Google Maps API key
+            Set VITE_GOOGLE_MAPS_API_KEY in your .env file with a valid Google
+            Maps API key
           </div>
         </div>
       </div>
@@ -269,14 +276,18 @@ export function GoogleMapsView({
         {!mapLoaded && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-200/50 backdrop-blur-sm">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
-            <span className="text-slate-700 font-medium">Initializing 3D Satellite Map...</span>
+            <span className="text-slate-700 font-medium">
+              Initializing 3D Satellite Map...
+            </span>
           </div>
         )}
       </div>
 
       {/* Map Controls Info */}
       <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-md rounded-lg p-2 sm:p-3 border border-purple-200/50 text-xs sm:text-sm">
-        <div className="text-slate-800 font-semibold mb-2">3D Satellite View</div>
+        <div className="text-slate-800 font-semibold mb-2">
+          3D Satellite View
+        </div>
         <div className="text-slate-600 text-xs space-y-1">
           <p>• Use mouse to rotate and pan</p>
           <p>• Scroll to zoom</p>

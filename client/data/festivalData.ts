@@ -29,7 +29,7 @@ export const festivalSites: FestivalSite[] = [
     id: "S001",
     name: "Main Entrance",
     location: "North Gate",
-    latitude: 25.640,
+    latitude: 25.64,
     longitude: 46.831,
     technology: "5G",
     status: "operational",
@@ -49,7 +49,7 @@ export const festivalSites: FestivalSite[] = [
     id: "S003",
     name: "Racing Track",
     location: "East Wing",
-    latitude: 25.630,
+    latitude: 25.63,
     longitude: 46.835,
     technology: "4G",
     status: "operational",
@@ -60,7 +60,7 @@ export const festivalSites: FestivalSite[] = [
     name: "Exhibition Hall",
     location: "West Zone",
     latitude: 25.638,
-    longitude: 46.820,
+    longitude: 46.82,
     technology: "5G",
     status: "operational",
     lastUpdate: new Date().toISOString(),
@@ -80,7 +80,7 @@ export const festivalSites: FestivalSite[] = [
     name: "Parking Zone",
     location: "Perimeter",
     latitude: 25.625,
-    longitude: 46.840,
+    longitude: 46.84,
     technology: "2G",
     status: "operational",
     lastUpdate: new Date().toISOString(),
@@ -98,7 +98,8 @@ export const festivalTickets: FestivalTicket[] = [
     status: "in-progress",
     createdAt: new Date(Date.now() - 3600000).toISOString(),
     updatedAt: new Date(Date.now() - 300000).toISOString(),
-    dispatcherNotes: "Signal fluctuation near food court, investigating interference",
+    dispatcherNotes:
+      "Signal fluctuation near food court, investigating interference",
   },
   {
     id: "TKT002",
@@ -109,7 +110,8 @@ export const festivalTickets: FestivalTicket[] = [
     status: "open",
     createdAt: new Date(Date.now() - 5400000).toISOString(),
     updatedAt: new Date(Date.now() - 600000).toISOString(),
-    dispatcherNotes: "Possible metal structure interference, pending site visit",
+    dispatcherNotes:
+      "Possible metal structure interference, pending site visit",
   },
   {
     id: "TKT003",
@@ -131,7 +133,8 @@ export const festivalTickets: FestivalTicket[] = [
     status: "open",
     createdAt: new Date(Date.now() - 1800000).toISOString(),
     updatedAt: new Date(Date.now() - 900000).toISOString(),
-    dispatcherNotes: "2G tower backup power failure, emergency repairs underway",
+    dispatcherNotes:
+      "2G tower backup power failure, emergency repairs underway",
   },
 ];
 
@@ -139,33 +142,31 @@ export const festivalTickets: FestivalTicket[] = [
 export function getFestivalStats() {
   const totalSites = festivalSites.length;
   const operationalSites = festivalSites.filter(
-    (s) => s.status === "operational"
+    (s) => s.status === "operational",
   ).length;
   const warningSites = festivalSites.filter(
-    (s) => s.status === "warning"
+    (s) => s.status === "warning",
   ).length;
   const criticalSites = festivalSites.filter(
-    (s) => s.status === "critical"
+    (s) => s.status === "critical",
   ).length;
 
   const availability = ((operationalSites / totalSites) * 100).toFixed(2);
 
   const totalTickets = festivalTickets.length;
-  const openTickets = festivalTickets.filter(
-    (t) => t.status === "open"
-  ).length;
+  const openTickets = festivalTickets.filter((t) => t.status === "open").length;
   const inProgressTickets = festivalTickets.filter(
-    (t) => t.status === "in-progress"
+    (t) => t.status === "in-progress",
   ).length;
   const resolvedTickets = festivalTickets.filter(
-    (t) => t.status === "resolved"
+    (t) => t.status === "resolved",
   ).length;
 
   const criticalTickets = festivalTickets.filter(
-    (t) => t.severity === "critical"
+    (t) => t.severity === "critical",
   ).length;
   const highTickets = festivalTickets.filter(
-    (t) => t.severity === "high"
+    (t) => t.severity === "high",
   ).length;
 
   return {
@@ -191,7 +192,7 @@ export function getTicketsByStatus(status: string) {
 // Get sites by location
 export function getSitesByLocation(location: string) {
   return festivalSites.filter((s) =>
-    s.location.toLowerCase().includes(location.toLowerCase())
+    s.location.toLowerCase().includes(location.toLowerCase()),
   );
 }
 
@@ -214,9 +215,7 @@ export const googleSheetsConfig: GoogleSheetsConfig = {
 };
 
 // Function to fetch data from Google Sheets (to be implemented)
-export async function fetchFestivalDataFromSheets(
-  _sheetId: string
-): Promise<{
+export async function fetchFestivalDataFromSheets(_sheetId: string): Promise<{
   sites: FestivalSite[];
   tickets: FestivalTicket[];
 }> {
