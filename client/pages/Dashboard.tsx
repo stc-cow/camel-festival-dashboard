@@ -107,31 +107,28 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {/* Main Content Area - Map (80%) + KPI (20%) */}
-        <div className="flex-1 overflow-hidden p-2 sm:p-3 md:p-4 flex gap-3">
-          {/* Map Container - 80% width */}
-          <div className="w-4/5 h-full overflow-hidden rounded-lg shadow-md">
-            <MaplibreView
-              sites={sites}
-              onSiteSelect={setSelectedSite}
-            />
+        {/* Main Content Area - Full Map */}
+        <div className="flex-1 overflow-hidden relative">
+          <MaplibreView
+            sites={sites}
+            onSiteSelect={setSelectedSite}
+          />
+
+          {/* KPI Overlay - Top Right */}
+          <div className="absolute top-4 right-4 z-20">
+            <div className="bg-transparent">
+              <KPIGauge
+                value={parseInt(stats.availability) || 0}
+                label="Availability KPI"
+                unit="%"
+                threshold={{ excellent: 90, good: 75, warning: 50 }}
+              />
+            </div>
           </div>
 
-          {/* KPI Container - 20% width, transparent only metric circle */}
-          <div className="w-1/5 h-full flex items-center justify-center">
-            <KPIGauge
-              value={parseInt(stats.availability) || 0}
-              label="Availability KPI"
-              unit="%"
-              threshold={{ excellent: 90, good: 75, warning: 50 }}
-            />
-          </div>
-        </div>
-
-        {/* Bottom Panel - Tickets Table */}
-        <div className="h-32 md:h-40 overflow-hidden px-2 sm:px-3 md:px-4 pb-2 sm:pb-3 md:pb-4 flex-shrink-0">
-          <div className="h-full overflow-hidden">
-            <FestivalTicketsTable tickets={tickets} />
+          {/* Tickets Table Overlay - Bottom Right with Toggle */}
+          <div className="absolute bottom-4 right-4 z-20 max-w-sm">
+            <TicketsTableOverlay tickets={tickets} />
           </div>
         </div>
 
