@@ -260,13 +260,15 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       // Restore console methods
       (console as any).error = originalConsoleError;
       (console as any).warn = originalConsoleWarn;
+      (console as any).log = originalConsoleLog;
 
       // Remove event listeners
       window.removeEventListener(
         "unhandledrejection",
         unhandledRejectionHandler,
+        true
       );
-      window.removeEventListener("error", errorEventHandler);
+      window.removeEventListener("error", errorEventHandler, true);
 
       // Clear any pending timeouts
       if (pendingTimeoutRef.current) {
