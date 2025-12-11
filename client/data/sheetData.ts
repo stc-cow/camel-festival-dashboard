@@ -61,15 +61,13 @@ function parseCSV(csv: string): SheetRow[] {
       Tech: values[1] || "",
       Lat: values[2] || "",
       Long: values[3] || "",
-      PowerStatus: values[4] || undefined,
-      NetworkStatus: values[5] || undefined,
-      TicketID: values[6] || undefined,
-      Issue: values[7] || undefined,
-      Severity: values[8] || undefined,
-      Status: values[9] || undefined,
-      CreatedAt: values[10] || undefined,
-      LastUpdate: values[11] || undefined,
-      Notes: values[12] || undefined,
+      TicketID: values[4] || undefined,
+      Issue: values[5] || undefined,
+      Severity: values[6] || undefined,
+      Status: values[7] || undefined,
+      CreatedAt: values[8] || undefined,
+      LastUpdate: values[9] || undefined,
+      Notes: values[10] || undefined,
     };
 
     if (row.COWName) {
