@@ -37,7 +37,8 @@ export function GoogleMapsView({
       setMapLoaded(true);
     };
     script.onerror = () => {
-      console.error("Failed to load Google Maps API");
+      console.error("Failed to load Google Maps API - check your API key");
+      setMapError("Google Maps API failed to load. Please provide a valid API key in VITE_GOOGLE_MAPS_API_KEY environment variable.");
       setMapLoaded(true); // Still set as loaded to show fallback
     };
     document.head.appendChild(script);
