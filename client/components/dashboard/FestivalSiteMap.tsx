@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import type { FestivalSite } from "@/data/festivalData";
 
 interface FestivalSiteMapProps {
@@ -10,7 +9,6 @@ export function FestivalSiteMap({
   sites,
   onSiteSelect,
 }: FestivalSiteMapProps) {
-  const canvasRef = useRef<HTMLDivElement>(null);
 
   // Festival boundary coordinates (Al Ula area)
   const mapCenter = { lat: 25.633, lng: 46.828 };
