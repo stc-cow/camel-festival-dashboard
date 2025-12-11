@@ -50,7 +50,7 @@ export function KPIGauge({
   const strokeDashoffset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-slate-950/40 backdrop-blur-md rounded-xl border border-slate-700/50 p-6">
+    <div className="flex flex-col items-center justify-center h-full bg-transparent backdrop-blur-none rounded-xl border-0 p-6">
       {/* SVG Gauge */}
       <div className="relative w-32 h-32 mb-4">
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
