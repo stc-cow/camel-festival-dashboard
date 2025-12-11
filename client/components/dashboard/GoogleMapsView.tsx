@@ -14,6 +14,7 @@ export function GoogleMapsView({
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapError, setMapError] = useState<string | null>(null);
 
   // Load Google Maps script
   useEffect(() => {
