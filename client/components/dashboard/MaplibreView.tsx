@@ -223,38 +223,23 @@ export function MaplibreView({
       pitch: 30,
       bearing: 0,
       antialias: true,
+      fadeDuration: 300,
     });
-
-    // Suppress abort errors from maplibre tile loading
-    const errorHandler = (event: ErrorEvent) => {
-      if (event.message && event.message.includes("AbortError")) {
-        event.preventDefault();
-        return false;
-      }
-    };
-    window.addEventListener("error", errorHandler);
 
     map.on("load", () => {
       setMapLoaded(true);
       addMarkers();
       // Fit map bounds to show all sites
       fitMapToSites(map);
+    });
 
-      // Handle container resize
-      const resizeObserver = new ResizeObserver(() => {
-        try {
-          map.resize();
-        } catch (e) {
-          console.error("Error resizing map:", e);
-        }
-      });
-
-      if (mapContainer.current) {
-        resizeObserver.observe(mapContainer.current);
+    // Handle unhandled promise rejections from maplibre tile aborts
+    map.on("error", (error: any) => {
+      if (error?.error?.message?.includes?.("AbortError")) {
+        // Silently ignore abort errors - they're expected when resizing or loading tiles
+        return;
       }
-
-      // Store resize observer for cleanup
-      map.resizeObserver = resizeObserver;
+      console.error("Map error:", error);
     });
 
     mapInstanceRef.current = map;
