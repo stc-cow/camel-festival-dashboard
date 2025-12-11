@@ -108,9 +108,9 @@ export default function Dashboard() {
         </header>
 
         {/* Main Content Area - Map (60%) + KPI (40%) */}
-        <div className="flex-1 overflow-hidden p-3 sm:p-4 md:p-6 flex gap-4">
+        <div className="flex-1 overflow-hidden p-2 sm:p-3 md:p-4 flex gap-3">
           {/* Map Container - 60% width */}
-          <div className="w-3/5 h-full overflow-hidden">
+          <div className="w-3/5 h-full overflow-hidden rounded-lg shadow-md">
             <MaplibreView
               sites={sites}
               onSiteSelect={setSelectedSite}
@@ -118,7 +118,7 @@ export default function Dashboard() {
           </div>
 
           {/* KPI Container - 40% width */}
-          <div className="w-2/5 h-full overflow-hidden bg-white rounded-lg shadow-md border border-slate-200">
+          <div className="w-2/5 h-full overflow-auto bg-white rounded-lg shadow-md border border-slate-200 flex items-center justify-center">
             <KPIGauge
               value={parseInt(stats.availability) || 0}
               label="Availability KPI"
@@ -129,7 +129,7 @@ export default function Dashboard() {
         </div>
 
         {/* Bottom Panel - Tickets Table */}
-        <div className="h-80 md:h-96 overflow-hidden px-3 sm:px-4 md:px-6 pb-3 sm:pb-4 md:pb-6 flex-shrink-0">
+        <div className="h-48 md:h-56 overflow-hidden px-2 sm:px-3 md:px-4 pb-2 sm:pb-3 md:pb-4 flex-shrink-0">
           <div className="h-full overflow-hidden">
             <FestivalTicketsTable tickets={tickets} />
           </div>
