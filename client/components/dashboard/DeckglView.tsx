@@ -45,7 +45,9 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
 
         // Load Deck.gl dynamically
         const { Deck } = await import("@deck.gl/core");
-        const { ScatterplotLayer } = await import("@deck.gl/layers");
+        const { ScatterplotLayer, TileLayer } = await import(
+          "@deck.gl/layers"
+        );
 
         if (cleanup || !containerRef.current) return;
 
