@@ -356,68 +356,58 @@ export function MaplibreView({
     container.style.display = "flex";
     container.style.flexDirection = "column";
     container.style.alignItems = "center";
-    container.style.gap = "4px";
+    container.style.gap = "2px";
 
-    const div = document.createElement("div");
-    div.style.transition = "transform 0.2s";
-
+    // Create circular marker with number
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "0 0 40 50");
-    svg.setAttribute("width", "40");
-    svg.setAttribute("height", "50");
-    svg.style.filter = "drop-shadow(0 2px 6px rgba(0,0,0,0.4))";
+    svg.setAttribute("viewBox", "0 0 60 60");
+    svg.setAttribute("width", "48");
+    svg.setAttribute("height", "48");
+    svg.style.filter = "drop-shadow(0 2px 8px rgba(0,0,0,0.3))";
 
-    // Tower base
-    const base = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    base.setAttribute("x", "17");
-    base.setAttribute("y", "35");
-    base.setAttribute("width", "6");
-    base.setAttribute("height", "10");
-    base.setAttribute("fill", color);
-    base.setAttribute("rx", "1");
-    svg.appendChild(base);
+    // Outer circle background
+    const outerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    outerCircle.setAttribute("cx", "30");
+    outerCircle.setAttribute("cy", "30");
+    outerCircle.setAttribute("r", "28");
+    outerCircle.setAttribute("fill", color);
+    outerCircle.setAttribute("opacity", "0.9");
+    svg.appendChild(outerCircle);
 
-    // Tower pole
-    const pole = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    pole.setAttribute("x1", "20");
-    pole.setAttribute("y1", "10");
-    pole.setAttribute("x2", "20");
-    pole.setAttribute("y2", "35");
-    pole.setAttribute("stroke", color);
-    pole.setAttribute("stroke-width", "2.5");
-    pole.setAttribute("stroke-linecap", "round");
-    svg.appendChild(pole);
+    // Inner white circle border
+    const borderCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    borderCircle.setAttribute("cx", "30");
+    borderCircle.setAttribute("cy", "30");
+    borderCircle.setAttribute("r", "25");
+    borderCircle.setAttribute("fill", "white");
+    svg.appendChild(borderCircle);
 
-    // Tower top (antenna)
-    const top = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    top.setAttribute("cx", "20");
-    top.setAttribute("cy", "10");
-    top.setAttribute("r", "3.5");
-    top.setAttribute("fill", color);
-    svg.appendChild(top);
+    // Colored inner circle
+    const innerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    innerCircle.setAttribute("cx", "30");
+    innerCircle.setAttribute("cy", "30");
+    innerCircle.setAttribute("r", "23");
+    innerCircle.setAttribute("fill", color);
+    svg.appendChild(innerCircle);
 
-    // Wi-Fi arcs (3 concentric arcs)
-    const arcRadii = [7, 12, 17];
-    arcRadii.forEach((radius, index) => {
-      const arc = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      const arcPath = `M ${20 - radius} 10 A ${radius} ${radius} 0 0 1 ${20 + radius} 10`;
-      arc.setAttribute("d", arcPath);
-      arc.setAttribute("stroke", color);
-      arc.setAttribute("stroke-width", "1.2");
-      arc.setAttribute("fill", "none");
-      arc.setAttribute("opacity", String(0.8 - index * 0.15));
-      arc.setAttribute("stroke-linecap", "round");
-      svg.appendChild(arc);
-    });
+    // Site ID number text
+    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    text.setAttribute("x", "30");
+    text.setAttribute("y", "35");
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("font-size", "20");
+    text.setAttribute("font-weight", "bold");
+    text.setAttribute("fill", "white");
+    text.textContent = site.id.replace(/\D/g, '').slice(0, 2) || "1";
+    svg.appendChild(text);
 
-    div.appendChild(svg);
-    container.appendChild(div);
+    container.appendChild(svg);
 
-    // Add site name label without background
+    // Add site name label - not bold
     const nameLabel = document.createElement("div");
     nameLabel.textContent = site.name;
     nameLabel.style.fontSize = "11px";
-    nameLabel.style.fontWeight = "bold";
+    nameLabel.style.fontWeight = "normal";
     nameLabel.style.color = "#000";
     nameLabel.style.textAlign = "center";
     nameLabel.style.maxWidth = "70px";
