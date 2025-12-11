@@ -348,8 +348,15 @@ export function MaplibreView({
   };
 
   const createMarkerSVG = (site: FestivalSite, color: string): HTMLElement => {
+    const container = document.createElement("div");
+    container.style.cursor = "pointer";
+    container.style.transition = "transform 0.2s";
+    container.style.display = "flex";
+    container.style.flexDirection = "column";
+    container.style.alignItems = "center";
+    container.style.gap = "4px";
+
     const div = document.createElement("div");
-    div.style.cursor = "pointer";
     div.style.transition = "transform 0.2s";
 
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -402,8 +409,22 @@ export function MaplibreView({
     });
 
     div.appendChild(svg);
+    container.appendChild(div);
 
-    return div;
+    // Add site name label without background
+    const nameLabel = document.createElement("div");
+    nameLabel.textContent = site.name;
+    nameLabel.style.fontSize = "11px";
+    nameLabel.style.fontWeight = "bold";
+    nameLabel.style.color = "#000";
+    nameLabel.style.textAlign = "center";
+    nameLabel.style.maxWidth = "70px";
+    nameLabel.style.whiteSpace = "normal";
+    nameLabel.style.pointerEvents = "none";
+    nameLabel.style.lineHeight = "1.2";
+    container.appendChild(nameLabel);
+
+    return container;
   };
 
   const getStatusColor = (status: string): string => {
