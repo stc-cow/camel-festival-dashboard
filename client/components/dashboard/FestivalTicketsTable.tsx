@@ -70,27 +70,27 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       <div className="overflow-x-auto border-0">
         <table className="w-full text-sm" style={{ borderCollapse: "collapse" }}>
           {/* Table Head */}
-          <thead className="bg-transparent border-b-2 border-purple-500 sticky top-0">
+          <thead className="bg-transparent sticky top-0">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider border border-purple-500">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Ticket ID
               </th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider border border-purple-500">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Site
               </th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider border border-purple-500">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Issue
               </th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider border border-purple-500">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Severity
               </th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider border border-purple-500">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider border border-purple-500">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Created
               </th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider border border-purple-500">
+              <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Notes
               </th>
             </tr>
