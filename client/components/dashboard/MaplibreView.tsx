@@ -246,6 +246,15 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     scriptEl.async = true;
     scriptEl.onload = () => {
       if (isMountedRef.current) {
+        // Suppress maplibre's internal AbortErrors after library loads
+        const originalError = window.onerror;
+        window.onerror = function(msg: any, url: any, lineNo: any, colNo: any, error: any) {
+          const errorString = String(msg || "");
+          if (/abort/i.test(errorString) || /signal is aborted/i.test(errorString) || error?.name === "AbortError") {
+            return true; // Suppress error
+          }
+          return originalError ? originalError(msg, url, lineNo, colNo, error) : false;
+        };
         initializeMap();
       }
     };
