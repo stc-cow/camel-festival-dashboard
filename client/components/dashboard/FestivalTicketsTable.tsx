@@ -90,36 +90,24 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
             {tickets.length > 0 ? (
               tickets.map((ticket) => (
                 <tr key={ticket.id} className="bg-white/20 hover:bg-white/40 transition-colors duration-200">
-                  {/* Column A: COWName */}
+                  {/* COWName */}
                   <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     <p className="text-black font-bold text-xs">{ticket.siteName}</p>
                   </td>
 
-                  {/* Column B: Empty */}
-                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                  </td>
-
-                  {/* Column C: Empty */}
-                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                  </td>
-
-                  {/* Column D: Empty */}
-                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                  </td>
-
-                  {/* Column E: TicketID */}
+                  {/* TicketID */}
                   <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     <code className="text-xs font-bold text-black">
                       {ticket.id}
                     </code>
                   </td>
 
-                  {/* Column F: Issue */}
+                  {/* Issue */}
                   <td className="px-2 py-1 max-w-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     <p className="text-black font-bold text-xs truncate">{ticket.issue}</p>
                   </td>
 
-                  {/* Column G: Severity */}
+                  {/* Severity */}
                   <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     <span
                       className={`inline-flex items-center px-1 py-0.5 rounded text-xs font-medium border capitalize ${getSeverityColor(
@@ -130,7 +118,7 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                     </span>
                   </td>
 
-                  {/* Column H: Status */}
+                  {/* Status */}
                   <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     <span
                       className={`inline-flex items-center px-1 py-0.5 rounded text-xs font-medium border capitalize ${getStatusColor(
@@ -141,17 +129,17 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                     </span>
                   </td>
 
-                  {/* Column I: CreatedAt */}
+                  {/* CreatedAt */}
                   <td className="px-2 py-1 text-black font-bold text-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     {new Date(ticket.createdAt).toLocaleString()}
                   </td>
 
-                  {/* Column J: LastUpdate */}
+                  {/* LastUpdate */}
                   <td className="px-2 py-1 text-black font-bold text-xs" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     {new Date(ticket.updatedAt).toLocaleString()}
                   </td>
 
-                  {/* Column K: Notes */}
+                  {/* Notes */}
                   <td className="px-2 py-1 max-w-sm" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     <p className="text-black font-bold text-xs truncate">
                       {ticket.dispatcherNotes}
