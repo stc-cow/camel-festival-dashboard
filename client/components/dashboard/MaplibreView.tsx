@@ -155,6 +155,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
 
     const isAbortError = (...args: any[]): boolean => {
       return args.some((arg) => {
+        if (!arg) return false;
         const str = String(arg);
         return (
           /abort/i.test(str) ||
@@ -163,15 +164,6 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
           (typeof arg === "object" && arg?.name === "AbortError")
         );
       });
-    };
-
-    // Override Promise rejection handler for AbortError
-    const originalPromiseReject = Promise.reject;
-    Promise.reject = function(reason: any) {
-      if (isAbortError(reason)) {
-        return Promise.resolve(); // Silently resolve instead of reject
-      }
-      return originalPromiseReject.call(this, reason);
     };
 
     // Suppress AbortError from unhandled promise rejections
