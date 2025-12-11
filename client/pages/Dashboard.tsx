@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MaplibreView } from "@/components/dashboard/MaplibreView";
 import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
+import { KPIGauge } from "@/components/dashboard/KPIGauge";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 import { fetchSheetData } from "@/data/sheetData";
