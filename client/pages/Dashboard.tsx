@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MaplibreView } from "@/components/dashboard/MaplibreView";
+import { DeckglView } from "@/components/dashboard/DeckglView";
 import { KPIGauge } from "@/components/dashboard/KPIGauge";
 import { TicketsTableOverlay } from "@/components/dashboard/TicketsTableOverlay";
 import { Button } from "@/components/ui/button";
