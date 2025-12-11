@@ -37,17 +37,17 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
       }
     };
 
+    let cleanup = false;
+
     const initDeckGL = async () => {
       try {
-        if (!containerRef.current) return;
+        if (!containerRef.current || cleanup) return;
 
-        // Dynamically import Deck.gl
+        // Load Deck.gl dynamically
         const { Deck } = await import("@deck.gl/core");
         const { ScatterplotLayer } = await import("@deck.gl/layers");
 
-        // Get WebGL canvas
-        const canvas = document.createElement("canvas");
-        containerRef.current.appendChild(canvas);
+        if (cleanup || !containerRef.current) return;
 
         const getStatusColor = (status: string): [number, number, number] => {
           switch (status) {
@@ -62,15 +62,15 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
           }
         };
 
-        // Create scatter plot layer for tower icons
+        // Create scatterplot layer for sites
         const scatterLayer = new ScatterplotLayer({
-          id: "scatter-plot",
+          id: "sites",
           data: sites,
           pickable: true,
-          opacity: 0.8,
-          radiusScale: 50,
-          radiusMinPixels: 35,
-          radiusMaxPixels: 100,
+          opacity: 0.85,
+          radiusScale: 40,
+          radiusMinPixels: 30,
+          radiusMaxPixels: 80,
           lineWidthMinPixels: 2,
           getPosition: (d: FestivalSite) => [d.longitude, d.latitude],
           getFillColor: (d: FestivalSite) => getStatusColor(d.status),
@@ -90,64 +90,33 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
           },
         });
 
-        // Base map layer using tiles
-        const tileLayer = new TileLayer({
-          data: "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          minZoom: 0,
-          maxZoom: 19,
-          tileSize: 256,
-          renderSubLayers: (props: any) => {
-            const {
-              bbox: [west, south, east, north],
-            } = props.tile;
-
-            return new GeoJsonLayer({
-              ...props,
-              data: {
-                type: "FeatureCollection",
-                features: [
-                  {
-                    type: "Feature",
-                    geometry: {
-                      type: "Polygon",
-                      coordinates: [
-                        [
-                          [west, south],
-                          [east, south],
-                          [east, north],
-                          [west, north],
-                          [west, south],
-                        ],
-                      ],
-                    },
-                  },
-                ],
-              },
-              stroked: false,
-              filled: false,
-              pickable: false,
-              autoHighlight: false,
-            });
-          },
-        });
-
         const initialViewState = {
           longitude: 37.9833,
           latitude: 26.6868,
           zoom: 12,
-          pitch: 45,
+          pitch: 40,
           bearing: 0,
         };
 
+        // Create Deck.gl instance
         const deck = new Deck({
           container: containerRef.current,
           initialViewState,
-          controller: true,
-          layers: [tileLayer, scatterLayer],
-          onWebGLInitialized: () => setMapLoaded(true),
+          controller: {
+            doubleClickZoom: true,
+            touchZoom: true,
+            touchRotate: true,
+          },
+          layers: [scatterLayer],
         });
 
+        if (cleanup) {
+          deck.finalize();
+          return;
+        }
+
         deckRef.current = deck;
+        setMapLoaded(true);
 
         // Fit bounds to all sites
         if (sites.length > 0) {
@@ -165,41 +134,18 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
 
           const centerLng = (minLng + maxLng) / 2;
           const centerLat = (minLat + maxLat) / 2;
-          const deltaLng = maxLng - minLng;
-          const deltaLat = maxLat - minLat;
-          const zoom = Math.min(
-            12,
-            Math.floor(
-              Math.log2(
-                Math.max(
-                  360 / deltaLng,
-                  Math.max(
-                    85.051129 /
-                      Math.log(
-                        Math.tan(
-                          Math.PI / 4 +
-                            ((maxLat * Math.PI) / 180 / 2)
-                        )
-                      ) -
-                      Math.log(
-                        Math.tan(
-                          Math.PI / 4 +
-                            ((minLat * Math.PI) / 180 / 2)
-                        )
-                      ),
-                    -1
-                  ) / 256
-                )
-              )
-            )
-          );
+          const deltaLng = Math.abs(maxLng - minLng);
+          const deltaLat = Math.abs(maxLat - minLat);
+
+          const maxDelta = Math.max(deltaLng, deltaLat);
+          const zoom = Math.max(8, 14 - Math.log2(maxDelta * 111));
 
           deck.setProps({
             initialViewState: {
               longitude: centerLng,
               latitude: centerLat,
-              zoom,
-              pitch: 45,
+              zoom: Math.min(zoom, 15),
+              pitch: 40,
               bearing: 0,
               transitionDuration: 1000,
             },
@@ -214,12 +160,14 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
     initDeckGL();
 
     return () => {
+      cleanup = true;
       (console as any).error = originalConsoleError;
       (console as any).warn = originalConsoleWarn;
 
       if (deckRef.current) {
         try {
           deckRef.current.finalize();
+          deckRef.current = null;
         } catch (e) {
           // Silently ignore cleanup errors
         }
@@ -238,7 +186,7 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-200/50 backdrop-blur-sm z-10">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4" />
             <span className="text-slate-700 font-medium">
-              Loading 3D Map...
+              Loading 3D Visualization...
             </span>
           </div>
         )}
@@ -258,7 +206,7 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
           <div className="bg-white/90 backdrop-blur-md rounded-lg border border-purple-200/50 shadow-lg">
             <div className="flex items-center justify-between px-3 py-2 border-b border-purple-200/30">
               <div className="text-slate-800 font-bold text-xs">
-                Map Controls
+                3D Controls
               </div>
               <button
                 onClick={() => setIsLayerSelectorOpen(false)}
@@ -275,7 +223,7 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
                 <strong>Zoom:</strong> Scroll
               </p>
               <p className="text-slate-700">
-                <strong>Pan:</strong> Right Click + Drag
+                <strong>Tilt:</strong> Ctrl + Drag
               </p>
             </div>
           </div>
@@ -285,7 +233,7 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
       {/* Attribution */}
       <div className="absolute bottom-4 right-4 text-xs text-slate-600 z-20 pointer-events-none">
         <span className="bg-white/80 px-2 py-1 rounded border border-purple-200/50 backdrop-blur-sm inline-block">
-          © OpenStreetMap contributors
+          Deck.gl Map
         </span>
       </div>
     </div>
