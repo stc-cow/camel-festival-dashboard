@@ -98,12 +98,12 @@ export function KPIGauge({
       </div>
 
       {/* Threshold indicators */}
-      <div className="w-full space-y-2 text-xs">
-        <div className="flex justify-between items-center text-slate-600">
+      <div className="w-full space-y-2 text-sm">
+        <div className="flex justify-between items-center text-slate-700 font-medium">
           <span>Excellent</span>
           <span>{threshold.excellent}%</span>
         </div>
-        <div className="w-full h-1.5 bg-slate-300 rounded-full overflow-hidden">
+        <div className="w-full h-2 bg-slate-300 rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
             style={{ width: "100%" }}
