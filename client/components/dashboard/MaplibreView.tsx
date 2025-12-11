@@ -230,6 +230,17 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     window.addEventListener("unhandledrejection", unhandledRejectionHandler, true);
     window.addEventListener("error", errorEventHandler, true);
 
+    // Add aggressive global handler for AbortError that may come from Worker threads
+    const globalUnhandledRejection = (event: any) => {
+      if (event && event.reason) {
+        const reasonStr = String(event.reason);
+        if (/abort/i.test(reasonStr) || /signal is aborted/i.test(reasonStr) || event.reason?.name === "AbortError") {
+          event.preventDefault();
+        }
+      }
+    };
+    window.addEventListener("unhandledrejection", globalUnhandledRejection, true);
+
     // Create style link for Maplibre
     const linkEl = document.createElement("link");
     linkEl.href =
