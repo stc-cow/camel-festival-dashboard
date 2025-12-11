@@ -329,56 +329,75 @@ export function MaplibreView({
   };
 
   const addMarkers = () => {
-    if (!mapInstanceRef.current || !window.maplibregl) return;
+    if (!isMountedRef.current || !mapInstanceRef.current || !window.maplibregl) return;
 
-    // Clear existing markers
-    markersRef.current.forEach((marker) => marker.remove());
-    markersRef.current.clear();
-
-    sites.forEach((site) => {
-      const color = getStatusColor(site.status);
-
-      // Create custom SVG marker
-      const markerElement = createMarkerSVG(site, color);
-
-      const marker = new window.maplibregl.Marker({
-        element: markerElement,
-      })
-        .setLngLat([site.longitude, site.latitude])
-        .addTo(mapInstanceRef.current);
-
-      // Create popup for info
-      const popup = new window.maplibregl.Popup({ offset: 25 }).setHTML(
-        `
-        <div style="padding: 12px; font-family: Arial, sans-serif; min-width: 200px;">
-          <h4 style="margin: 0 0 8px 0; font-weight: bold; font-size: 14px; color: #1f2937;">
-            ${site.name}
-          </h4>
-          <p style="margin: 4px 0; font-size: 12px; color: #4b5563;">
-            <strong>Location:</strong> ${site.location}
-          </p>
-          <p style="margin: 4px 0; font-size: 12px; color: #4b5563;">
-            <strong>Technology:</strong> ${site.technology}
-          </p>
-          <p style="margin: 4px 0; font-size: 12px; color: #4b5563;">
-            <strong>Status:</strong> <span style="color: ${color}; font-weight: bold; text-transform: capitalize;">${site.status}</span>
-          </p>
-          <p style="margin: 4px 0 0 0; font-size: 11px; color: #9ca3af;">
-            Updated: ${new Date(site.lastUpdate).toLocaleTimeString()}
-          </p>
-        </div>
-        `
-      );
-
-      marker.setPopup(popup);
-
-      // Click handler
-      markerElement.addEventListener("click", () => {
-        onSiteSelect?.(site);
+    try {
+      // Clear existing markers
+      markersRef.current.forEach((marker) => {
+        try {
+          marker.remove();
+        } catch (e) {
+          // Silently ignore marker removal errors
+        }
       });
+      markersRef.current.clear();
 
-      markersRef.current.set(site.id, marker);
-    });
+      // Only add markers if map is still available
+      if (!mapInstanceRef.current) return;
+
+      sites.forEach((site) => {
+        if (!isMountedRef.current || !mapInstanceRef.current) return;
+
+        const color = getStatusColor(site.status);
+
+        // Create custom SVG marker
+        const markerElement = createMarkerSVG(site, color);
+
+        try {
+          const marker = new window.maplibregl.Marker({
+            element: markerElement,
+          })
+            .setLngLat([site.longitude, site.latitude])
+            .addTo(mapInstanceRef.current);
+
+          // Create popup for info
+          const popup = new window.maplibregl.Popup({ offset: 25 }).setHTML(
+            `
+            <div style="padding: 12px; font-family: Arial, sans-serif; min-width: 200px;">
+              <h4 style="margin: 0 0 8px 0; font-weight: bold; font-size: 14px; color: #1f2937;">
+                ${site.name}
+              </h4>
+              <p style="margin: 4px 0; font-size: 12px; color: #4b5563;">
+                <strong>Location:</strong> ${site.location}
+              </p>
+              <p style="margin: 4px 0; font-size: 12px; color: #4b5563;">
+                <strong>Technology:</strong> ${site.technology}
+              </p>
+              <p style="margin: 4px 0; font-size: 12px; color: #4b5563;">
+                <strong>Status:</strong> <span style="color: ${color}; font-weight: bold; text-transform: capitalize;">${site.status}</span>
+              </p>
+              <p style="margin: 4px 0 0 0; font-size: 11px; color: #9ca3af;">
+                Updated: ${new Date(site.lastUpdate).toLocaleTimeString()}
+              </p>
+            </div>
+            `
+          );
+
+          marker.setPopup(popup);
+
+          // Click handler
+          markerElement.addEventListener("click", () => {
+            onSiteSelect?.(site);
+          });
+
+          markersRef.current.set(site.id, marker);
+        } catch (e) {
+          // Silently ignore marker creation errors
+        }
+      });
+    } catch (e) {
+      // Silently ignore marker operations errors
+    }
   };
 
   const updateMarkers = () => {
