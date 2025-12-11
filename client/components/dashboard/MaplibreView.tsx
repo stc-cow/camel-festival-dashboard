@@ -211,25 +211,39 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       }
     };
 
-    // Intercept console methods to suppress AbortError logs
+    // Intercept console methods to suppress AbortError logs - CRITICAL for maplibre
     const originalConsoleError = console.error;
     const originalConsoleWarn = console.warn;
     const originalConsoleLog = console.log;
 
+    const shouldSuppress = (...args: any[]): boolean => {
+      return args.some((arg) => {
+        if (!arg) return false;
+        const str = String(arg);
+        return (
+          /abort/i.test(str) ||
+          /signal is aborted/i.test(str) ||
+          (arg instanceof Error && arg.name === "AbortError") ||
+          (typeof arg === "object" && arg?.name === "AbortError") ||
+          /generator|maplibre/i.test(str)
+        );
+      });
+    };
+
     (console as any).error = function (...args: any[]) {
-      if (!isAbortError(...args)) {
+      if (!shouldSuppress(...args)) {
         originalConsoleError.apply(console, args);
       }
     };
 
     (console as any).warn = function (...args: any[]) {
-      if (!isAbortError(...args)) {
+      if (!shouldSuppress(...args)) {
         originalConsoleWarn.apply(console, args);
       }
     };
 
     (console as any).log = function (...args: any[]) {
-      if (!isAbortError(...args)) {
+      if (!shouldSuppress(...args)) {
         originalConsoleLog.apply(console, args);
       }
     };
