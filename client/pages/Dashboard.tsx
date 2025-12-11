@@ -86,7 +86,7 @@ export default function Dashboard() {
         <div className="flex-1 overflow-hidden flex flex-col">
           {/* Map Container - 75% height */}
           <div className="flex-1 overflow-hidden relative">
-            <MaplibreView sites={sites} onSiteSelect={setSelectedSite} />
+            <Cesium3DView sites={sites} onSiteSelect={setSelectedSite} />
 
             {/* KPI Overlay - Top Right */}
             <div className="absolute top-2 right-2 z-20">
