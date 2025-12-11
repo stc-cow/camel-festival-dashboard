@@ -18,7 +18,7 @@ interface SheetRow {
 
 // Google Sheet public CSV export URL
 const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/1WVROxCmhtU9W6GFme3lWaJ4jhYPaAmSAunC3dMPSyys/export?format=csv&gid=1338846885";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vS-w_0g3Jw25ORAUBiDwfGSGpdGco4-CYPJ1uKNuA88G2-HKMeoO54eaqjqJHr-9lLietSy0KaqIwvW/pub?gid=1338846885&single=true&output=csv";
 
 // Parse CSV data
 function parseCSV(csv: string): SheetRow[] {
