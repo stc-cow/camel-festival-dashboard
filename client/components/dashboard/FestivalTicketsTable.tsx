@@ -56,7 +56,7 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       boxShadow: "inset 0 0 0 2px rgb(236, 72, 153), 0 0 0 1px rgb(168, 85, 247)"
     }}>
       {/* Header - One Line */}
-      <div className="bg-transparent border-b-2 border-purple-500 px-6 py-3 flex items-center justify-between">
+      <div className="bg-transparent border-b-2 border-purple-500 px-3 py-1.5 flex items-center justify-between">
         <h3 className="text-sm font-bold text-black">
           Dispatch Tickets & Issues
         </h3>
