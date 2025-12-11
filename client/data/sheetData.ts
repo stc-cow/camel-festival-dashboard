@@ -5,8 +5,6 @@ interface SheetRow {
   Tech: string;
   Lat: string;
   Long: string;
-  PowerStatus?: string;
-  NetworkStatus?: string;
   TicketID?: string;
   Issue?: string;
   Severity?: string;
