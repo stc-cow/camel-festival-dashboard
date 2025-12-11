@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { DeckTerrainMapView } from "@/components/dashboard/DeckTerrainMapView";
+import { LeafletMapView } from "@/components/dashboard/LeafletMapView";
 import { KPIGauge } from "@/components/dashboard/KPIGauge";
 import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
 import { fetchSheetData } from "@/data/sheetData";
