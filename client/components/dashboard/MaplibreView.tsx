@@ -150,6 +150,15 @@ export function MaplibreView({
 
   // Load Maplibre GL library
   useEffect(() => {
+    // Suppress MapLibre AbortError from unhandled promise rejections
+    const unhandledRejectionHandler = (event: PromiseRejectionEvent) => {
+      if (event.reason?.message?.includes?.("AbortError")) {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener("unhandledrejection", unhandledRejectionHandler);
+
     // Create style link for Maplibre
     const linkEl = document.createElement("link");
     linkEl.href =
@@ -172,6 +181,9 @@ export function MaplibreView({
     document.head.appendChild(scriptEl);
 
     return () => {
+      // Clean up unhandled rejection handler
+      window.removeEventListener("unhandledrejection", unhandledRejectionHandler);
+
       // Clean up map instance
       if (mapInstanceRef.current) {
         try {
