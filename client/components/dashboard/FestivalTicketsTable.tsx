@@ -62,15 +62,6 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                 COWName
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                B
-              </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                C
-              </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                D
-              </th>
-              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 TicketID
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
