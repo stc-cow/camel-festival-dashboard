@@ -73,10 +73,7 @@ export function FestivalSiteMap({
   };
 
   return (
-    <div
-      ref={canvasRef}
-      className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-xl overflow-hidden relative"
-    >
+    <div className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-xl overflow-hidden relative">
       {/* SVG Map */}
       <svg
         className="w-full h-full"
