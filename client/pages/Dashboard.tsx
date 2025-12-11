@@ -148,7 +148,7 @@ export default function Dashboard() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <span className="text-xs">
               Sites:{" "}
-              <span className="text-white font-semibold">
+              <span className="text-slate-800 font-semibold">
                 {stats.totalSites}
               </span>
               {" "}| ✓{" "}
