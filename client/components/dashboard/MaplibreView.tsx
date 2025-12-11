@@ -450,17 +450,17 @@ export function MaplibreView({
     iconContainer.appendChild(img);
     container.appendChild(iconContainer);
 
-    // Add site name label - not bold
+    // Add site name label - not bold, smaller
     const nameLabel = document.createElement("div");
     nameLabel.textContent = site.name;
-    nameLabel.style.fontSize = "11px";
+    nameLabel.style.fontSize = "8px";
     nameLabel.style.fontWeight = "normal";
     nameLabel.style.color = "#000";
     nameLabel.style.textAlign = "center";
-    nameLabel.style.maxWidth = "80px";
+    nameLabel.style.maxWidth = "60px";
     nameLabel.style.whiteSpace = "normal";
     nameLabel.style.pointerEvents = "none";
-    nameLabel.style.lineHeight = "1.2";
+    nameLabel.style.lineHeight = "1.1";
     container.appendChild(nameLabel);
 
     return container;
