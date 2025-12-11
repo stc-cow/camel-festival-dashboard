@@ -503,16 +503,41 @@ export function MaplibreView({
     iconContainer.style.height = "20px";
     iconContainer.style.filter = "drop-shadow(0 1px 4px rgba(0,0,0,0.3))";
 
-    const img = document.createElement("img");
-    img.src = "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F337d21741ce545d5b5567c095ddcf011?format=webp&width=800";
-    img.alt = site.name;
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "contain";
-    img.style.pointerEvents = "none";
-    img.style.userSelect = "none";
+    // Create SVG WiFi icon
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", "20");
+    svg.setAttribute("height", "20");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "#22c55e");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
 
-    iconContainer.appendChild(img);
+    // First arc
+    const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path1.setAttribute("d", "M5 12c2.9-2.9 7.6-2.9 10.6 0");
+    path1.setAttribute("stroke", "#22c55e");
+
+    // Second arc
+    const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path2.setAttribute("d", "M2 9c4.4-4.4 11.6-4.4 16 0");
+    path2.setAttribute("stroke", "#22c55e");
+
+    // WiFi dot
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", "12");
+    circle.setAttribute("cy", "20");
+    circle.setAttribute("r", "1");
+    circle.setAttribute("fill", "#22c55e");
+
+    svg.appendChild(path1);
+    svg.appendChild(path2);
+    svg.appendChild(circle);
+    svg.style.pointerEvents = "none";
+    svg.style.userSelect = "none";
+
+    iconContainer.appendChild(svg);
     container.appendChild(iconContainer);
 
     // Add site name label - not bold, smaller
