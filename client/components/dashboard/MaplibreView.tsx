@@ -459,51 +459,71 @@ export function MaplibreView({
         )}
       </div>
 
-      {/* Layer Selector - Top Right */}
-      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-lg p-2 border border-purple-200/50 z-20">
-        <div className="text-slate-800 font-semibold text-xs mb-2">Map Layers</div>
-        <div className="space-y-1">
+      {/* Layer Selector - Foldable Icon */}
+      <div className="absolute top-4 right-4 z-20">
+        {!isLayerSelectorOpen ? (
           <button
-            onClick={() => switchMapLayer("satellite")}
-            className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
-              currentLayer === "satellite"
-                ? "bg-purple-600 text-white"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-            }`}
+            onClick={() => setIsLayerSelectorOpen(true)}
+            className="bg-white/90 backdrop-blur-md rounded-lg p-2 border border-purple-200/50 hover:bg-white transition-all shadow-md"
+            title="Toggle Map Layers"
           >
-            Satellite
+            <Layers className="w-5 h-5 text-slate-700" />
           </button>
-          <button
-            onClick={() => switchMapLayer("street")}
-            className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
-              currentLayer === "street"
-                ? "bg-purple-600 text-white"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-            }`}
-          >
-            Street Map
-          </button>
-          <button
-            onClick={() => switchMapLayer("hybrid")}
-            className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
-              currentLayer === "hybrid"
-                ? "bg-purple-600 text-white"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-            }`}
-          >
-            Hybrid
-          </button>
-          <button
-            onClick={() => switchMapLayer("terrain")}
-            className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
-              currentLayer === "terrain"
-                ? "bg-purple-600 text-white"
-                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-            }`}
-          >
-            Terrain
-          </button>
-        </div>
+        ) : (
+          <div className="bg-white/90 backdrop-blur-md rounded-lg border border-purple-200/50 shadow-lg">
+            <div className="flex items-center justify-between px-3 py-2 border-b border-purple-200/30">
+              <div className="text-slate-800 font-bold text-xs">Map Layers</div>
+              <button
+                onClick={() => setIsLayerSelectorOpen(false)}
+                className="text-slate-600 hover:text-slate-800"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="space-y-1 p-2">
+              <button
+                onClick={() => switchMapLayer("satellite")}
+                className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                  currentLayer === "satellite"
+                    ? "bg-purple-600 text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                Satellite
+              </button>
+              <button
+                onClick={() => switchMapLayer("street")}
+                className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                  currentLayer === "street"
+                    ? "bg-purple-600 text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                Street Map
+              </button>
+              <button
+                onClick={() => switchMapLayer("hybrid")}
+                className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                  currentLayer === "hybrid"
+                    ? "bg-purple-600 text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                Hybrid
+              </button>
+              <button
+                onClick={() => switchMapLayer("terrain")}
+                className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                  currentLayer === "terrain"
+                    ? "bg-purple-600 text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                Terrain
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
 
