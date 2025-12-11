@@ -431,50 +431,24 @@ export function MaplibreView({
     container.style.alignItems = "center";
     container.style.gap = "2px";
 
-    // Create circular marker with number
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "0 0 60 60");
-    svg.setAttribute("width", "48");
-    svg.setAttribute("height", "48");
-    svg.style.filter = "drop-shadow(0 2px 8px rgba(0,0,0,0.3))";
+    // Create image marker with telecom tower icon
+    const iconContainer = document.createElement("div");
+    iconContainer.style.position = "relative";
+    iconContainer.style.width = "64px";
+    iconContainer.style.height = "64px";
+    iconContainer.style.filter = "drop-shadow(0 2px 8px rgba(0,0,0,0.3))";
 
-    // Outer circle background
-    const outerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    outerCircle.setAttribute("cx", "30");
-    outerCircle.setAttribute("cy", "30");
-    outerCircle.setAttribute("r", "28");
-    outerCircle.setAttribute("fill", color);
-    outerCircle.setAttribute("opacity", "0.9");
-    svg.appendChild(outerCircle);
+    const img = document.createElement("img");
+    img.src = "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F337d21741ce545d5b5567c095ddcf011?format=webp&width=800";
+    img.alt = site.name;
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "contain";
+    img.style.pointerEvents = "none";
+    img.style.userSelect = "none";
 
-    // Inner white circle border
-    const borderCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    borderCircle.setAttribute("cx", "30");
-    borderCircle.setAttribute("cy", "30");
-    borderCircle.setAttribute("r", "25");
-    borderCircle.setAttribute("fill", "white");
-    svg.appendChild(borderCircle);
-
-    // Colored inner circle
-    const innerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    innerCircle.setAttribute("cx", "30");
-    innerCircle.setAttribute("cy", "30");
-    innerCircle.setAttribute("r", "23");
-    innerCircle.setAttribute("fill", color);
-    svg.appendChild(innerCircle);
-
-    // Site ID number text
-    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    text.setAttribute("x", "30");
-    text.setAttribute("y", "35");
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("font-size", "20");
-    text.setAttribute("font-weight", "bold");
-    text.setAttribute("fill", "white");
-    text.textContent = site.id.replace(/\D/g, '').slice(0, 2) || "1";
-    svg.appendChild(text);
-
-    container.appendChild(svg);
+    iconContainer.appendChild(img);
+    container.appendChild(iconContainer);
 
     // Add site name label - not bold
     const nameLabel = document.createElement("div");
@@ -483,7 +457,7 @@ export function MaplibreView({
     nameLabel.style.fontWeight = "normal";
     nameLabel.style.color = "#000";
     nameLabel.style.textAlign = "center";
-    nameLabel.style.maxWidth = "70px";
+    nameLabel.style.maxWidth = "80px";
     nameLabel.style.whiteSpace = "normal";
     nameLabel.style.pointerEvents = "none";
     nameLabel.style.lineHeight = "1.2";
