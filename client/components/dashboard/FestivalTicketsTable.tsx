@@ -67,9 +67,9 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           {/* Table Head */}
-          <thead className="bg-slate-900/50 border-b border-slate-700/30 sticky top-0">
+          <thead className="bg-transparent border-b border-purple-200/30 sticky top-0">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
                 Ticket ID
               </th>
               <th className="px-6 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">
