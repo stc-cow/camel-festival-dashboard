@@ -1,106 +1,90 @@
-import { useState } from "react";
-import { PowerTicketsStats } from "@/components/dashboard/PowerTicketsStats";
-import { AvailabilityMetric } from "@/components/dashboard/AvailabilityMetric";
-import { PowerOutagesTable } from "@/components/dashboard/PowerOutagesTable";
-import { SiteMap } from "@/components/dashboard/SiteMap";
-import { Card } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import { FestivalSiteMap } from "@/components/dashboard/FestivalSiteMap";
+import { KPIGauge } from "@/components/dashboard/KPIGauge";
+import { SitesList } from "@/components/dashboard/SitesList";
+import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
 import { Button } from "@/components/ui/button";
-import { RefreshCw, AlertTriangle } from "lucide-react";
-import { powerTickets, getPowerStats } from "@/data/powerOutageData";
+import { RefreshCw } from "lucide-react";
+import {
+  festivalSites,
+  festivalTickets,
+  getFestivalStats,
+  type FestivalSite,
+} from "@/data/festivalData";
 
 export default function Dashboard() {
+  const [sites, setSites] = useState(festivalSites);
+  const [tickets, setTickets] = useState(festivalTickets);
+  const [selectedSite, setSelectedSite] = useState<FestivalSite | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const stats = getPowerStats();
-  const lastUpdated = new Date().toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
+  const [lastRefreshed, setLastRefreshed] = useState<Date>(new Date());
+
+  const stats = getFestivalStats();
+
+  // Auto-refresh every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleRefresh();
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Simulate data refresh
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    setLastRefreshed(new Date());
     setIsRefreshing(false);
   };
 
-  // Get COW units for map
-  const cowUnits = [
-    {
-      id: "COW076",
-      name: "COW076",
-      status: "active" as const,
-      latitude: 25.59805,
-      longitude: 46.87754,
-      power: "critical",
-    },
-    {
-      id: "COW022",
-      name: "COW022",
-      status: "warning" as const,
-      latitude: 25.63587,
-      longitude: 46.83091,
-      power: "critical",
-    },
-    {
-      id: "COW188",
-      name: "COW188",
-      status: "warning" as const,
-      latitude: 25.64236,
-      longitude: 46.81855,
-      power: "high",
-    },
-    {
-      id: "COW094",
-      name: "COW094",
-      status: "active" as const,
-      latitude: 25.67764,
-      longitude: 46.85573,
-      power: "high",
-    },
-    {
-      id: "COW652",
-      name: "COW652",
-      status: "active" as const,
-      latitude: 25.67445,
-      longitude: 46.8308,
-      power: "normal",
-    },
-    {
-      id: "CWS808",
-      name: "CWS808",
-      status: "active" as const,
-      latitude: 25.6609,
-      longitude: 46.86093,
-      power: "normal",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-slate-950">
-      {/* Header */}
-      <div className="border-b border-purple-500/30 bg-purple-900/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">⚡</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-white">
-                  Power & Outage Insight
-                </h1>
-                <p className="text-purple-300 text-xs">
-                  Real-time power system monitoring
-                </p>
+    <div className="min-h-screen w-full bg-slate-950 overflow-hidden">
+      {/* Background Logo - Semi-transparent */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-25 flex items-center justify-center"
+        style={{
+          background:
+            "url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><text x=%2250%25%22 y=%2250%25%22 font-size=%22120%22 font-weight=%22bold%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23666%22>🐫</text></svg>')",
+          backgroundSize: "400px 400px",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+
+      {/* Main Container */}
+      <div className="relative z-10 w-full h-screen flex flex-col">
+        {/* Header */}
+        <header className="bg-slate-950/80 backdrop-blur-md border-b border-slate-700/50 px-6 py-4 flex items-center justify-between">
+          {/* Left: STC Logo */}
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-sm">
+              STC
+            </div>
+          </div>
+
+          {/* Center: Title */}
+          <div className="flex-1 text-center">
+            <h1 className="text-2xl font-bold text-white">
+              King Abdulaziz Camel Festival
+            </h1>
+            <p className="text-xs text-slate-400 mt-1">
+              Network & Connectivity Dashboard
+            </p>
+          </div>
+
+          {/* Right: ACES Logo + Refresh */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-bold text-sm">
+                ACES
               </div>
             </div>
             <Button
               onClick={handleRefresh}
               disabled={isRefreshing}
-              className="gap-2 bg-purple-700 hover:bg-purple-600 text-white"
               size="sm"
+              className="gap-2 bg-slate-700 hover:bg-slate-600 text-white"
             >
               <RefreshCw
                 className={`w-4 h-4 ${isRefreshing ? "animate-spin" : ""}`}
@@ -108,96 +92,74 @@ export default function Dashboard() {
               Refresh
             </Button>
           </div>
-        </div>
-      </div>
+        </header>
 
-      {/* Main Content - Two Column Layout */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Alert Bar */}
-        {stats.openCount > 0 && (
-          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-semibold text-red-300 mb-1">
-                Active Power Issues
-              </h3>
-              <p className="text-sm text-red-200">
-                {stats.openCount} open ticket{stats.openCount > 1 ? "s" : ""}{" "}
-                requiring attention
-              </p>
-            </div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Panel - Power Tickets Stats */}
-          <div className="lg:col-span-1">
-            <PowerTicketsStats
-              criticalCount={stats.criticalCount}
-              highCount={stats.highCount}
-              mediumCount={stats.mediumCount}
-              lowCount={stats.lowCount}
-              openCount={stats.openCount}
-              inProgressCount={stats.inProgressCount}
-            />
-          </div>
-
-          {/* Right Panel - Map and Availability */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Map Section */}
-            <div>
-              <div className="mb-4">
-                <h2 className="text-lg font-bold text-white">
-                  Coverage Map - Power Status
-                </h2>
-                <p className="text-sm text-purple-300">
-                  Outage locations and affected areas
-                </p>
-              </div>
-              <div className="h-80 rounded-lg overflow-hidden shadow-lg border border-purple-500/30">
-                <SiteMap cowUnits={cowUnits} />
+        {/* Main Content Area - Flexible Grid */}
+        <div className="flex-1 overflow-hidden p-6">
+          <div className="w-full h-full grid grid-cols-12 gap-6">
+            {/* Left Panel - KPI Gauge */}
+            <div className="col-span-2 flex flex-col">
+              <div className="flex-1 min-h-0">
+                <KPIGauge
+                  value={parseInt(stats.availability)}
+                  label="Network Availability"
+                  unit="%"
+                  threshold={{ excellent: 95, good: 85, warning: 75 }}
+                />
               </div>
             </div>
 
-            {/* Availability Metric */}
-            <div>
-              <AvailabilityMetric
-                availability={parseFloat(stats.availability as string)}
-                affectedDevices={stats.totalAffectedDevices}
-                lastUpdated={lastUpdated}
-              />
+            {/* Center Panel - 3D Satellite Map */}
+            <div className="col-span-6 flex flex-col">
+              <div className="flex-1 min-h-0">
+                <FestivalSiteMap
+                  sites={sites}
+                  onSiteSelect={setSelectedSite}
+                />
+              </div>
+            </div>
+
+            {/* Right Panel - Sites List */}
+            <div className="col-span-4 flex flex-col">
+              <div className="flex-1 min-h-0">
+                <SitesList
+                  sites={sites}
+                  onSiteSelect={setSelectedSite}
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Full Width - Power Outages Table */}
-        <div className="mt-8">
-          <PowerOutagesTable tickets={powerTickets} />
+        {/* Bottom Panel - Tickets Table */}
+        <div className="flex-1 overflow-hidden px-6 pb-6">
+          <div className="h-full overflow-hidden">
+            <FestivalTicketsTable tickets={tickets} />
+          </div>
         </div>
 
-        {/* Summary Stats Footer */}
-        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <Card className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 border-purple-500/30 p-4">
-            <p className="text-xs text-purple-300 mb-2">Total Tickets</p>
-            <p className="text-2xl font-bold text-white">{stats.totalTickets}</p>
-          </Card>
-          <Card className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 border-purple-500/30 p-4">
-            <p className="text-xs text-purple-300 mb-2">Total Outage Time</p>
-            <p className="text-2xl font-bold text-yellow-400">
-              {stats.totalOutageDuration}
-            </p>
-            <p className="text-xs text-purple-400 mt-1">minutes (8h)</p>
-          </Card>
-          <Card className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 border-purple-500/30 p-4">
-            <p className="text-xs text-purple-300 mb-2">System Status</p>
-            <p className="text-2xl font-bold text-green-400">Operational</p>
-          </Card>
-          <Card className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 border-purple-500/30 p-4">
-            <p className="text-xs text-purple-300 mb-2">Next Review</p>
-            <p className="text-lg font-bold text-white">15:30</p>
-            <p className="text-xs text-purple-400 mt-1">Today</p>
-          </Card>
-        </div>
+        {/* Status Bar */}
+        <footer className="bg-slate-950/80 backdrop-blur-md border-t border-slate-700/50 px-6 py-2 text-xs text-slate-400">
+          <div className="flex justify-between items-center">
+            <span>
+              Total Sites: {stats.totalSites} | Operational:{" "}
+              <span className="text-green-400 font-semibold">
+                {stats.operationalSites}
+              </span>
+              | Warning:{" "}
+              <span className="text-amber-400 font-semibold">
+                {stats.warningSites}
+              </span>
+              | Critical:{" "}
+              <span className="text-red-400 font-semibold">
+                {stats.criticalSites}
+              </span>
+            </span>
+            <span>
+              Last updated: {lastRefreshed.toLocaleTimeString()}
+            </span>
+          </div>
+        </footer>
       </div>
     </div>
   );
