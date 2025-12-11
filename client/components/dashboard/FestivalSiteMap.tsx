@@ -237,20 +237,20 @@ export function FestivalSiteMap({
       </div>
 
       {/* Technology Legend - Bottom Right */}
-      <div className="absolute bottom-4 right-4 bg-slate-950/60 backdrop-blur-md rounded-lg p-3 border border-slate-700/50">
-        <div className="text-xs font-semibold text-slate-300 mb-2">Technology</div>
+      <div className="absolute bottom-4 right-4 bg-white/80 backdrop-blur-md rounded-lg p-3 border border-purple-200/50">
+        <div className="text-xs font-semibold text-slate-800 mb-2">Technology</div>
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-violet-500" />
-            <span className="text-slate-400">5G ({techCounts["5G"]})</span>
+            <span className="text-slate-600">5G ({techCounts["5G"]})</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-blue-500" />
-            <span className="text-slate-400">4G ({techCounts["4G"]})</span>
+            <span className="text-slate-600">4G ({techCounts["4G"]})</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-indigo-500" />
-            <span className="text-slate-400">2G ({techCounts["2G"]})</span>
+            <span className="text-slate-600">2G ({techCounts["2G"]})</span>
           </div>
         </div>
       </div>
