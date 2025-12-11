@@ -107,9 +107,9 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {/* Main Content Area - Full Map */}
+        {/* Main Content Area - Full 3D Map */}
         <div className="flex-1 overflow-hidden relative">
-          <MaplibreView
+          <DeckglView
             sites={sites}
             onSiteSelect={setSelectedSite}
           />
