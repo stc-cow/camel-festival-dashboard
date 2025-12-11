@@ -52,8 +52,8 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
     <div className="h-full bg-transparent backdrop-blur-none rounded-xl border-0 overflow-hidden flex flex-col">
       {/* Header */}
       <div className="bg-transparent border-b border-purple-200/30 px-4 py-3">
-        <h3 className="text-sm font-semibold text-white">Festival Sites</h3>
-        <p className="text-xs text-slate-400 mt-1">{sites.length} locations</p>
+        <h3 className="text-sm font-semibold text-slate-800">Festival Sites</h3>
+        <p className="text-xs text-slate-500 mt-1">{sites.length} locations</p>
       </div>
 
       {/* Scrollable Content */}
