@@ -18,6 +18,35 @@ export default function Dashboard() {
     availability: "0",
   });
 
+  // Suppress ResizeObserver and other benign console errors from third-party libraries
+  useEffect(() => {
+    const originalError = console.error;
+    const originalWarn = console.warn;
+
+    (console as any).error = function (...args: any[]) {
+      const message = args.map((arg) => String(arg)).join(" ");
+      // Suppress ResizeObserver warnings from Deck.gl
+      if (/ResizeObserver loop/i.test(message)) {
+        return;
+      }
+      originalError.apply(console, args);
+    };
+
+    (console as any).warn = function (...args: any[]) {
+      const message = args.map((arg) => String(arg)).join(" ");
+      // Suppress ResizeObserver warnings
+      if (/ResizeObserver loop/i.test(message)) {
+        return;
+      }
+      originalWarn.apply(console, args);
+    };
+
+    return () => {
+      (console as any).error = originalError;
+      (console as any).warn = originalWarn;
+    };
+  }, []);
+
   // Fetch data on mount and auto-refresh
   useEffect(() => {
     loadData();
