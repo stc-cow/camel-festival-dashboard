@@ -5,12 +5,8 @@ import { SitesList } from "@/components/dashboard/SitesList";
 import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
-import {
-  festivalSites,
-  festivalTickets,
-  getFestivalStats,
-  type FestivalSite,
-} from "@/data/festivalData";
+import { fetchSheetData } from "@/data/sheetData";
+import type { FestivalSite, FestivalTicket } from "@/data/festivalData";
 
 export default function Dashboard() {
   const [sites, setSites] = useState(festivalSites);
