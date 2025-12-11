@@ -528,7 +528,7 @@ export function MaplibreView({
       </div>
 
       {/* Layer Selector - Foldable Icon */}
-      <div className="absolute top-24 left-4 z-20">
+      <div className="absolute bottom-4 left-4 z-20">
         {!isLayerSelectorOpen ? (
           <button
             onClick={() => setIsLayerSelectorOpen(true)}
