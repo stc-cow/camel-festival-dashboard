@@ -114,10 +114,10 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Center Panel - 3D Google Maps (Flex to fill) */}
+            {/* Center Panel - 3D Mapbox Map (Flex to fill) */}
             <div className="flex-1 flex flex-col min-w-0">
               <div className="flex-1 min-h-0">
-                <GoogleMapsView
+                <MapboxView
                   sites={sites}
                   onSiteSelect={setSelectedSite}
                 />
