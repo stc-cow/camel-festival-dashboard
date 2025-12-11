@@ -280,6 +280,18 @@ export function MaplibreView({
       bearing: 0,
       antialias: true,
       fadeDuration: 300,
+      crossSourceCollisions: false,
+    });
+
+    // Suppress internal error events from the map
+    map.on("error", (event: any) => {
+      if (event?.error?.message?.includes?.("AbortError") ||
+          event?.error?.name === "AbortError" ||
+          /abort/i.test(String(event?.error))) {
+        // Silently ignore abort errors
+        return;
+      }
+      console.error("Map error:", event);
     });
 
     map.on("load", () => {
