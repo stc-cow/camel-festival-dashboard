@@ -91,10 +91,6 @@ export function KPIGauge({
         </div>
       </div>
 
-      {/* Label only */}
-      <div className="text-center w-full">
-        <h3 className="text-xs sm:text-sm md:text-base font-bold text-black">{label}</h3>
-      </div>
     </div>
   );
 }
