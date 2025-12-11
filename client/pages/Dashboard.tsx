@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Cesium3DView } from "@/components/dashboard/Cesium3DView";
+import { DeckTerrainMapView } from "@/components/dashboard/DeckTerrainMapView";
 import { KPIGauge } from "@/components/dashboard/KPIGauge";
 import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
 import { fetchSheetData } from "@/data/sheetData";
@@ -83,10 +83,13 @@ export default function Dashboard() {
         </header>
 
         {/* Main Content Area - Map takes most space */}
-        <div className="flex-1 overflow-hidden flex flex-col">
-          {/* Map Container - 75% height */}
-          <div className="flex-1 overflow-hidden relative">
-            <Cesium3DView sites={sites} onSiteSelect={setSelectedSite} />
+        <div className="flex-1 overflow-hidden flex flex-col gap-1">
+          {/* Map Container - Slightly reduced height */}
+          <div className="flex-[0.68] min-h-[55%] overflow-hidden relative">
+            <DeckTerrainMapView
+              sites={sites}
+              onSiteSelect={setSelectedSite}
+            />
 
             {/* KPI Overlay - Top Right */}
             <div className="absolute top-2 right-2 z-20">
@@ -101,8 +104,8 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Tickets Table - Below Map - 20% height */}
-          <div className="h-1/5 overflow-hidden px-1 sm:px-2 py-0.5 sm:py-1 flex-shrink-0 bg-white/50 backdrop-blur-md border-t border-purple-200/30">
+          {/* Tickets Table - Below Map - Larger height */}
+          <div className="flex-[0.32] min-h-[28%] overflow-hidden px-1 sm:px-2 py-0.5 sm:py-1 flex-shrink-0 bg-white/60 backdrop-blur-md border-t border-purple-200/30">
             <div className="h-full overflow-hidden">
               <FestivalTicketsTable tickets={tickets} />
             </div>
