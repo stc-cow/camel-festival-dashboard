@@ -52,12 +52,12 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
 
   return (
     <div className="w-full bg-transparent backdrop-blur-none rounded-xl border-0 overflow-hidden">
-      {/* Header */}
-      <div className="bg-transparent border-b border-purple-200/30 px-6 py-4">
+      {/* Header - One Line */}
+      <div className="bg-transparent border-b border-purple-200/30 px-6 py-3 flex items-center justify-between">
         <h3 className="text-sm font-bold text-black">
           Dispatch Tickets & Issues
         </h3>
-        <p className="text-xs text-black font-bold mt-1">
+        <p className="text-xs text-black font-bold">
           {tickets.length} ticket{tickets.length !== 1 ? "s" : ""} | Last updated:{" "}
           {new Date().toLocaleTimeString()}
         </p>
