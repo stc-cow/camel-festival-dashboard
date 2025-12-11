@@ -91,6 +91,10 @@ export function KPIGauge({
         </div>
       </div>
 
+      {/* Availability Label */}
+      <div className="text-center text-xs sm:text-sm font-bold text-black mt-1">
+        Availability
+      </div>
     </div>
   );
 }
