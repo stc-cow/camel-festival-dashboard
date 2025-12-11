@@ -167,14 +167,35 @@ export function MaplibreView({
       }
     };
 
-    // Intercept console.error to suppress AbortError logs
+    // Intercept console.error and console.warn to suppress AbortError logs
     const originalConsoleError = console.error;
+    const originalConsoleWarn = console.warn;
+
+    const isAbortError = (...args: any[]): boolean => {
+      return args.some((arg) => {
+        if (typeof arg === "string") {
+          return /abort/i.test(arg);
+        }
+        if (arg instanceof Error) {
+          return /abort/i.test(arg.name) || /abort/i.test(arg.message);
+        }
+        if (arg && typeof arg === "object") {
+          const str = String(arg);
+          return /abort/i.test(str);
+        }
+        return false;
+      });
+    };
+
     (console as any).error = function(...args: any[]) {
-      const errorString = args
-        .map((arg) => (typeof arg === "string" ? arg : String(arg)))
-        .join(" ");
-      if (!errorString.includes("AbortError")) {
+      if (!isAbortError(...args)) {
         originalConsoleError.apply(console, args);
+      }
+    };
+
+    (console as any).warn = function(...args: any[]) {
+      if (!isAbortError(...args)) {
+        originalConsoleWarn.apply(console, args);
       }
     };
 
