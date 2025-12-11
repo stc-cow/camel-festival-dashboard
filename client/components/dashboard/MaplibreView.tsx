@@ -481,6 +481,9 @@ export function MaplibreView({
 
   return (
     <div className="w-full h-full overflow-hidden rounded-xl border border-purple-200/30 bg-gradient-to-br from-slate-100 to-slate-200 relative">
+      <style>{`
+        .maplibregl-attribution { display: none !important; }
+      `}</style>
       <div
         ref={mapContainer}
         className="w-full h-full"
