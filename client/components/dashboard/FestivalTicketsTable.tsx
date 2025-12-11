@@ -159,32 +159,6 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
           </tbody>
         </table>
       </div>
-
-      {/* Footer with stats */}
-      <div className="bg-transparent px-3 py-1 grid grid-cols-4 gap-2 text-xs" style={{ borderTop: "2px solid rgb(168, 85, 247)" }}>
-        <div>
-          <span className="text-black font-bold text-xs">Total</span>
-          <p className="font-bold text-black mt-0">{tickets.length}</p>
-        </div>
-        <div>
-          <span className="text-black font-bold text-xs">Critical</span>
-          <p className="font-bold text-black mt-0">
-            {tickets.filter((t) => t.severity === "critical").length}
-          </p>
-        </div>
-        <div>
-          <span className="text-black font-bold text-xs">Open</span>
-          <p className="font-bold text-black mt-0">
-            {tickets.filter((t) => t.status === "open").length}
-          </p>
-        </div>
-        <div>
-          <span className="text-black font-bold text-xs">In Progress</span>
-          <p className="font-bold text-black mt-0">
-            {tickets.filter((t) => t.status === "in-progress").length}
-          </p>
-        </div>
-      </div>
     </div>
   );
 }
