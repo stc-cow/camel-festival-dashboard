@@ -273,15 +273,29 @@ export function MaplibreView({
   };
 
   const switchMapLayer = (layer: MapLayerStyle) => {
-    if (!mapInstanceRef.current) return;
+    if (!mapInstanceRef.current || !isMountedRef.current) return;
 
     setCurrentLayer(layer);
-    mapInstanceRef.current.setStyle(MAP_STYLES[layer]);
 
-    // Re-add markers after style change
-    setTimeout(() => {
-      addMarkers();
-    }, 500);
+    // Clear any pending timeout from previous style changes
+    if (pendingTimeoutRef.current) {
+      clearTimeout(pendingTimeoutRef.current);
+    }
+
+    // Wrap setStyle in a safe operation that checks if component is still mounted
+    try {
+      mapInstanceRef.current.setStyle(MAP_STYLES[layer]);
+    } catch (e) {
+      // Silently ignore style change errors
+      return;
+    }
+
+    // Re-add markers after style change with proper mount check
+    pendingTimeoutRef.current = setTimeout(() => {
+      if (isMountedRef.current && mapInstanceRef.current) {
+        addMarkers();
+      }
+    }, 800);
   };
 
   const fitMapToSites = (map: any) => {
