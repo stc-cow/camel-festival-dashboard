@@ -128,8 +128,10 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
             doubleClickZoom: true,
             touchZoom: true,
             touchRotate: true,
+            keyboard: true,
           },
-          layers: [scatterLayer],
+          layers: [tileLayer, scatterLayer],
+          style: { position: "relative" },
         });
 
         if (cleanup) {
