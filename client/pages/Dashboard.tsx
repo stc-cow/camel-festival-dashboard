@@ -95,10 +95,10 @@ export default function Dashboard() {
         </header>
 
         {/* Main Content Area - Flexible Grid */}
-        <div className="flex-1 overflow-hidden p-6">
-          <div className="w-full h-full grid grid-cols-12 gap-6">
+        <div className="flex-1 overflow-hidden p-4 sm:p-6">
+          <div className="w-full h-full grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
             {/* Left Panel - KPI Gauge */}
-            <div className="col-span-2 flex flex-col">
+            <div className="md:col-span-2 flex flex-col h-full">
               <div className="flex-1 min-h-0">
                 <KPIGauge
                   value={parseInt(stats.availability)}
@@ -110,7 +110,7 @@ export default function Dashboard() {
             </div>
 
             {/* Center Panel - 3D Satellite Map */}
-            <div className="col-span-6 flex flex-col">
+            <div className="md:col-span-6 flex flex-col h-full">
               <div className="flex-1 min-h-0">
                 <FestivalSiteMap
                   sites={sites}
@@ -120,7 +120,7 @@ export default function Dashboard() {
             </div>
 
             {/* Right Panel - Sites List */}
-            <div className="col-span-4 flex flex-col">
+            <div className="md:col-span-4 flex flex-col h-full">
               <div className="flex-1 min-h-0">
                 <SitesList
                   sites={sites}
