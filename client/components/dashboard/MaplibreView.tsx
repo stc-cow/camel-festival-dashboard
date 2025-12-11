@@ -156,6 +156,60 @@ export function MaplibreView({
   useEffect(() => {
     isMountedRef.current = true;
 
+    // Suppress AbortError from unhandled promise rejections
+    const unhandledRejectionHandler = (event: PromiseRejectionEvent) => {
+      const reason = event.reason || {};
+      const reasonStr = String(reason);
+      const message = reason?.message || "";
+      const name = reason?.name || "";
+
+      if (/abort/i.test(reasonStr) ||
+          /abort/i.test(message) ||
+          /abort/i.test(name)) {
+        event.preventDefault();
+      }
+    };
+
+    // Suppress AbortError from error events
+    const errorEventHandler = (event: ErrorEvent) => {
+      const message = event.message || "";
+      const errorName = event.error?.name || "";
+      const errorMsg = event.error?.message || "";
+
+      if (/abort/i.test(message) ||
+          /abort/i.test(errorName) ||
+          /abort/i.test(errorMsg)) {
+        event.preventDefault();
+        return true;
+      }
+    };
+
+    // Intercept console methods to suppress AbortError logs
+    const originalConsoleError = console.error;
+    const originalConsoleWarn = console.warn;
+
+    const isAbortError = (...args: any[]): boolean => {
+      return args.some((arg) => {
+        const str = String(arg);
+        return /abort/i.test(str);
+      });
+    };
+
+    (console as any).error = function(...args: any[]) {
+      if (!isAbortError(...args)) {
+        originalConsoleError.apply(console, args);
+      }
+    };
+
+    (console as any).warn = function(...args: any[]) {
+      if (!isAbortError(...args)) {
+        originalConsoleWarn.apply(console, args);
+      }
+    };
+
+    window.addEventListener("unhandledrejection", unhandledRejectionHandler);
+    window.addEventListener("error", errorEventHandler);
+
     // Create style link for Maplibre
     const linkEl = document.createElement("link");
     linkEl.href =
@@ -182,6 +236,14 @@ export function MaplibreView({
 
     return () => {
       isMountedRef.current = false;
+
+      // Restore console methods
+      (console as any).error = originalConsoleError;
+      (console as any).warn = originalConsoleWarn;
+
+      // Remove event listeners
+      window.removeEventListener("unhandledrejection", unhandledRejectionHandler);
+      window.removeEventListener("error", errorEventHandler);
 
       // Clear any pending timeouts
       if (pendingTimeoutRef.current) {
