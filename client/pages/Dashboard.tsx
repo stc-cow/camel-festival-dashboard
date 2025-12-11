@@ -42,11 +42,11 @@ export default function Dashboard() {
     <div className="min-h-screen w-full bg-slate-950 overflow-hidden">
       {/* Background Logo - Semi-transparent */}
       <div
-        className="fixed inset-0 pointer-events-none opacity-25 flex items-center justify-center"
+        className="fixed inset-0 pointer-events-none opacity-20 flex items-center justify-center"
         style={{
           background:
-            "url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><text x=%2250%25%22 y=%2250%25%22 font-size=%22120%22 font-weight=%22bold%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23666%22>🐫</text></svg>')",
-          backgroundSize: "400px 400px",
+            "url('https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2Fdb73f0b948424cf882124f061889ce6e?format=webp&width=800')",
+          backgroundSize: "contain",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
