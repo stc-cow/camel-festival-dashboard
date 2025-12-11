@@ -49,9 +49,9 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
   };
 
   return (
-    <div className="h-full bg-slate-950/40 backdrop-blur-md rounded-xl border border-slate-700/50 overflow-hidden flex flex-col">
+    <div className="h-full bg-transparent backdrop-blur-none rounded-xl border-0 overflow-hidden flex flex-col">
       {/* Header */}
-      <div className="bg-gradient-to-r from-slate-900/80 to-slate-800/80 border-b border-slate-700/50 px-4 py-3">
+      <div className="bg-transparent border-b border-purple-200/30 px-4 py-3">
         <h3 className="text-sm font-semibold text-white">Festival Sites</h3>
         <p className="text-xs text-slate-400 mt-1">{sites.length} locations</p>
       </div>
