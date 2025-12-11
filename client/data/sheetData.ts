@@ -112,17 +112,29 @@ function sheetRowToTicket(row: SheetRow): FestivalTicket | null {
   let severity: "low" | "medium" | "high" | "critical" = "medium";
   if (row.Severity && row.Severity.trim()) {
     const sev = row.Severity.trim().toLowerCase();
-    if (sev.includes("critical")) severity = "critical";
-    else if (sev.includes("high")) severity = "high";
-    else if (sev.includes("low")) severity = "low";
-    else if (sev.includes("medium")) severity = "medium";
+    if (sev.includes("critical")) {
+      severity = "critical";
+    } else if (sev.includes("high")) {
+      severity = "high";
+    } else if (sev.includes("low")) {
+      severity = "low";
+    } else if (sev.includes("medium")) {
+      severity = "medium";
+    }
   }
 
   let status: "open" | "in-progress" | "resolved" = "open";
-  if (row.Status) {
-    const stat = row.Status.toLowerCase();
-    if (stat === "in-progress" || stat === "in progress") status = "in-progress";
-    else if (stat === "resolved" || stat === "closed") status = "resolved";
+  if (row.Status && row.Status.trim()) {
+    const stat = row.Status.trim().toLowerCase();
+    if (stat.includes("resolved") || stat.includes("closed")) {
+      status = "resolved";
+    } else if (stat.includes("in-progress") || stat.includes("in progress")) {
+      status = "in-progress";
+    } else if (stat.includes("assigned") || stat.includes("pending")) {
+      status = "in-progress";
+    } else if (stat.includes("open")) {
+      status = "open";
+    }
   }
 
   return {
