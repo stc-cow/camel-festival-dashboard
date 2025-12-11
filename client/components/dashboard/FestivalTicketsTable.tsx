@@ -167,7 +167,7 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       </div>
 
       {/* Footer with stats */}
-      <div className="bg-transparent px-6 py-3 grid grid-cols-4 gap-4 text-xs" style={{ borderTop: "2px solid rgb(168, 85, 247)" }}>
+      <div className="bg-transparent px-3 py-1 grid grid-cols-4 gap-2 text-xs" style={{ borderTop: "2px solid rgb(168, 85, 247)" }}>
         <div>
           <span className="text-black font-bold">Total</span>
           <p className="font-bold text-black mt-1">{tickets.length}</p>
