@@ -340,11 +340,26 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
         /abort/i.test(errorStr) ||
         /abort/i.test(errorMsg) ||
         /abort/i.test(errorName) ||
+        /signal is aborted/i.test(errorStr) ||
+        /signal is aborted/i.test(errorMsg) ||
         errorName === "AbortError"
       ) {
-        return;
+        event.preventDefault?.();
+        return false;
       }
     });
+
+    // Wrap map's error function to suppress AbortError at source
+    if (map && map._errorHandler) {
+      const originalErrorHandler = map._errorHandler;
+      map._errorHandler = function(error: any) {
+        const errorStr = String(error || "");
+        if (/abort/i.test(errorStr) || /signal is aborted/i.test(errorStr) || error?.name === "AbortError") {
+          return;
+        }
+        return originalErrorHandler.call(this, error);
+      };
+    }
 
     const handleMapLoad = () => {
       if (!isMountedRef.current) return;
