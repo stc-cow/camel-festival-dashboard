@@ -503,7 +503,7 @@ export function MaplibreView({
     iconContainer.style.height = "20px";
     iconContainer.style.filter = "drop-shadow(0 1px 4px rgba(0,0,0,0.3))";
 
-    // Create SVG WiFi icon
+    // Create SVG WiFi icon with center circle and left/right arcs
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("viewBox", "0 0 24 24");
     svg.setAttribute("width", "20");
@@ -514,26 +514,26 @@ export function MaplibreView({
     svg.setAttribute("stroke-linecap", "round");
     svg.setAttribute("stroke-linejoin", "round");
 
-    // First arc
-    const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path1.setAttribute("d", "M5 12c2.9-2.9 7.6-2.9 10.6 0");
-    path1.setAttribute("stroke", "#22c55e");
+    // Left arc
+    const leftArc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    leftArc.setAttribute("d", "M8 12c0 2.2 1.8 4 4 4");
+    leftArc.setAttribute("stroke", "#22c55e");
 
-    // Second arc
-    const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path2.setAttribute("d", "M2 9c4.4-4.4 11.6-4.4 16 0");
-    path2.setAttribute("stroke", "#22c55e");
+    // Right arc
+    const rightArc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    rightArc.setAttribute("d", "M16 12c0 2.2-1.8 4-4 4");
+    rightArc.setAttribute("stroke", "#22c55e");
 
-    // WiFi dot
-    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle.setAttribute("cx", "12");
-    circle.setAttribute("cy", "20");
-    circle.setAttribute("r", "1");
-    circle.setAttribute("fill", "#22c55e");
+    // Center circle
+    const centerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    centerCircle.setAttribute("cx", "12");
+    centerCircle.setAttribute("cy", "12");
+    centerCircle.setAttribute("r", "2.5");
+    centerCircle.setAttribute("fill", "#22c55e");
 
-    svg.appendChild(path1);
-    svg.appendChild(path2);
-    svg.appendChild(circle);
+    svg.appendChild(leftArc);
+    svg.appendChild(rightArc);
+    svg.appendChild(centerCircle);
     svg.style.pointerEvents = "none";
     svg.style.userSelect = "none";
 
