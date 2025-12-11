@@ -175,10 +175,6 @@ export function MaplibreView({
       // Clean up map instance
       if (mapInstanceRef.current) {
         try {
-          // Clean up resize observer
-          if ((mapInstanceRef.current as any).resizeObserver) {
-            (mapInstanceRef.current as any).resizeObserver.disconnect();
-          }
           mapInstanceRef.current.remove();
           mapInstanceRef.current = null;
         } catch (e) {
