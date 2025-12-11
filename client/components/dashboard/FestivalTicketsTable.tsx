@@ -56,11 +56,11 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       boxShadow: "inset 0 0 0 2px rgb(236, 72, 153), 0 0 0 1px rgb(168, 85, 247)"
     }}>
       {/* Header - One Line */}
-      <div className="bg-transparent border-b-2 border-purple-500 px-3 py-1.5 flex items-center justify-between">
-        <h3 className="text-sm font-bold text-black">
+      <div className="bg-transparent border-b-2 border-purple-500 px-3 py-1 flex items-center justify-between">
+        <h3 className="text-xs font-bold text-black">
           Dispatch Tickets & Issues
         </h3>
-        <p className="text-xs text-black font-bold">
+        <p className="text-xs text-black font-bold" style={{ fontSize: "10px" }}>
           {tickets.length} ticket{tickets.length !== 1 ? "s" : ""} | Last updated:{" "}
           {new Date().toLocaleTimeString()}
         </p>
