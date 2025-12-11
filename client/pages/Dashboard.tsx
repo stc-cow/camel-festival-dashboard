@@ -21,7 +21,7 @@ export default function Dashboard() {
   // Fetch data on mount and auto-refresh
   useEffect(() => {
     loadData();
-    const interval = setInterval(loadData, 30000); // Refresh every 30 seconds
+    const interval = setInterval(loadData, 1000); // Refresh every 1 second
     return () => clearInterval(interval);
   }, []);
 
