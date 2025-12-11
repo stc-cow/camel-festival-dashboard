@@ -301,7 +301,7 @@ export function MaplibreView({
         {!mapLoaded && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-200/50 backdrop-blur-sm z-10">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
-            <span className="text-slate-700 font-medium">Loading 3D Map...</span>
+            <span className="text-slate-700 font-medium">Loading Hybrid Map...</span>
           </div>
         )}
       </div>
