@@ -3,7 +3,25 @@ import { MapContainer, TileLayer, Popup, Marker, useMap } from "react-leaflet";
 import L from "leaflet";
 import { Layers, X } from "lucide-react";
 import type { FestivalSite } from "@/data/festivalData";
-import "leaflet/dist/leaflet.css";
+
+// Import Leaflet CSS
+if (typeof window !== "undefined") {
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+  document.head.appendChild(link);
+}
+
+// Fix default marker icons
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+});
 
 interface LeafletMapViewProps {
   sites: FestivalSite[];
