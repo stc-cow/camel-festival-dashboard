@@ -163,9 +163,12 @@ export function MaplibreView({
       const message = reason?.message || "";
       const name = reason?.name || "";
 
-      if (/abort/i.test(reasonStr) ||
+      if (name === "AbortError" ||
+          /abort/i.test(reasonStr) ||
           /abort/i.test(message) ||
-          /abort/i.test(name)) {
+          /abort/i.test(name) ||
+          /signal is aborted/i.test(reasonStr) ||
+          /signal is aborted/i.test(message)) {
         event.preventDefault();
       }
     };
@@ -176,9 +179,12 @@ export function MaplibreView({
       const errorName = event.error?.name || "";
       const errorMsg = event.error?.message || "";
 
-      if (/abort/i.test(message) ||
+      if (errorName === "AbortError" ||
+          /abort/i.test(message) ||
           /abort/i.test(errorName) ||
-          /abort/i.test(errorMsg)) {
+          /abort/i.test(errorMsg) ||
+          /signal is aborted/i.test(message) ||
+          /signal is aborted/i.test(errorMsg)) {
         event.preventDefault();
         return true;
       }
