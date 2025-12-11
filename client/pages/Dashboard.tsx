@@ -9,7 +9,6 @@ export default function Dashboard() {
   const [sites, setSites] = useState<FestivalSite[]>([]);
   const [tickets, setTickets] = useState<FestivalTicket[]>([]);
   const [selectedSite, setSelectedSite] = useState<FestivalSite | null>(null);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastRefreshed, setLastRefreshed] = useState<Date>(new Date());
   const [stats, setStats] = useState({
     totalSites: 0,
@@ -36,12 +35,6 @@ export default function Dashboard() {
     } catch (error) {
       console.error("Failed to load dashboard data:", error);
     }
-  };
-
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    await loadData();
-    setIsRefreshing(false);
   };
 
   return (
