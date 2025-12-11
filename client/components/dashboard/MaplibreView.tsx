@@ -197,7 +197,9 @@ export function MaplibreView({
     const isAbortError = (...args: any[]): boolean => {
       return args.some((arg) => {
         const str = String(arg);
-        return /abort/i.test(str);
+        return /abort/i.test(str) ||
+               /signal is aborted/i.test(str) ||
+               (arg instanceof Error && arg.name === "AbortError");
       });
     };
 
