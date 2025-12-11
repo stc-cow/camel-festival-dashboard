@@ -58,9 +58,11 @@ export default function Dashboard() {
         <header className="bg-slate-950/80 backdrop-blur-md border-b border-slate-700/50 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
           {/* Left: STC Logo */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-lg bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-xs sm:text-sm">
-              STC
-            </div>
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F7b8e4dc97baf45f1befa845a6b1010f6?format=webp&width=800"
+              alt="STC Logo"
+              className="h-8 sm:h-10 object-contain"
+            />
           </div>
 
           {/* Center: Title */}
