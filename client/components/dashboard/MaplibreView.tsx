@@ -54,16 +54,16 @@ export function MaplibreView({
   const initializeMap = () => {
     if (!mapContainer.current || !window.maplibregl) return;
 
-    // Al Ula coordinates
+    // Al Ula coordinates (fallback center)
     const center = [37.9833, 26.6868] as [number, number];
 
-    // Use free OpenStreetMap tile style
+    // Use hybrid style - street + satellite layers
     const map = new window.maplibregl.Map({
       container: mapContainer.current,
       style: {
         version: 8,
         sources: {
-          "osm-tiles": {
+          "satellite-tiles": {
             type: "raster",
             tiles: [
               "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -74,30 +74,86 @@ export function MaplibreView({
             attribution:
               '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           },
+          "street-tiles": {
+            type: "raster",
+            tiles: [
+              "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+              "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+              "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+              "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+            ],
+            tileSize: 256,
+            attribution: '© CARTO, © OpenStreetMap contributors',
+          },
         },
         layers: [
           {
-            id: "osm-layer",
+            id: "satellite-layer",
             type: "raster",
-            source: "osm-tiles",
+            source: "satellite-tiles",
             minzoom: 0,
             maxzoom: 19,
+            paint: {
+              "raster-opacity": 0.7,
+            },
+          },
+          {
+            id: "street-layer",
+            type: "raster",
+            source: "street-tiles",
+            minzoom: 0,
+            maxzoom: 19,
+            paint: {
+              "raster-opacity": 0.5,
+            },
           },
         ],
       },
       center: center,
-      zoom: 15,
-      pitch: 45,
-      bearing: 45,
+      zoom: 12,
+      pitch: 30,
+      bearing: 0,
       antialias: true,
     });
 
     map.on("load", () => {
       setMapLoaded(true);
-      updateMarkers();
+      addMarkers();
+      // Fit map bounds to show all sites
+      fitMapToSites(map);
     });
 
     mapInstanceRef.current = map;
+  };
+
+  const fitMapToSites = (map: any) => {
+    if (sites.length === 0) return;
+
+    // Calculate bounds from all sites
+    let minLng = sites[0].longitude;
+    let maxLng = sites[0].longitude;
+    let minLat = sites[0].latitude;
+    let maxLat = sites[0].latitude;
+
+    sites.forEach((site) => {
+      minLng = Math.min(minLng, site.longitude);
+      maxLng = Math.max(maxLng, site.longitude);
+      minLat = Math.min(minLat, site.latitude);
+      maxLat = Math.max(maxLat, site.latitude);
+    });
+
+    // Add padding to bounds
+    const padding = 0.01;
+    const bounds = [
+      [minLng - padding, minLat - padding],
+      [maxLng + padding, maxLat + padding],
+    ] as [[number, number], [number, number]];
+
+    // Fit map to bounds with animation
+    map.fitBounds(bounds, {
+      padding: 50,
+      duration: 1000,
+    });
   };
 
   const addMarkers = () => {
