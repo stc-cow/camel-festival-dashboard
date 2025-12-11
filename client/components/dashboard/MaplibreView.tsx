@@ -147,6 +147,7 @@ export function MaplibreView({
   const markersRef = useRef<Map<string, any>>(new Map());
   const [mapLoaded, setMapLoaded] = useState(false);
   const [currentLayer, setCurrentLayer] = useState<MapLayerStyle>("hybrid");
+  const [isLayerSelectorOpen, setIsLayerSelectorOpen] = useState(false);
 
   // Load Maplibre GL library
   useEffect(() => {
