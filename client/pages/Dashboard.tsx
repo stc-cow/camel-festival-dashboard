@@ -92,7 +92,7 @@ export default function Dashboard() {
             />
 
             {/* KPI Overlay - Top Right */}
-            <div className="absolute top-4 right-4 z-20">
+            <div className="absolute top-2 right-2 z-20">
               <div className="bg-transparent">
                 <KPIGauge
                   value={parseInt(stats.availability) || 0}
