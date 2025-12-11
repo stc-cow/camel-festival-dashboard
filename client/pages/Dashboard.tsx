@@ -55,7 +55,7 @@ export default function Dashboard() {
       {/* Main Container */}
       <div className="relative z-10 w-full h-screen flex flex-col">
         {/* Header */}
-        <header className="bg-gradient-to-r from-purple-600 to-purple-700 backdrop-blur-md border-b border-purple-500/50 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
+        <header className="bg-gradient-to-r from-purple-600 to-purple-700 backdrop-blur-md border-b border-purple-500/50 px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-between gap-4">
           {/* Left: STC Logo */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <img
@@ -67,12 +67,9 @@ export default function Dashboard() {
 
           {/* Center: Title */}
           <div className="flex-1 text-center min-w-0">
-            <h1 className="text-lg sm:text-2xl font-bold text-white truncate sm:truncate">
-              King Abdulaziz Camel Festival
+            <h1 className="text-base sm:text-xl font-bold text-white truncate sm:truncate">
+              King Abdalaziz Camel Festival Tickets Performance Dashboard
             </h1>
-            <p className="text-xs text-purple-100 mt-0.5 sm:mt-1 hidden sm:block">
-              Network & Connectivity Dashboard
-            </p>
           </div>
 
           {/* Right: ACES Logo */}
