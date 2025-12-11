@@ -213,13 +213,13 @@ export function GoogleMapsView({
       <div style="padding: 8px; font-family: Arial, sans-serif;">
         <h4 style="margin: 0 0 4px 0; font-weight: bold; font-size: 14px;">${site.name}</h4>
         <p style="margin: 2px 0; font-size: 12px; color: #666;">
+          <strong>Location:</strong> ${site.location}
+        </p>
+        <p style="margin: 2px 0; font-size: 12px; color: #666;">
           <strong>Technology:</strong> ${site.technology}
         </p>
         <p style="margin: 2px 0; font-size: 12px; color: #666;">
           <strong>Status:</strong> <span style="color: ${getStatusColor(site.status)}; font-weight: bold; text-transform: capitalize;">${site.status}</span>
-        </p>
-        <p style="margin: 2px 0; font-size: 12px; color: #666;">
-          <strong>Power:</strong> ${site.powerStatus}
         </p>
         <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">
           Updated: ${new Date(site.lastUpdate).toLocaleTimeString()}
