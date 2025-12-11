@@ -128,7 +128,7 @@ export default function Dashboard() {
         <div className="flex-1 overflow-hidden flex flex-col gap-1">
           {/* Map Container - Slightly reduced height */}
           <div className="flex-[0.68] min-h-[55%] overflow-hidden relative">
-            <DeckTerrainMapView
+            <LeafletMapView
               sites={sites}
               onSiteSelect={setSelectedSite}
             />
