@@ -483,21 +483,6 @@ export function MaplibreView({
         </div>
       </div>
 
-      {/* Map Controls Info */}
-      <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md rounded-lg p-2 sm:p-3 border border-purple-200/50 text-xs sm:text-sm z-20 max-w-xs">
-        <div className="text-slate-800 font-semibold mb-2">
-          {currentLayer === "satellite" && "Satellite View"}
-          {currentLayer === "street" && "Street Map"}
-          {currentLayer === "hybrid" && "Hybrid Map"}
-          {currentLayer === "terrain" && "Terrain Map"}
-        </div>
-        <div className="text-slate-600 text-xs space-y-1">
-          <p>• Showing {sites.length} sites</p>
-          <p>• Click and drag to rotate</p>
-          <p>• Scroll to zoom</p>
-          <p>• Click markers for details</p>
-        </div>
-      </div>
 
       {/* Attribution */}
       <div className="absolute bottom-4 right-4 text-xs text-slate-600 z-20 pointer-events-none">
