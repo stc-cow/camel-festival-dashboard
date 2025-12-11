@@ -251,6 +251,19 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     window.addEventListener("unhandledrejection", unhandledRejectionHandler, true);
     window.addEventListener("error", errorEventHandler, true);
 
+    // Wrap fetch to suppress AbortError from cancelled tile requests
+    const originalFetch = window.fetch;
+    (window as any).fetch = function(...args: any[]) {
+      return originalFetch.apply(window, args)
+        .catch((error: any) => {
+          // Silently ignore AbortError from tile loading
+          if (error?.name === "AbortError" || /abort/i.test(String(error))) {
+            return Promise.resolve(new Response("", { status: 200 }));
+          }
+          throw error;
+        });
+    };
+
     // Create style link for Maplibre
     const linkEl = document.createElement("link");
     linkEl.href =
