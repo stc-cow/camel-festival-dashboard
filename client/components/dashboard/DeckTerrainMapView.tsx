@@ -50,6 +50,37 @@ export function DeckTerrainMapView({
   const deckRef = useRef<Deck | null>(null);
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
 
+  // Suppress WebGL context errors from Deck.gl
+  useEffect(() => {
+    const originalError = console.error;
+
+    (console as any).error = function (...args: any[]) {
+      const message = args.map((arg) => String(arg)).join(" ");
+      // Suppress WebGL context errors from Deck.gl
+      if (/maxTextureDimension2D|WebGLCanvasContext|cannot read properties|reading 'max/i.test(message)) {
+        return;
+      }
+      originalError.apply(console, args);
+    };
+
+    // Add global error handler for WebGL errors
+    const handleError = (event: ErrorEvent) => {
+      const message = event.message || "";
+      if (/maxTextureDimension2D|WebGLCanvasContext|cannot read properties|reading 'max/i.test(message)) {
+        event.preventDefault();
+        return true;
+      }
+      return false;
+    };
+
+    window.addEventListener("error", handleError, true);
+
+    return () => {
+      (console as any).error = originalError;
+      window.removeEventListener("error", handleError, true);
+    };
+  }, []);
+
   const layers = useMemo(() => {
     const baseColor = [148, 163, 184];
 
