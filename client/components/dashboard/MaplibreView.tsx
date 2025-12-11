@@ -194,6 +194,7 @@ export function MaplibreView({
     return () => {
       // Clean up unhandled rejection handler
       window.removeEventListener("unhandledrejection", unhandledRejectionHandler);
+      window.removeEventListener("error", errorHandler);
 
       // Clean up map instance
       if (mapInstanceRef.current) {
