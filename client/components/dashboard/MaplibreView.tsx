@@ -203,6 +203,9 @@ export function MaplibreView({
     document.head.appendChild(scriptEl);
 
     return () => {
+      // Restore console.error
+      (console as any).error = originalConsoleError;
+
       // Clean up unhandled rejection handler
       window.removeEventListener("unhandledrejection", unhandledRejectionHandler);
       window.removeEventListener("error", errorHandler);
