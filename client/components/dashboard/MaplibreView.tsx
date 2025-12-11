@@ -159,9 +159,19 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
         return (
           /abort/i.test(str) ||
           /signal is aborted/i.test(str) ||
-          (arg instanceof Error && arg.name === "AbortError")
+          (arg instanceof Error && arg.name === "AbortError") ||
+          (typeof arg === "object" && arg?.name === "AbortError")
         );
       });
+    };
+
+    // Override Promise rejection handler for AbortError
+    const originalPromiseReject = Promise.reject;
+    Promise.reject = function(reason: any) {
+      if (isAbortError(reason)) {
+        return Promise.resolve(); // Silently resolve instead of reject
+      }
+      return originalPromiseReject.call(this, reason);
     };
 
     // Suppress AbortError from unhandled promise rejections
