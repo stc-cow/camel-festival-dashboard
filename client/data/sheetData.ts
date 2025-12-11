@@ -20,16 +20,42 @@ interface SheetRow {
 const SHEET_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vS-w_0g3Jw25ORAUBiDwfGSGpdGco4-CYPJ1uKNuA88G2-HKMeoO54eaqjqJHr-9lLietSy0KaqIwvW/pub?gid=1338846885&single=true&output=csv";
 
-// Parse CSV data
+// Parse CSV data with proper quoted field handling
 function parseCSV(csv: string): SheetRow[] {
   const lines = csv.trim().split("\n");
   if (lines.length < 2) return [];
 
-  const headers = lines[0].split(",").map((h) => h.trim());
   const rows: SheetRow[] = [];
 
   for (let i = 1; i < lines.length; i++) {
-    const values = lines[i].split(",").map((v) => v.trim());
+    const line = lines[i];
+    if (!line.trim()) continue;
+
+    // Parse CSV line handling quoted fields
+    const values: string[] = [];
+    let current = "";
+    let inQuotes = false;
+
+    for (let j = 0; j < line.length; j++) {
+      const char = line[j];
+      const nextChar = line[j + 1];
+
+      if (char === '"') {
+        if (inQuotes && nextChar === '"') {
+          current += '"';
+          j++; // Skip next quote
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === "," && !inQuotes) {
+        values.push(current.trim());
+        current = "";
+      } else {
+        current += char;
+      }
+    }
+    values.push(current.trim());
+
     if (values.length < 4) continue; // Skip incomplete rows
 
     const row: SheetRow = {
