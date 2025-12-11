@@ -89,8 +89,8 @@ export function FestivalSiteMap({
 
           {/* Satellite texture */}
           <pattern id="satellitePattern" width="4" height="4" patternUnits="userSpaceOnUse">
-            <rect width="4" height="4" fill="#1E293B" />
-            <circle cx="2" cy="2" r="0.5" fill="#334155" opacity="0.3" />
+            <rect width="4" height="4" fill="#F5F3FF" />
+            <circle cx="2" cy="2" r="0.5" fill="#D8D4E8" opacity="0.3" />
           </pattern>
 
           {/* Glow filters */}
