@@ -401,10 +401,21 @@ export function MaplibreView({
   };
 
   const updateMarkers = () => {
-    if (mapInstanceRef.current && sites.length > 0) {
+    if (!isMountedRef.current || !mapInstanceRef.current || sites.length === 0) return;
+
+    try {
       addMarkers();
       // Fit to bounds whenever markers update
-      setTimeout(() => fitMapToSites(mapInstanceRef.current), 100);
+      if (pendingTimeoutRef.current) {
+        clearTimeout(pendingTimeoutRef.current);
+      }
+      pendingTimeoutRef.current = setTimeout(() => {
+        if (isMountedRef.current && mapInstanceRef.current) {
+          fitMapToSites(mapInstanceRef.current);
+        }
+      }, 100);
+    } catch (e) {
+      // Silently ignore update errors
     }
   };
 
