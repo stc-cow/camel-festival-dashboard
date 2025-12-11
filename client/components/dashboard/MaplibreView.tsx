@@ -409,9 +409,61 @@ export function MaplibreView({
         )}
       </div>
 
+      {/* Layer Selector - Top Right */}
+      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md rounded-lg p-2 border border-purple-200/50 z-20">
+        <div className="text-slate-800 font-semibold text-xs mb-2">Map Layers</div>
+        <div className="space-y-1">
+          <button
+            onClick={() => switchMapLayer("satellite")}
+            className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
+              currentLayer === "satellite"
+                ? "bg-purple-600 text-white"
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            Satellite
+          </button>
+          <button
+            onClick={() => switchMapLayer("street")}
+            className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
+              currentLayer === "street"
+                ? "bg-purple-600 text-white"
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            Street Map
+          </button>
+          <button
+            onClick={() => switchMapLayer("hybrid")}
+            className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
+              currentLayer === "hybrid"
+                ? "bg-purple-600 text-white"
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            Hybrid
+          </button>
+          <button
+            onClick={() => switchMapLayer("terrain")}
+            className={`block w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-all ${
+              currentLayer === "terrain"
+                ? "bg-purple-600 text-white"
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            Terrain
+          </button>
+        </div>
+      </div>
+
       {/* Map Controls Info */}
       <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md rounded-lg p-2 sm:p-3 border border-purple-200/50 text-xs sm:text-sm z-20 max-w-xs">
-        <div className="text-slate-800 font-semibold mb-2">Hybrid Satellite + Street Map</div>
+        <div className="text-slate-800 font-semibold mb-2">
+          {currentLayer === "satellite" && "Satellite View"}
+          {currentLayer === "street" && "Street Map"}
+          {currentLayer === "hybrid" && "Hybrid Map"}
+          {currentLayer === "terrain" && "Terrain Map"}
+        </div>
         <div className="text-slate-600 text-xs space-y-1">
           <p>• Showing {sites.length} sites</p>
           <p>• Click and drag to rotate</p>
