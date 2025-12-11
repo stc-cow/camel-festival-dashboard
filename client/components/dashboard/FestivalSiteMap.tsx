@@ -256,9 +256,9 @@ export function FestivalSiteMap({
       </div>
 
       {/* Location name overlay - Top */}
-      <div className="absolute top-4 left-4 bg-slate-950/60 backdrop-blur-md rounded-lg px-3 py-2 border border-slate-700/50">
-        <div className="text-xs text-slate-400">Festival Area</div>
-        <div className="text-sm font-semibold text-white">Al Ula, Saudi Arabia</div>
+      <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-md rounded-lg px-3 py-2 border border-purple-200/50">
+        <div className="text-xs text-slate-600">Festival Area</div>
+        <div className="text-sm font-semibold text-slate-800">Al Ula, Saudi Arabia</div>
       </div>
     </div>
   );
