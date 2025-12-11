@@ -6,6 +6,144 @@ interface MaplibreViewProps {
   onSiteSelect?: (site: FestivalSite) => void;
 }
 
+type MapLayerStyle = "satellite" | "street" | "hybrid" | "terrain";
+
+const MAP_STYLES: Record<MapLayerStyle, any> = {
+  satellite: {
+    version: 8,
+    sources: {
+      "satellite-tiles": {
+        type: "raster",
+        tiles: [
+          "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+        attribution:
+          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      },
+    },
+    layers: [
+      {
+        id: "satellite-layer",
+        type: "raster",
+        source: "satellite-tiles",
+        minzoom: 0,
+        maxzoom: 19,
+        paint: {
+          "raster-opacity": 1,
+        },
+      },
+    ],
+  },
+  street: {
+    version: 8,
+    sources: {
+      "street-tiles": {
+        type: "raster",
+        tiles: [
+          "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+          "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+          "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+        attribution: '© CARTO, © OpenStreetMap contributors',
+      },
+    },
+    layers: [
+      {
+        id: "street-layer",
+        type: "raster",
+        source: "street-tiles",
+        minzoom: 0,
+        maxzoom: 19,
+        paint: {
+          "raster-opacity": 1,
+        },
+      },
+    ],
+  },
+  hybrid: {
+    version: 8,
+    sources: {
+      "satellite-tiles": {
+        type: "raster",
+        tiles: [
+          "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+        attribution:
+          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      },
+      "street-tiles": {
+        type: "raster",
+        tiles: [
+          "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+          "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+          "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+          "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+        attribution: '© CARTO, © OpenStreetMap contributors',
+      },
+    },
+    layers: [
+      {
+        id: "satellite-layer",
+        type: "raster",
+        source: "satellite-tiles",
+        minzoom: 0,
+        maxzoom: 19,
+        paint: {
+          "raster-opacity": 0.7,
+        },
+      },
+      {
+        id: "street-layer",
+        type: "raster",
+        source: "street-tiles",
+        minzoom: 0,
+        maxzoom: 19,
+        paint: {
+          "raster-opacity": 0.5,
+        },
+      },
+    ],
+  },
+  terrain: {
+    version: 8,
+    sources: {
+      "terrain-tiles": {
+        type: "raster",
+        tiles: [
+          "https://a.tile.opentopomap.org/{z}/{x}/{y}.png",
+          "https://b.tile.opentopomap.org/{z}/{x}/{y}.png",
+          "https://c.tile.opentopomap.org/{z}/{x}/{y}.png",
+        ],
+        tileSize: 256,
+        attribution:
+          '© <a href="https://opentopomap.org">OpenTopoMap</a>, © OpenStreetMap contributors',
+      },
+    },
+    layers: [
+      {
+        id: "terrain-layer",
+        type: "raster",
+        source: "terrain-tiles",
+        minzoom: 0,
+        maxzoom: 17,
+        paint: {
+          "raster-opacity": 1,
+        },
+      },
+    ],
+  },
+};
+
 export function MaplibreView({
   sites,
   onSiteSelect,
@@ -14,6 +152,7 @@ export function MaplibreView({
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [currentLayer, setCurrentLayer] = useState<MapLayerStyle>("hybrid");
 
   // Load Maplibre GL library
   useEffect(() => {
