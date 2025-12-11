@@ -108,40 +108,14 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {/* Main Content Area - 3 Column Layout */}
+        {/* Main Content Area - Full Width Map */}
         <div className="flex-1 overflow-hidden p-3 sm:p-4 md:p-6">
-          <div className="w-full h-full flex gap-3 sm:gap-4 md:gap-6">
-            {/* Left Panel - KPI Gauge (Fixed Width) */}
-            <div className="hidden md:flex flex-col flex-shrink-0 w-56 lg:w-64">
-              <div className="h-full min-h-0">
-                <KPIGauge
-                  value={parseInt(stats.availability)}
-                  label="Network Availability"
-                  unit="%"
-                  threshold={{ excellent: 95, good: 85, warning: 75 }}
-                />
-              </div>
-            </div>
-
-            {/* Center Panel - 3D Map (Flex to fill) */}
-            <div className="flex-1 flex flex-col min-w-0">
-              <div className="flex-1 min-h-0">
-                <MaplibreView
-                  sites={sites}
-                  onSiteSelect={setSelectedSite}
-                />
-              </div>
-            </div>
-
-            {/* Right Panel - Sites List (Fixed Width) */}
-            <div className="hidden lg:flex flex-col flex-shrink-0 w-56 xl:w-64">
-              <div className="h-full min-h-0">
-                <SitesList
-                  sites={sites}
-                  onSiteSelect={setSelectedSite}
-                />
-              </div>
-            </div>
+          <div className="w-full h-full">
+            {/* Map - Full Width */}
+            <MaplibreView
+              sites={sites}
+              onSiteSelect={setSelectedSite}
+            />
           </div>
         </div>
 
