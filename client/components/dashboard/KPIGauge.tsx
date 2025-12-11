@@ -84,8 +84,8 @@ export function KPIGauge({
 
         {/* Center text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="text-3xl font-bold text-white">{value}</div>
-          <div className="text-xs text-slate-400">{unit}</div>
+          <div className="text-3xl font-bold text-slate-800">{value}</div>
+          <div className="text-xs text-slate-600">{unit}</div>
         </div>
       </div>
 
