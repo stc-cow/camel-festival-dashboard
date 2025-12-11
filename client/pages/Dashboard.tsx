@@ -129,7 +129,7 @@ export default function Dashboard() {
         </div>
 
         {/* Bottom Panel - Tickets Table */}
-        <div className="h-48 md:h-56 overflow-hidden px-2 sm:px-3 md:px-4 pb-2 sm:pb-3 md:pb-4 flex-shrink-0">
+        <div className="h-32 md:h-40 overflow-hidden px-2 sm:px-3 md:px-4 pb-2 sm:pb-3 md:pb-4 flex-shrink-0">
           <div className="h-full overflow-hidden">
             <FestivalTicketsTable tickets={tickets} />
           </div>
