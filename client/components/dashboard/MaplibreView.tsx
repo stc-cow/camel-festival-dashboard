@@ -161,7 +161,15 @@ export function MaplibreView({
 
     // Also suppress AbortError from regular error events
     const errorHandler = (event: ErrorEvent) => {
-      if (event.message?.includes?.("AbortError") || event.error?.name === "AbortError") {
+      const message = event.message || "";
+      const errorName = event.error?.name || "";
+      const errorMsg = event.error?.message || "";
+      const stackTrace = event.error?.stack || "";
+
+      if (/abort/i.test(message) ||
+          /abort/i.test(errorName) ||
+          /abort/i.test(errorMsg) ||
+          /abort/i.test(stackTrace)) {
         event.preventDefault();
         return true;
       }
