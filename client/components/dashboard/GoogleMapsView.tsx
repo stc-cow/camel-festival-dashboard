@@ -242,7 +242,7 @@ export function GoogleMapsView({
   };
 
   return (
-    <div className="w-full h-full overflow-hidden rounded-xl border border-purple-200/30 bg-white/10">
+    <div className="w-full h-full overflow-hidden rounded-xl border border-purple-200/30 bg-gradient-to-br from-slate-100 to-slate-200 relative">
       <div
         ref={mapRef}
         className="w-full h-full"
@@ -251,10 +251,21 @@ export function GoogleMapsView({
         }}
       >
         {!mapLoaded && (
-          <div className="flex items-center justify-center h-full">
-            <span className="text-slate-600">Loading map...</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-200/50 backdrop-blur-sm">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
+            <span className="text-slate-700 font-medium">Initializing 3D Satellite Map...</span>
           </div>
         )}
+      </div>
+
+      {/* Map Controls Info */}
+      <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-md rounded-lg p-2 sm:p-3 border border-purple-200/50 text-xs sm:text-sm">
+        <div className="text-slate-800 font-semibold mb-2">3D Satellite View</div>
+        <div className="text-slate-600 text-xs space-y-1">
+          <p>• Use mouse to rotate and pan</p>
+          <p>• Scroll to zoom</p>
+          <p>• Click markers for site details</p>
+        </div>
       </div>
     </div>
   );
