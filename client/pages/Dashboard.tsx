@@ -96,28 +96,33 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {/* Main Content Area - Full 3D Map */}
-        <div className="flex-1 overflow-hidden relative">
-          <MaplibreView
-            sites={sites}
-            onSiteSelect={setSelectedSite}
-          />
+        {/* Main Content Area - Map takes most space */}
+        <div className="flex-1 overflow-hidden flex flex-col">
+          {/* Map Container - 75% height */}
+          <div className="flex-1 overflow-hidden relative">
+            <MaplibreView
+              sites={sites}
+              onSiteSelect={setSelectedSite}
+            />
 
-          {/* KPI Overlay - Top Right */}
-          <div className="absolute top-4 right-4 z-20">
-            <div className="bg-transparent">
-              <KPIGauge
-                value={parseInt(stats.availability) || 0}
-                label="Availability KPI"
-                unit="%"
-                threshold={{ excellent: 90, good: 75, warning: 50 }}
-              />
+            {/* KPI Overlay - Top Right */}
+            <div className="absolute top-4 right-4 z-20">
+              <div className="bg-transparent">
+                <KPIGauge
+                  value={parseInt(stats.availability) || 0}
+                  label="Availability KPI"
+                  unit="%"
+                  threshold={{ excellent: 90, good: 75, warning: 50 }}
+                />
+              </div>
             </div>
           </div>
 
-          {/* Tickets Table Overlay - Bottom Right with Toggle */}
-          <div className="absolute bottom-4 right-4 z-20 max-w-sm">
-            <TicketsTableOverlay tickets={tickets} />
+          {/* Tickets Table - Below Map - 25% height */}
+          <div className="h-1/4 overflow-hidden px-3 sm:px-4 md:px-6 pb-2 sm:pb-3 md:pb-4 flex-shrink-0 bg-white/50 backdrop-blur-md border-t border-purple-200/30">
+            <div className="h-full overflow-hidden">
+              <FestivalTicketsTable tickets={tickets} />
+            </div>
           </div>
         </div>
 
