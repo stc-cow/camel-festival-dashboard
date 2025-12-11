@@ -117,7 +117,7 @@ export default function Dashboard() {
             {/* Center Panel - 3D Satellite Map */}
             <div className="md:col-span-6 flex flex-col h-full">
               <div className="flex-1 min-h-0">
-                <FestivalSiteMap
+                <Map3D
                   sites={sites}
                   onSiteSelect={setSelectedSite}
                 />
