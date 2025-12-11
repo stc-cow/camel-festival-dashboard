@@ -482,13 +482,23 @@ export function MaplibreView({
   return (
     <div className="w-full h-full overflow-hidden rounded-xl border border-purple-200/30 bg-gradient-to-br from-slate-100 to-slate-200 relative">
       <style>{`
-        .maplibregl-attribution { display: none !important; }
+        .maplibregl-attribution {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          height: 0 !important;
+          width: 0 !important;
+        }
+        .maplibregl-ctrl-bottom-right {
+          bottom: -30px !important;
+        }
       `}</style>
       <div
         ref={mapContainer}
         className="w-full h-full"
         style={{
           backgroundColor: "#e5e7eb",
+          overflow: "hidden",
         }}
       >
         {!mapLoaded && (
