@@ -155,7 +155,7 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
               ))
             ) : (
               <tr>
-                <td colSpan={7} className="px-6 py-8 text-center border border-purple-500">
+                <td colSpan={7} className="px-6 py-8 text-center" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                   <p className="text-black font-bold text-sm">
                     No tickets at this time
                   </p>
