@@ -233,32 +233,36 @@ export function DeckTerrainMapView({
   useEffect(() => {
     if (!containerRef.current || sites.length === 0) return;
 
-    const { clientWidth, clientHeight } = containerRef.current;
-    const viewport = new WebMercatorViewport({
-      width: Math.max(clientWidth, 640),
-      height: Math.max(clientHeight, 480),
-      ...INITIAL_VIEW_STATE,
-    });
+    try {
+      const { clientWidth, clientHeight } = containerRef.current;
+      const viewport = new WebMercatorViewport({
+        width: Math.max(clientWidth, 640),
+        height: Math.max(clientHeight, 480),
+        ...INITIAL_VIEW_STATE,
+      });
 
-    const lats = sites.map((site) => site.latitude);
-    const lngs = sites.map((site) => site.longitude);
-    const bounds: [number, number][] = [
-      [Math.min(...lngs), Math.min(...lats)],
-      [Math.max(...lngs), Math.max(...lats)],
-    ];
+      const lats = sites.map((site) => site.latitude);
+      const lngs = sites.map((site) => site.longitude);
+      const bounds: [number, number][] = [
+        [Math.min(...lngs), Math.min(...lats)],
+        [Math.max(...lngs), Math.max(...lats)],
+      ];
 
-    const { longitude, latitude, zoom } = viewport.fitBounds(bounds, {
-      padding: 80,
-    });
+      const { longitude, latitude, zoom } = viewport.fitBounds(bounds, {
+        padding: 80,
+      });
 
-    setViewState((prev) => ({
-      ...prev,
-      longitude,
-      latitude,
-      zoom: Math.min(zoom, 14.5),
-      transitionDuration: 900,
-      transitionInterpolator: new FlyToInterpolator(),
-    }));
+      setViewState((prev) => ({
+        ...prev,
+        longitude,
+        latitude,
+        zoom: Math.min(zoom, 14.5),
+        transitionDuration: 900,
+        transitionInterpolator: new FlyToInterpolator(),
+      }));
+    } catch (e) {
+      // Silently ignore viewport calculation errors
+    }
   }, [sites]);
 
   return (
