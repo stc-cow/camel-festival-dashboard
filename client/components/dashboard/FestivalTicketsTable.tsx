@@ -90,6 +90,11 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
             {tickets.length > 0 ? (
               tickets.map((ticket) => (
                 <tr key={ticket.id} className="bg-white/20 hover:bg-white/40 transition-colors duration-200">
+                  {/* COWName */}
+                  <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                    <p className="text-black font-bold text-xs">{ticket.siteName}</p>
+                  </td>
+
                   {/* Ticket ID */}
                   <td className="px-2 py-1" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                     <code className="text-xs font-bold text-black">
