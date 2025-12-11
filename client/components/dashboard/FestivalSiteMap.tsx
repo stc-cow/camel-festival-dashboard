@@ -73,7 +73,7 @@ export function FestivalSiteMap({
   };
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-xl overflow-hidden relative">
+    <div className="w-full h-full bg-white/60 backdrop-blur-sm rounded-xl overflow-hidden relative border border-purple-200/30">
       {/* SVG Map */}
       <svg
         className="w-full h-full"
