@@ -431,12 +431,12 @@ export function MaplibreView({
     container.style.alignItems = "center";
     container.style.gap = "2px";
 
-    // Create image marker with telecom tower icon
+    // Create image marker with telecom tower icon - MINIMIZED
     const iconContainer = document.createElement("div");
     iconContainer.style.position = "relative";
-    iconContainer.style.width = "64px";
-    iconContainer.style.height = "64px";
-    iconContainer.style.filter = "drop-shadow(0 2px 8px rgba(0,0,0,0.3))";
+    iconContainer.style.width = "32px";
+    iconContainer.style.height = "32px";
+    iconContainer.style.filter = "drop-shadow(0 1px 4px rgba(0,0,0,0.3))";
 
     const img = document.createElement("img");
     img.src = "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F337d21741ce545d5b5567c095ddcf011?format=webp&width=800";
