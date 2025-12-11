@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FestivalSiteMap } from "@/components/dashboard/FestivalSiteMap";
+import { GoogleMapsView } from "@/components/dashboard/GoogleMapsView";
 import { KPIGauge } from "@/components/dashboard/KPIGauge";
 import { SitesList } from "@/components/dashboard/SitesList";
 import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
