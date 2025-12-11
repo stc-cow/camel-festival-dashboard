@@ -39,13 +39,15 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
 
     const initDeckGL = async () => {
       try {
-        const { Deck } = await import("@deck.gl/core");
-        const { GeoJsonLayer, IconLayer, ScatterplotLayer } = await import(
-          "@deck.gl/layers"
-        );
-        const { TileLayer } = await import("@deck.gl/geo-layers");
-
         if (!containerRef.current) return;
+
+        // Dynamically import Deck.gl
+        const { Deck } = await import("@deck.gl/core");
+        const { ScatterplotLayer } = await import("@deck.gl/layers");
+
+        // Get WebGL canvas
+        const canvas = document.createElement("canvas");
+        containerRef.current.appendChild(canvas);
 
         const getStatusColor = (status: string): [number, number, number] => {
           switch (status) {
