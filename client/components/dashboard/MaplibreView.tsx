@@ -218,7 +218,7 @@ export function MaplibreView({
 
   // Update markers when sites change
   useEffect(() => {
-    if (mapInstanceRef.current && sites.length > 0) {
+    if (isMountedRef.current && mapInstanceRef.current && sites.length > 0) {
       updateMarkers();
     }
   }, [sites, mapLoaded]);
