@@ -139,24 +139,28 @@ export default function Dashboard() {
         </div>
 
         {/* Status Bar */}
-        <footer className="bg-slate-950/80 backdrop-blur-md border-t border-slate-700/50 px-6 py-2 text-xs text-slate-400">
-          <div className="flex justify-between items-center">
-            <span>
-              Total Sites: {stats.totalSites} | Operational:{" "}
+        <footer className="bg-slate-950/80 backdrop-blur-md border-t border-slate-700/50 px-4 sm:px-6 py-2 text-xs text-slate-400">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <span className="text-xs">
+              Sites:{" "}
+              <span className="text-white font-semibold">
+                {stats.totalSites}
+              </span>
+              {" "}| ✓{" "}
               <span className="text-green-400 font-semibold">
                 {stats.operationalSites}
               </span>
-              | Warning:{" "}
+              {" "}| ⚠{" "}
               <span className="text-amber-400 font-semibold">
                 {stats.warningSites}
               </span>
-              | Critical:{" "}
+              {" "}| ✕{" "}
               <span className="text-red-400 font-semibold">
                 {stats.criticalSites}
               </span>
             </span>
-            <span>
-              Last updated: {lastRefreshed.toLocaleTimeString()}
+            <span className="text-xs">
+              Updated: {lastRefreshed.toLocaleTimeString()}
             </span>
           </div>
         </footer>
