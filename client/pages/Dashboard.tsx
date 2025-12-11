@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { MaplibreView } from "@/components/dashboard/MaplibreView";
 import { KPIGauge } from "@/components/dashboard/KPIGauge";
-import { TicketsTableOverlay } from "@/components/dashboard/TicketsTableOverlay";
-import { Button } from "@/components/ui/button";
-import { RefreshCw } from "lucide-react";
+import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
 import { fetchSheetData } from "@/data/sheetData";
 import type { FestivalSite, FestivalTicket } from "@/data/festivalData";
 
