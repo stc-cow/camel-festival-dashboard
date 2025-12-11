@@ -67,7 +67,7 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto border border-purple-200/30">
+      <div className="overflow-x-auto border-0">
         <table className="w-full text-sm border-collapse">
           {/* Table Head */}
           <thead className="bg-transparent border-b-2 border-purple-200/30 sticky top-0">
