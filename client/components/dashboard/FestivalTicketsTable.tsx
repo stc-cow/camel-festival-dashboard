@@ -169,24 +169,24 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       {/* Footer with stats */}
       <div className="bg-transparent border-t border-purple-200/30 px-6 py-3 grid grid-cols-4 gap-4 text-xs">
         <div>
-          <span className="text-slate-600">Total</span>
-          <p className="font-semibold text-slate-800 mt-1">{tickets.length}</p>
+          <span className="text-black font-bold">Total</span>
+          <p className="font-bold text-black mt-1">{tickets.length}</p>
         </div>
         <div>
-          <span className="text-slate-600">Critical</span>
-          <p className="font-semibold text-red-600 mt-1">
+          <span className="text-black font-bold">Critical</span>
+          <p className="font-bold text-black mt-1">
             {tickets.filter((t) => t.severity === "critical").length}
           </p>
         </div>
         <div>
-          <span className="text-slate-600">Open</span>
-          <p className="font-semibold text-orange-600 mt-1">
+          <span className="text-black font-bold">Open</span>
+          <p className="font-bold text-black mt-1">
             {tickets.filter((t) => t.status === "open").length}
           </p>
         </div>
         <div>
-          <span className="text-slate-600">In Progress</span>
-          <p className="font-semibold text-blue-600 mt-1">
+          <span className="text-black font-bold">In Progress</span>
+          <p className="font-bold text-black mt-1">
             {tickets.filter((t) => t.status === "in-progress").length}
           </p>
         </div>
