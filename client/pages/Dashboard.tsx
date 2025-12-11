@@ -107,13 +107,23 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {/* Main Content Area - Full Width Map */}
-        <div className="flex-1 overflow-hidden p-3 sm:p-4 md:p-6">
-          <div className="w-full h-full">
-            {/* Map - Full Width */}
+        {/* Main Content Area - Map (60%) + KPI (40%) */}
+        <div className="flex-1 overflow-hidden p-3 sm:p-4 md:p-6 flex gap-4">
+          {/* Map Container - 60% width */}
+          <div className="w-3/5 h-full overflow-hidden">
             <MaplibreView
               sites={sites}
               onSiteSelect={setSelectedSite}
+            />
+          </div>
+
+          {/* KPI Container - 40% width */}
+          <div className="w-2/5 h-full overflow-hidden bg-white rounded-lg shadow-md border border-slate-200">
+            <KPIGauge
+              value={parseInt(stats.availability) || 0}
+              label="Availability KPI"
+              unit="%"
+              threshold={{ excellent: 90, good: 75, warning: 50 }}
             />
           </div>
         </div>
