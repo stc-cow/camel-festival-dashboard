@@ -64,15 +64,35 @@ export function DeckglView({ sites, onSiteSelect }: DeckglViewProps) {
           }
         };
 
+        // Create tile layer for base map
+        const tileLayer = new TileLayer({
+          data: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+          minZoom: 0,
+          maxZoom: 19,
+          tileSize: 256,
+          renderSubLayers: (props: any) => {
+            const {
+              bbox: [west, south, east, north],
+            } = props.tile;
+
+            return new TileLayer({
+              ...props,
+              id: `tile-${props.id}`,
+              data: [],
+              renderSubLayers: () => null,
+            });
+          },
+        });
+
         // Create scatterplot layer for sites
         const scatterLayer = new ScatterplotLayer({
           id: "sites",
           data: sites,
           pickable: true,
-          opacity: 0.85,
-          radiusScale: 40,
-          radiusMinPixels: 30,
-          radiusMaxPixels: 80,
+          opacity: 0.9,
+          radiusScale: 45,
+          radiusMinPixels: 32,
+          radiusMaxPixels: 85,
           lineWidthMinPixels: 2,
           getPosition: (d: FestivalSite) => [d.longitude, d.latitude],
           getFillColor: (d: FestivalSite) => getStatusColor(d.status),
