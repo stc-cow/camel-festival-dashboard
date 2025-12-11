@@ -172,6 +172,26 @@ export function MaplibreView({
     document.head.appendChild(scriptEl);
 
     return () => {
+      // Clean up map instance
+      if (mapInstanceRef.current) {
+        try {
+          mapInstanceRef.current.remove();
+          mapInstanceRef.current = null;
+        } catch (e) {
+          console.error("Error removing map:", e);
+        }
+      }
+
+      // Clean up markers
+      markersRef.current.forEach((marker) => {
+        try {
+          marker.remove();
+        } catch (e) {
+          console.error("Error removing marker:", e);
+        }
+      });
+      markersRef.current.clear();
+
       if (linkEl.parentNode) document.head.removeChild(linkEl);
       if (scriptEl.parentNode) document.head.removeChild(scriptEl);
     };
