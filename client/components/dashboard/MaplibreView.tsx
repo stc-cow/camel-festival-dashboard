@@ -173,16 +173,21 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       const message = reason?.message || "";
       const name = reason?.name || "";
 
-      if (
+      // Comprehensive AbortError detection
+      const isAbort =
         name === "AbortError" ||
         /abort/i.test(reasonStr) ||
         /abort/i.test(message) ||
         /abort/i.test(name) ||
         /signal is aborted/i.test(reasonStr) ||
         /signal is aborted/i.test(message) ||
-        isAbortError(reason)
-      ) {
+        isAbortError(reason) ||
+        (typeof reason === "object" && reason !== null && (reason as any).name === "AbortError");
+
+      if (isAbort) {
         event.preventDefault();
+        // Return early to prevent any further processing
+        return;
       }
     };
 
