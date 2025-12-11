@@ -435,10 +435,8 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       sites.forEach((site) => {
         if (!isMountedRef.current || !mapInstanceRef.current) return;
 
-        const color = getStatusColor(site.status);
-
         // Create custom SVG marker
-        const markerElement = createMarkerSVG(site, color);
+        const markerElement = createMarkerSVG(site);
 
         try {
           const marker = new window.maplibregl.Marker({
