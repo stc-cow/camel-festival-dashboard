@@ -78,9 +78,11 @@ export default function Dashboard() {
           {/* Right: ACES Logo + Refresh */}
           <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
             <div className="hidden sm:flex items-center gap-2">
-              <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-bold text-xs sm:text-sm">
-                ACES
-              </div>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F76fe7c8a618a4f37aefd6179ec954af9?format=webp&width=800"
+                alt="ACES Logo"
+                className="h-8 sm:h-10 object-contain"
+              />
             </div>
             <Button
               onClick={handleRefresh}
