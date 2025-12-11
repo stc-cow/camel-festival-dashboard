@@ -224,7 +224,7 @@ export function MaplibreView({
   }, [sites, mapLoaded]);
 
   const initializeMap = () => {
-    if (!mapContainer.current || !window.maplibregl) return;
+    if (!mapContainer.current || !window.maplibregl || !isMountedRef.current) return;
 
     // Al Ula coordinates (fallback center)
     const center = [37.9833, 26.6868] as [number, number];
@@ -242,23 +242,32 @@ export function MaplibreView({
       crossSourceCollisions: false,
     });
 
-    // Suppress internal error events from the map
+    // Suppress internal error events from the map - especially AbortErrors
     map.on("error", (event: any) => {
-      if (event?.error?.message?.includes?.("AbortError") ||
-          event?.error?.name === "AbortError" ||
-          /abort/i.test(String(event?.error))) {
-        // Silently ignore abort errors
+      const errorStr = String(event?.error || "");
+      const errorMsg = event?.error?.message || "";
+      const errorName = event?.error?.name || "";
+
+      if (/abort/i.test(errorStr) ||
+          /abort/i.test(errorMsg) ||
+          /abort/i.test(errorName) ||
+          errorName === "AbortError") {
         return;
       }
-      console.error("Map error:", event);
     });
 
-    map.on("load", () => {
-      setMapLoaded(true);
-      addMarkers();
-      // Fit map bounds to show all sites
-      fitMapToSites(map);
-    });
+    const handleMapLoad = () => {
+      if (!isMountedRef.current) return;
+      if (isMountedRef.current) {
+        setMapLoaded(true);
+      }
+      if (isMountedRef.current && mapInstanceRef.current) {
+        addMarkers();
+        fitMapToSites(mapInstanceRef.current);
+      }
+    };
+
+    map.on("load", handleMapLoad);
 
     mapInstanceRef.current = map;
   };
