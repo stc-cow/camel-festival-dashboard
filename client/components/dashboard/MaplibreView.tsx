@@ -564,12 +564,6 @@ export function MaplibreView({
       </div>
 
 
-      {/* Attribution */}
-      <div className="absolute bottom-4 right-4 text-xs text-slate-600 z-20 pointer-events-none">
-        <span className="bg-white/80 px-2 py-1 rounded border border-purple-200/50 backdrop-blur-sm inline-block">
-          © OpenStreetMap & CARTO
-        </span>
-      </div>
     </div>
   );
 }
