@@ -153,6 +153,17 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
   useEffect(() => {
     isMountedRef.current = true;
 
+    const isAbortError = (...args: any[]): boolean => {
+      return args.some((arg) => {
+        const str = String(arg);
+        return (
+          /abort/i.test(str) ||
+          /signal is aborted/i.test(str) ||
+          (arg instanceof Error && arg.name === "AbortError")
+        );
+      });
+    };
+
     // Suppress AbortError from unhandled promise rejections
     const unhandledRejectionHandler = (event: PromiseRejectionEvent) => {
       const reason = event.reason || {};
@@ -166,7 +177,8 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
         /abort/i.test(message) ||
         /abort/i.test(name) ||
         /signal is aborted/i.test(reasonStr) ||
-        /signal is aborted/i.test(message)
+        /signal is aborted/i.test(message) ||
+        isAbortError(reason)
       ) {
         event.preventDefault();
       }
@@ -184,7 +196,8 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
         /abort/i.test(errorName) ||
         /abort/i.test(errorMsg) ||
         /signal is aborted/i.test(message) ||
-        /signal is aborted/i.test(errorMsg)
+        /signal is aborted/i.test(errorMsg) ||
+        isAbortError(event.error, message)
       ) {
         event.preventDefault();
         return true;
@@ -194,17 +207,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     // Intercept console methods to suppress AbortError logs
     const originalConsoleError = console.error;
     const originalConsoleWarn = console.warn;
-
-    const isAbortError = (...args: any[]): boolean => {
-      return args.some((arg) => {
-        const str = String(arg);
-        return (
-          /abort/i.test(str) ||
-          /signal is aborted/i.test(str) ||
-          (arg instanceof Error && arg.name === "AbortError")
-        );
-      });
-    };
+    const originalConsoleLog = console.log;
 
     (console as any).error = function (...args: any[]) {
       if (!isAbortError(...args)) {
@@ -218,8 +221,14 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       }
     };
 
-    window.addEventListener("unhandledrejection", unhandledRejectionHandler);
-    window.addEventListener("error", errorEventHandler);
+    (console as any).log = function (...args: any[]) {
+      if (!isAbortError(...args)) {
+        originalConsoleLog.apply(console, args);
+      }
+    };
+
+    window.addEventListener("unhandledrejection", unhandledRejectionHandler, true);
+    window.addEventListener("error", errorEventHandler, true);
 
     // Create style link for Maplibre
     const linkEl = document.createElement("link");
