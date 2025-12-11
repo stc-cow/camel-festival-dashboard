@@ -24,13 +24,20 @@ export function GoogleMapsView({
       return;
     }
 
+    // Get API key from environment or use placeholder
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "AIzaSyDDJzMCdTTcG8mn1ZEsWQJPHKL-G77tZWY";
+
     // Load Google Maps API
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDDJzMCdTTcG8mn1ZEsWQJPHKL-G77tZWY&libraries=maps,marker`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=maps,marker`;
     script.async = true;
     script.defer = true;
     script.onload = () => {
       setMapLoaded(true);
+    };
+    script.onerror = () => {
+      console.error("Failed to load Google Maps API");
+      setMapLoaded(true); // Still set as loaded to show fallback
     };
     document.head.appendChild(script);
 
