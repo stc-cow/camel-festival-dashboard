@@ -546,10 +546,10 @@ export function MaplibreView({
 
   return (
     <div
-      className="w-full h-full overflow-hidden rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 relative"
+      className="w-full h-full overflow-hidden rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 relative"
       style={{
-        border: "3px solid rgb(168, 85, 247)",
-        boxShadow: "inset 0 0 0 2px rgb(236, 72, 153), 0 0 0 1px rgb(168, 85, 247)"
+        border: "2px solid rgb(168, 85, 247)",
+        boxShadow: "inset 0 0 0 1px rgb(236, 72, 153)"
       }}
     >
       <style>{`
