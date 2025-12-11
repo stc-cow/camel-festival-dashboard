@@ -299,33 +299,39 @@ export function MaplibreView({
   };
 
   const fitMapToSites = (map: any) => {
-    if (sites.length === 0) return;
+    if (!isMountedRef.current || !map || sites.length === 0) return;
 
-    // Calculate bounds from all sites
-    let minLng = sites[0].longitude;
-    let maxLng = sites[0].longitude;
-    let minLat = sites[0].latitude;
-    let maxLat = sites[0].latitude;
+    try {
+      // Calculate bounds from all sites
+      let minLng = sites[0].longitude;
+      let maxLng = sites[0].longitude;
+      let minLat = sites[0].latitude;
+      let maxLat = sites[0].latitude;
 
-    sites.forEach((site) => {
-      minLng = Math.min(minLng, site.longitude);
-      maxLng = Math.max(maxLng, site.longitude);
-      minLat = Math.min(minLat, site.latitude);
-      maxLat = Math.max(maxLat, site.latitude);
-    });
+      sites.forEach((site) => {
+        minLng = Math.min(minLng, site.longitude);
+        maxLng = Math.max(maxLng, site.longitude);
+        minLat = Math.min(minLat, site.latitude);
+        maxLat = Math.max(maxLat, site.latitude);
+      });
 
-    // Add padding to bounds
-    const padding = 0.01;
-    const bounds = [
-      [minLng - padding, minLat - padding],
-      [maxLng + padding, maxLat + padding],
-    ] as [[number, number], [number, number]];
+      // Add padding to bounds
+      const padding = 0.01;
+      const bounds = [
+        [minLng - padding, minLat - padding],
+        [maxLng + padding, maxLat + padding],
+      ] as [[number, number], [number, number]];
 
-    // Fit map to bounds with animation
-    map.fitBounds(bounds, {
-      padding: 50,
-      duration: 1000,
-    });
+      // Fit map to bounds with animation
+      if (isMountedRef.current && map) {
+        map.fitBounds(bounds, {
+          padding: 50,
+          duration: 1000,
+        });
+      }
+    } catch (e) {
+      // Silently ignore fitBounds errors
+    }
   };
 
   const addMarkers = () => {
