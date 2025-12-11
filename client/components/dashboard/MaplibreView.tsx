@@ -509,8 +509,17 @@ export function MaplibreView({
         )}
       </div>
 
+      {/* Flag Icon - Above Layer Selector */}
+      <div className="absolute top-4 left-4 z-20">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F79a99b59a9f14ca183f1fa070a00a956?format=webp&width=800"
+          alt="Festival Camel Riders"
+          className="w-16 h-16 object-contain drop-shadow-md"
+        />
+      </div>
+
       {/* Layer Selector - Foldable Icon */}
-      <div className="absolute top-28 left-4 z-20">
+      <div className="absolute top-24 left-4 z-20">
         {!isLayerSelectorOpen ? (
           <button
             onClick={() => setIsLayerSelectorOpen(true)}
