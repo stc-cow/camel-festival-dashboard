@@ -64,10 +64,10 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
+      <div className="overflow-x-auto border border-purple-200/30">
+        <table className="w-full text-sm border-collapse">
           {/* Table Head */}
-          <thead className="bg-transparent border-b border-purple-200/30 sticky top-0">
+          <thead className="bg-transparent border-b-2 border-purple-200/30 sticky top-0">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase tracking-wider">
                 Ticket ID
