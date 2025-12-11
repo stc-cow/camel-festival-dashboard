@@ -9,28 +9,41 @@ import { fetchSheetData } from "@/data/sheetData";
 import type { FestivalSite, FestivalTicket } from "@/data/festivalData";
 
 export default function Dashboard() {
-  const [sites, setSites] = useState(festivalSites);
-  const [tickets, setTickets] = useState(festivalTickets);
+  const [sites, setSites] = useState<FestivalSite[]>([]);
+  const [tickets, setTickets] = useState<FestivalTicket[]>([]);
   const [selectedSite, setSelectedSite] = useState<FestivalSite | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastRefreshed, setLastRefreshed] = useState<Date>(new Date());
+  const [stats, setStats] = useState({
+    totalSites: 0,
+    operationalSites: 0,
+    warningSites: 0,
+    criticalSites: 0,
+    availability: "0",
+  });
 
-  const stats = getFestivalStats();
-
-  // Auto-refresh every 30 seconds
+  // Fetch data on mount and auto-refresh
   useEffect(() => {
-    const interval = setInterval(() => {
-      handleRefresh();
-    }, 30000);
-
+    loadData();
+    const interval = setInterval(loadData, 30000); // Refresh every 30 seconds
     return () => clearInterval(interval);
   }, []);
 
+  const loadData = async () => {
+    try {
+      const data = await fetchSheetData();
+      setSites(data.sites);
+      setTickets(data.tickets);
+      setStats(data.stats);
+      setLastRefreshed(new Date());
+    } catch (error) {
+      console.error("Failed to load dashboard data:", error);
+    }
+  };
+
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    // Simulate data refresh
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setLastRefreshed(new Date());
+    await loadData();
     setIsRefreshing(false);
   };
 
