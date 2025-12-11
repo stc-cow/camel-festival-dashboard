@@ -84,26 +84,15 @@ export default function Dashboard() {
             </p>
           </div>
 
-          {/* Right: ACES Logo + Refresh */}
+          {/* Right: ACES Logo */}
           <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F76fe7c8a618a4f37aefd6179ec954af9?format=webp&width=800"
                 alt="ACES Logo"
-                className="h-8 sm:h-10 object-contain"
+                className="h-12 sm:h-16 object-contain"
               />
             </div>
-            <Button
-              onClick={handleRefresh}
-              disabled={isRefreshing}
-              size="sm"
-              className="gap-1 sm:gap-2 bg-purple-500 hover:bg-purple-600 text-white text-xs sm:text-sm px-2 sm:px-4"
-            >
-              <RefreshCw
-                className={`w-3 h-3 sm:w-4 sm:h-4 ${isRefreshing ? "animate-spin" : ""}`}
-              />
-              <span className="hidden sm:inline">Refresh</span>
-            </Button>
           </div>
         </header>
 
