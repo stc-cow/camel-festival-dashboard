@@ -222,7 +222,11 @@ export function DeckTerrainMapView({
 
   useEffect(() => {
     if (deckRef.current) {
-      deckRef.current.setProps({ layers, viewState });
+      try {
+        deckRef.current.setProps({ layers, viewState });
+      } catch (e) {
+        // Silently ignore prop update errors
+      }
     }
   }, [layers, viewState]);
 
