@@ -59,7 +59,10 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
           <thead className="bg-transparent sticky top-0">
             <tr>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                Ticket ID
+                COWName
+              </th>
+              <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
+                TicketID
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Issue
@@ -71,10 +74,10 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                 Status
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                Created At
+                CreatedAt
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
-                Last Update
+                LastUpdate
               </th>
               <th className="px-2 py-1 text-left text-xs font-bold text-black uppercase tracking-wider" style={{ border: "1px solid rgb(168, 85, 247)" }}>
                 Notes
