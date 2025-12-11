@@ -156,7 +156,7 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
             ) : (
               <tr>
                 <td colSpan={7} className="px-6 py-8 text-center">
-                  <p className="text-slate-400 text-sm">
+                  <p className="text-slate-600 text-sm">
                     No tickets at this time
                   </p>
                 </td>
@@ -167,26 +167,26 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       </div>
 
       {/* Footer with stats */}
-      <div className="bg-slate-900/30 border-t border-slate-700/50 px-6 py-3 grid grid-cols-4 gap-4 text-xs">
+      <div className="bg-transparent border-t border-purple-200/30 px-6 py-3 grid grid-cols-4 gap-4 text-xs">
         <div>
-          <span className="text-slate-400">Total</span>
-          <p className="font-semibold text-white mt-1">{tickets.length}</p>
+          <span className="text-slate-600">Total</span>
+          <p className="font-semibold text-slate-800 mt-1">{tickets.length}</p>
         </div>
         <div>
-          <span className="text-slate-400">Critical</span>
-          <p className="font-semibold text-red-400 mt-1">
+          <span className="text-slate-600">Critical</span>
+          <p className="font-semibold text-red-600 mt-1">
             {tickets.filter((t) => t.severity === "critical").length}
           </p>
         </div>
         <div>
-          <span className="text-slate-400">Open</span>
-          <p className="font-semibold text-orange-400 mt-1">
+          <span className="text-slate-600">Open</span>
+          <p className="font-semibold text-orange-600 mt-1">
             {tickets.filter((t) => t.status === "open").length}
           </p>
         </div>
         <div>
-          <span className="text-slate-400">In Progress</span>
-          <p className="font-semibold text-blue-400 mt-1">
+          <span className="text-slate-600">In Progress</span>
+          <p className="font-semibold text-blue-600 mt-1">
             {tickets.filter((t) => t.status === "in-progress").length}
           </p>
         </div>
