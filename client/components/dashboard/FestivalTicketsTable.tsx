@@ -94,12 +94,12 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
           </thead>
 
           {/* Table Body */}
-          <tbody className="divide-y divide-slate-700/20">
+          <tbody className="divide-y divide-purple-200/30">
             {tickets.length > 0 ? (
               tickets.map((ticket) => (
                 <tr
                   key={ticket.id}
-                  className="bg-slate-900/20 hover:bg-slate-800/40 transition-colors duration-200"
+                  className="bg-white/20 hover:bg-white/40 transition-colors duration-200"
                 >
                   {/* Ticket ID */}
                   <td className="px-6 py-3">
