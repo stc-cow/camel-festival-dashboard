@@ -113,7 +113,7 @@ export default function Dashboard() {
         </div>
 
         {/* Status Bar */}
-        <footer className="bg-slate-100 backdrop-blur-md border-t border-purple-200/50 px-4 sm:px-6 py-2 text-xs text-slate-600">
+        <footer className="bg-slate-100 backdrop-blur-md border-t border-purple-200/50 px-3 sm:px-4 py-1 text-xs text-slate-600">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <span className="text-xs">
               Sites:{" "}
