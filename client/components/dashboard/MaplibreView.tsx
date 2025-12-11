@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Layers, X } from "lucide-react";
 import type { FestivalSite } from "@/data/festivalData";
 
 interface MaplibreViewProps {
