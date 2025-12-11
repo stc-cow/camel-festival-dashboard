@@ -17,9 +17,6 @@ importers:
       '@deck.gl/layers':
         specifier: ^9.1.0
         version: 9.2.5(@deck.gl/core@9.2.5)(@loaders.gl/core@4.3.4)(@luma.gl/core@9.2.4)(@luma.gl/engine@9.2.4(@luma.gl/core@9.2.4)(@luma.gl/shadertools@9.2.4(@luma.gl/core@9.2.4)))
-      cesium:
-        specifier: ^1.136.0
-        version: 1.136.0
       dotenv:
         specifier: ^17.2.1
         version: 17.2.1
@@ -243,9 +240,6 @@ importers:
       vite:
         specifier: ^7.1.2
         version: 7.1.2(@types/node@24.2.1)(jiti@1.21.7)(tsx@4.20.3)(yaml@2.8.1)
-      vite-plugin-cesium:
-        specifier: ^1.2.23
-        version: 1.2.23(cesium@1.136.0)(rollup@4.46.2)(vite@7.1.2(@types/node@24.2.1)(jiti@1.21.7)(tsx@4.20.3)(yaml@2.8.1))
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.2.1)(jiti@1.21.7)(tsx@4.20.3)(yaml@2.8.1)
@@ -259,17 +253,6 @@ packages:
   '@babel/runtime@7.28.2':
     resolution: {integrity: sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA==}
     engines: {node: '>=6.9.0'}
-
-  '@cesium/engine@22.1.0':
-    resolution: {integrity: sha512-grL8/wiIkKLFG+FrizORhUTMpOcFMFawa0fmLH3I/1K46TcDQn6Gom+qrcGqbJoc4diYM75xsAC9M8Yajgh4rQ==}
-    engines: {node: '>=20.19.0'}
-
-  '@cesium/wasm-splats@0.1.0-alpha.2':
-    resolution: {integrity: sha512-t9pMkknv31hhIbLpMa8yPvmqfpvs5UkUjgqlQv9SeO8VerCXOYnyP8/486BDaFrztM0A7FMbRjsXtNeKvqQghA==}
-
-  '@cesium/widgets@14.1.0':
-    resolution: {integrity: sha512-/8xJTi95XZrdkmJGABEHuQLu2ZarJ59J4V21dmgU/GJAFoqnjPlqFaFajx5XBZzRufGFYW1vGsq9BMqbdOJn5Q==}
-    engines: {node: '>=20.19.0'}
 
   '@date-fns/tz@1.4.0':
     resolution: {integrity: sha512-FLHih5yiLZD50fMLuXhq51PYWc6RDrV23DZm96vAM15Z+YB65iywx+6k5KhlxPApWpRQucJD5FZp9kR57Ziqtw==}
@@ -1946,10 +1929,6 @@ packages:
   caniuse-lite@1.0.30001734:
     resolution: {integrity: sha512-uhE1Ye5vgqju6OI71HTQqcBCZrvHugk0MjLak7Q+HfoBgoq5Bi+5YnwjP4fjDgrtYr/l8MVRBvzz9dPD4KyK0A==}
 
-  cesium@1.136.0:
-    resolution: {integrity: sha512-sHSFNNLgrgJQxpdLxdmjytT7qfs8dkn23tpPnXKweqvynQn+yAybepK6AwzYBbKQ017qBkrS/Wb4DORIFcjjhQ==}
-    engines: {node: '>=20.19.0'}
-
   chai@5.2.1:
     resolution: {integrity: sha512-5nFxhUrX0PqtyogoYOA8IPswy5sZFTOsBFl/9bNsmDLgsxYTzSZQJDPppDnZPTQbzSEm0hqGjWPzRemQCYbD6A==}
     engines: {node: '>=18'}
@@ -3349,12 +3328,6 @@ packages:
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
-  vite-plugin-cesium@1.2.23:
-    resolution: {integrity: sha512-x9A8ZCEoegceXg/E+LnxKr0XBsI9CR4cgYWQ2Dd3cUEYwKcTnHQ3kBfpol7BUcGtgQnQos/mtVrRmuVQBXFjHw==}
-    peerDependencies:
-      cesium: ^1.95.0
-      vite: '>=2.7.1'
-
   vite@7.1.2:
     resolution: {integrity: sha512-J0SQBPlQiEXAF7tajiH+rUooJPo0l8KQgyg4/aMunNtrOa7bwuZJsJbDWzeljqQpgftxuq5yNJxQ91O9ts29UQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -3511,37 +3484,6 @@ snapshots:
   '@alloc/quick-lru@5.2.0': {}
 
   '@babel/runtime@7.28.2': {}
-
-  '@cesium/engine@22.1.0':
-    dependencies:
-      '@cesium/wasm-splats': 0.1.0-alpha.2
-      '@spz-loader/core': 0.3.0
-      '@tweenjs/tween.js': 25.0.0
-      '@zip.js/zip.js': 2.8.11
-      autolinker: 4.1.5
-      bitmap-sdf: 1.0.4
-      dompurify: 3.3.1
-      draco3d: 1.5.7
-      earcut: 3.0.2
-      grapheme-splitter: 1.0.4
-      jsep: 1.4.0
-      kdbush: 4.0.2
-      ktx-parse: 1.1.0
-      lerc: 2.0.0
-      mersenne-twister: 1.1.0
-      meshoptimizer: 0.25.0
-      pako: 2.1.0
-      protobufjs: 7.5.4
-      rbush: 4.0.1
-      topojson-client: 3.1.0
-      urijs: 1.19.11
-
-  '@cesium/wasm-splats@0.1.0-alpha.2': {}
-
-  '@cesium/widgets@14.1.0':
-    dependencies:
-      '@cesium/engine': 22.1.0
-      nosleep.js: 0.12.0
 
   '@date-fns/tz@1.4.0': {}
 
@@ -5312,11 +5254,6 @@ snapshots:
 
   caniuse-lite@1.0.30001734: {}
 
-  cesium@1.136.0:
-    dependencies:
-      '@cesium/engine': 22.1.0
-      '@cesium/widgets': 14.1.0
-
   chai@5.2.1:
     dependencies:
       assertion-error: 2.0.1
@@ -6743,17 +6680,6 @@ snapshots:
       - terser
       - tsx
       - yaml
-
-  vite-plugin-cesium@1.2.23(cesium@1.136.0)(rollup@4.46.2)(vite@7.1.2(@types/node@24.2.1)(jiti@1.21.7)(tsx@4.20.3)(yaml@2.8.1)):
-    dependencies:
-      cesium: 1.136.0
-      fs-extra: 9.1.0
-      rollup-plugin-external-globals: 0.6.1(rollup@4.46.2)
-      serve-static: 1.16.2
-      vite: 7.1.2(@types/node@24.2.1)(jiti@1.21.7)(tsx@4.20.3)(yaml@2.8.1)
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
 
   vite@7.1.2(@types/node@24.2.1)(jiti@1.21.7)(tsx@4.20.3)(yaml@2.8.1):
     dependencies:
