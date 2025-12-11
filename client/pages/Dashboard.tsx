@@ -42,8 +42,9 @@ export default function Dashboard() {
     <div className="min-h-screen w-full bg-slate-950 overflow-hidden">
       {/* Background Logo - Semi-transparent */}
       <div
-        className="fixed inset-0 pointer-events-none opacity-20 flex items-center justify-center"
+        className="fixed inset-0 pointer-events-none flex items-center justify-center"
         style={{
+          opacity: 0.2,
           backgroundImage:
             "url('https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2Fdb73f0b948424cf882124f061889ce6e?format=webp&width=800')",
           backgroundSize: "contain",
