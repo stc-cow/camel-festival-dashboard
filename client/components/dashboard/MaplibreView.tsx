@@ -154,7 +154,14 @@ export function MaplibreView({
   useEffect(() => {
     // Suppress MapLibre AbortError from unhandled promise rejections
     const unhandledRejectionHandler = (event: PromiseRejectionEvent) => {
-      if (event.reason?.message?.includes?.("AbortError") || event.reason?.name === "AbortError") {
+      const reason = event.reason || {};
+      const reasonStr = String(reason);
+      const message = reason?.message || "";
+      const name = reason?.name || "";
+
+      if (/abort/i.test(reasonStr) ||
+          /abort/i.test(message) ||
+          /abort/i.test(name)) {
         event.preventDefault();
       }
     };
