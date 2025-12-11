@@ -507,7 +507,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     }
   };
 
-  const createMarkerSVG = (site: FestivalSite, color: string): HTMLElement => {
+  const createMarkerSVG = (site: FestivalSite): HTMLElement => {
     const container = document.createElement("div");
     container.style.cursor = "pointer";
     container.style.transition = "transform 0.2s";
@@ -516,35 +516,107 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     container.style.alignItems = "center";
     container.style.gap = "2px";
 
-    // Create image marker with antenna icon
+    // Create 3D wireless antenna icon
     const iconContainer = document.createElement("div");
     iconContainer.style.position = "relative";
     iconContainer.style.width = "28px";
     iconContainer.style.height = "28px";
     iconContainer.style.filter = "drop-shadow(0 2px 4px rgba(0,0,0,0.3))";
+    iconContainer.style.display = "flex";
+    iconContainer.style.alignItems = "center";
+    iconContainer.style.justifyContent = "center";
 
-    // Create image element with antenna icon
-    const img = document.createElement("img");
-    img.src = "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F4672babce37e41f8a7ff799da578f8aa?format=webp&width=800";
-    img.alt = site.name;
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "contain";
-    img.style.pointerEvents = "none";
-    img.style.userSelect = "none";
+    // Create SVG icon using the Wireless3DIcon component
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "28");
+    svg.setAttribute("height", "28");
+    svg.setAttribute("viewBox", "0 0 200 200");
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svg.style.pointerEvents = "none";
+    svg.style.userSelect = "none";
 
-    // Apply color filter based on status
-    // Convert hex color to RGB for filter
-    const colorFilters: Record<string, string> = {
-      "#10B981": "invert(64%) sepia(52%) saturate(519%) hue-rotate(90deg) brightness(101%) contrast(103%)", // green
-      "#F59E0B": "invert(71%) sepia(87%) saturate(383%) hue-rotate(4deg) brightness(107%) contrast(104%)", // amber
-      "#EF4444": "invert(42%) sepia(72%) saturate(1480%) hue-rotate(2deg) brightness(98%) contrast(103%)", // red
-      "#6B7280": "invert(50%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%)", // gray
-    };
+    const color = (() => {
+      switch (site.status) {
+        case "operational":
+          return "#10B981"; // green
+        case "warning":
+          return "#F59E0B"; // amber
+        case "critical":
+          return "#EF4444"; // red
+        default:
+          return "#6B7280"; // gray
+      }
+    })();
 
-    img.style.filter = colorFilters[color] || colorFilters["#6B7280"];
+    // 3D center pole
+    const pole = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    pole.setAttribute(
+      "d",
+      "M95 70 Q100 160 100 185 Q100 195 110 195 Q120 195 120 185 Q120 160 105 70 Z"
+    );
+    pole.setAttribute("fill", color);
 
-    iconContainer.appendChild(img);
+    // 3D top sphere
+    const sphere = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    sphere.setAttribute("cx", "110");
+    sphere.setAttribute("cy", "60");
+    sphere.setAttribute("r", "25");
+    sphere.setAttribute("fill", color);
+
+    // Outer arcs (left side)
+    const arc1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    arc1.setAttribute("d", "M40 70 Q110 0 180 70");
+    arc1.setAttribute("stroke", color);
+    arc1.setAttribute("stroke-width", "18");
+    arc1.setAttribute("fill", "none");
+    arc1.setAttribute("stroke-linecap", "round");
+
+    const arc2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    arc2.setAttribute("d", "M55 95 Q110 35 165 95");
+    arc2.setAttribute("stroke", color);
+    arc2.setAttribute("stroke-width", "18");
+    arc2.setAttribute("fill", "none");
+    arc2.setAttribute("stroke-linecap", "round");
+
+    const arc3 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    arc3.setAttribute("d", "M70 120 Q110 70 150 120");
+    arc3.setAttribute("stroke", color);
+    arc3.setAttribute("stroke-width", "18");
+    arc3.setAttribute("fill", "none");
+    arc3.setAttribute("stroke-linecap", "round");
+
+    // Right side mirrored arcs
+    const arc4 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    arc4.setAttribute("d", "M180 70 Q110 0 40 70");
+    arc4.setAttribute("stroke", color);
+    arc4.setAttribute("stroke-width", "18");
+    arc4.setAttribute("fill", "none");
+    arc4.setAttribute("stroke-linecap", "round");
+
+    const arc5 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    arc5.setAttribute("d", "M165 95 Q110 35 55 95");
+    arc5.setAttribute("stroke", color);
+    arc5.setAttribute("stroke-width", "18");
+    arc5.setAttribute("fill", "none");
+    arc5.setAttribute("stroke-linecap", "round");
+
+    const arc6 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    arc6.setAttribute("d", "M150 120 Q110 70 70 120");
+    arc6.setAttribute("stroke", color);
+    arc6.setAttribute("stroke-width", "18");
+    arc6.setAttribute("fill", "none");
+    arc6.setAttribute("stroke-linecap", "round");
+
+    svg.appendChild(pole);
+    svg.appendChild(sphere);
+    svg.appendChild(arc1);
+    svg.appendChild(arc2);
+    svg.appendChild(arc3);
+    svg.appendChild(arc4);
+    svg.appendChild(arc5);
+    svg.appendChild(arc6);
+
+    iconContainer.appendChild(svg);
     container.appendChild(iconContainer);
 
     // Add site name label - not bold, smaller
