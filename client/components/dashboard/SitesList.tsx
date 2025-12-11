@@ -57,7 +57,7 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
       </div>
 
       {/* Scrollable Content */}
-      <ScrollArea className="flex-1">
+      <div className="flex-1 overflow-y-auto">
         <div className="space-y-2 p-3">
           {sites.map((site) => (
             <div
@@ -106,7 +106,7 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
             </div>
           ))}
         </div>
-      </ScrollArea>
+      </div>
     </div>
   );
 }
