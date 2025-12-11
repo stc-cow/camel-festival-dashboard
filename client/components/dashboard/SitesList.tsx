@@ -63,7 +63,7 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
             <div
               key={site.id}
               onClick={() => onSiteSelect?.(site)}
-              className="p-3 rounded-lg border border-slate-700/30 bg-slate-900/40 hover:bg-slate-800/60 hover:border-slate-600/50 cursor-pointer transition-all duration-200 group"
+              className="p-3 rounded-lg border border-purple-300/40 bg-white/40 hover:bg-white/60 hover:border-purple-400/50 cursor-pointer transition-all duration-200 group"
             >
               {/* Site header with status */}
               <div className="flex items-start justify-between gap-2 mb-2">
