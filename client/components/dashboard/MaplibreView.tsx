@@ -118,13 +118,11 @@ const MAP_STYLES: Record<MapLayerStyle, any> = {
       "terrain-tiles": {
         type: "raster",
         tiles: [
-          "https://a.tile.opentopomap.org/{z}/{x}/{y}.png",
-          "https://b.tile.opentopomap.org/{z}/{x}/{y}.png",
-          "https://c.tile.opentopomap.org/{z}/{x}/{y}.png",
+          "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
         ],
         tileSize: 256,
         attribution:
-          '© <a href="https://opentopomap.org">OpenTopoMap</a>, © OpenStreetMap contributors',
+          '© <a href="https://www.esri.com/">Esri</a>, National Geographic, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, increment P Corp',
       },
     },
     layers: [
@@ -133,7 +131,7 @@ const MAP_STYLES: Record<MapLayerStyle, any> = {
         type: "raster",
         source: "terrain-tiles",
         minzoom: 0,
-        maxzoom: 17,
+        maxzoom: 19,
         paint: {
           "raster-opacity": 1,
         },
