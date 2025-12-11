@@ -141,13 +141,13 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                   </td>
 
                   {/* Created Time */}
-                  <td className="px-6 py-3 text-slate-400 text-xs">
+                  <td className="px-6 py-3 text-slate-600 text-xs">
                     {getTimeString(ticket.createdAt)}
                   </td>
 
                   {/* Notes */}
                   <td className="px-6 py-3 max-w-sm">
-                    <p className="text-slate-400 text-xs truncate">
+                    <p className="text-slate-600 text-xs truncate">
                       {ticket.dispatcherNotes}
                     </p>
                   </td>
