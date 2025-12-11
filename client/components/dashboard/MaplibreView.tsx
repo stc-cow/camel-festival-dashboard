@@ -515,57 +515,35 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     container.style.alignItems = "center";
     container.style.gap = "2px";
 
-    // Create image marker with telecom tower icon - MINIMIZED
+    // Create image marker with antenna icon
     const iconContainer = document.createElement("div");
     iconContainer.style.position = "relative";
-    iconContainer.style.width = "20px";
-    iconContainer.style.height = "20px";
-    iconContainer.style.filter = "drop-shadow(0 1px 4px rgba(0,0,0,0.3))";
+    iconContainer.style.width = "28px";
+    iconContainer.style.height = "28px";
+    iconContainer.style.filter = "drop-shadow(0 2px 4px rgba(0,0,0,0.3))";
 
-    // Create SVG WiFi icon with center circle and left/right arcs
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "0 0 24 24");
-    svg.setAttribute("width", "20");
-    svg.setAttribute("height", "20");
-    svg.setAttribute("fill", "none");
-    svg.setAttribute("stroke", "#22c55e");
-    svg.setAttribute("stroke-width", "2.5");
-    svg.setAttribute("stroke-linecap", "round");
-    svg.setAttribute("stroke-linejoin", "round");
+    // Create image element with antenna icon
+    const img = document.createElement("img");
+    img.src = "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F4672babce37e41f8a7ff799da578f8aa?format=webp&width=800";
+    img.alt = site.name;
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "contain";
+    img.style.pointerEvents = "none";
+    img.style.userSelect = "none";
 
-    // Left arc (upward curve to the left)
-    const leftArc = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "path",
-    );
-    leftArc.setAttribute("d", "M7 14Q7 8 12 8");
-    leftArc.setAttribute("stroke", "#22c55e");
+    // Apply color filter based on status
+    // Convert hex color to RGB for filter
+    const colorFilters: Record<string, string> = {
+      "#10B981": "invert(64%) sepia(52%) saturate(519%) hue-rotate(90deg) brightness(101%) contrast(103%)", // green
+      "#F59E0B": "invert(71%) sepia(87%) saturate(383%) hue-rotate(4deg) brightness(107%) contrast(104%)", // amber
+      "#EF4444": "invert(42%) sepia(72%) saturate(1480%) hue-rotate(2deg) brightness(98%) contrast(103%)", // red
+      "#6B7280": "invert(50%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%)", // gray
+    };
 
-    // Right arc (upward curve to the right)
-    const rightArc = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "path",
-    );
-    rightArc.setAttribute("d", "M17 14Q17 8 12 8");
-    rightArc.setAttribute("stroke", "#22c55e");
+    img.style.filter = colorFilters[color] || colorFilters["#6B7280"];
 
-    // Center circle
-    const centerCircle = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "circle",
-    );
-    centerCircle.setAttribute("cx", "12");
-    centerCircle.setAttribute("cy", "16");
-    centerCircle.setAttribute("r", "2.5");
-    centerCircle.setAttribute("fill", "#22c55e");
-
-    svg.appendChild(leftArc);
-    svg.appendChild(rightArc);
-    svg.appendChild(centerCircle);
-    svg.style.pointerEvents = "none";
-    svg.style.userSelect = "none";
-
-    iconContainer.appendChild(svg);
+    iconContainer.appendChild(img);
     container.appendChild(iconContainer);
 
     // Add site name label - not bold, smaller
