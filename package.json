@@ -24,6 +24,7 @@
     "@deck.gl/core": "^9.1.0",
     "@deck.gl/geo-layers": "^9.1.0",
     "@deck.gl/layers": "^9.1.0",
+    "cesium": "^1.136.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "zod": "^3.25.76"
