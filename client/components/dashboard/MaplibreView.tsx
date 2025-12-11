@@ -212,6 +212,8 @@ export function MaplibreView({
   const updateMarkers = () => {
     if (mapInstanceRef.current && sites.length > 0) {
       addMarkers();
+      // Fit to bounds whenever markers update
+      setTimeout(() => fitMapToSites(mapInstanceRef.current), 100);
     }
   };
 
