@@ -185,29 +185,37 @@ export function DeckTerrainMapView({
   useEffect(() => {
     if (!containerRef.current || deckRef.current) return;
 
-    deckRef.current = new Deck({
-      parent: containerRef.current,
-      views: [new MapView({ repeat: true })],
-      controller: {
-        dragPan: true,
-        dragRotate: true,
-        scrollZoom: true,
-        maxPitch: 80,
-      },
-      initialViewState: INITIAL_VIEW_STATE,
-      viewState,
-      layers,
-      getTooltip: ({ object }) =>
-        object
-          ? `${object.name}\n${object.location}\n${object.technology}`
-          : null,
-      onViewStateChange: ({ viewState: next }) => {
-        setViewState(next as typeof viewState);
-      },
-    });
+    try {
+      deckRef.current = new Deck({
+        parent: containerRef.current,
+        views: [new MapView({ repeat: true })],
+        controller: {
+          dragPan: true,
+          dragRotate: true,
+          scrollZoom: true,
+          maxPitch: 80,
+        },
+        initialViewState: INITIAL_VIEW_STATE,
+        viewState,
+        layers,
+        getTooltip: ({ object }) =>
+          object
+            ? `${object.name}\n${object.location}\n${object.technology}`
+            : null,
+        onViewStateChange: ({ viewState: next }) => {
+          setViewState(next as typeof viewState);
+        },
+      });
+    } catch (e) {
+      // Silently ignore Deck initialization errors
+    }
 
     return () => {
-      deckRef.current?.finalize();
+      try {
+        deckRef.current?.finalize();
+      } catch (e) {
+        // Silently ignore finalization errors
+      }
       deckRef.current = null;
     };
   }, [layers, viewState]);
