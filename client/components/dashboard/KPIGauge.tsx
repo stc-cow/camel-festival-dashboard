@@ -91,7 +91,7 @@ export function KPIGauge({
 
       {/* Label and status */}
       <div className="text-center mb-3">
-        <h3 className="text-sm font-semibold text-slate-300">{label}</h3>
+        <h3 className="text-sm font-semibold text-slate-700">{label}</h3>
         <p className="text-xs font-medium mt-1" style={{ color: color.main }}>
           {color.label}
         </p>
@@ -99,11 +99,11 @@ export function KPIGauge({
 
       {/* Threshold indicators */}
       <div className="w-full space-y-2 text-xs">
-        <div className="flex justify-between items-center text-slate-400">
+        <div className="flex justify-between items-center text-slate-600">
           <span>Excellent</span>
           <span>{threshold.excellent}%</span>
         </div>
-        <div className="w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-slate-300 rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
             style={{ width: "100%" }}
