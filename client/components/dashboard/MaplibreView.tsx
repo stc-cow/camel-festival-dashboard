@@ -221,11 +221,36 @@ export function MaplibreView({
       antialias: true,
     });
 
+    // Suppress abort errors from maplibre tile loading
+    const errorHandler = (event: ErrorEvent) => {
+      if (event.message && event.message.includes("AbortError")) {
+        event.preventDefault();
+        return false;
+      }
+    };
+    window.addEventListener("error", errorHandler);
+
     map.on("load", () => {
       setMapLoaded(true);
       addMarkers();
       // Fit map bounds to show all sites
       fitMapToSites(map);
+
+      // Handle container resize
+      const resizeObserver = new ResizeObserver(() => {
+        try {
+          map.resize();
+        } catch (e) {
+          console.error("Error resizing map:", e);
+        }
+      });
+
+      if (mapContainer.current) {
+        resizeObserver.observe(mapContainer.current);
+      }
+
+      // Store resize observer for cleanup
+      map.resizeObserver = resizeObserver;
     });
 
     mapInstanceRef.current = map;
