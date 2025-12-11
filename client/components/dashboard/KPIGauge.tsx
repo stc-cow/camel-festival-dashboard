@@ -79,7 +79,7 @@ export function KPIGauge({
           />
 
           {/* Center circle for 3D effect */}
-          <circle cx="50" cy="50" r="35" fill="rgba(15, 23, 42, 0.8)" />
+          <circle cx="50" cy="50" r="35" fill="rgba(255, 255, 255, 0.95)" />
         </svg>
 
         {/* Center text */}
