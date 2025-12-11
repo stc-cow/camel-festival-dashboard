@@ -68,10 +68,10 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
               {/* Site header with status */}
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div className="flex-1">
-                  <h4 className="text-sm font-semibold text-white group-hover:text-blue-300 transition-colors">
+                  <h4 className="text-sm font-semibold text-slate-800 group-hover:text-purple-600 transition-colors">
                     {site.name}
                   </h4>
-                  <p className="text-xs text-slate-400 mt-0.5">{site.location}</p>
+                  <p className="text-xs text-slate-600 mt-0.5">{site.location}</p>
                 </div>
                 <span className="text-lg leading-none">{getStatusIcon(site.status)}</span>
               </div>
