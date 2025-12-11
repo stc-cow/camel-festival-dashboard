@@ -581,16 +581,16 @@ export function MaplibreView({
       </div>
 
       {/* Flag Icon - Above Layer Selector */}
-      <div className="absolute top-4 left-4 z-20">
+      <div className="absolute top-2 left-2 z-20">
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F816100c27387414c8114242260ac3118?format=webp&width=800"
           alt="Festival Camel Riders"
-          className="w-32 h-32 object-contain drop-shadow-md"
+          className="w-24 h-24 object-contain drop-shadow-md"
         />
       </div>
 
       {/* Layer Selector - Foldable Icon */}
-      <div className="absolute bottom-4 left-4 z-20">
+      <div className="absolute bottom-2 left-2 z-20">
         {!isLayerSelectorOpen ? (
           <button
             onClick={() => setIsLayerSelectorOpen(true)}
