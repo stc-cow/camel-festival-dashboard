@@ -1,4 +1,3 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import type { FestivalSite } from "@/data/festivalData";
 
 interface SitesListProps {
