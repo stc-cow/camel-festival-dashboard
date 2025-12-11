@@ -110,11 +110,12 @@ function sheetRowToTicket(row: SheetRow): FestivalTicket | null {
   if (!row.TicketID) return null;
 
   let severity: "low" | "medium" | "high" | "critical" = "medium";
-  if (row.Severity) {
-    const sev = row.Severity.toLowerCase();
-    if (sev === "critical") severity = "critical";
-    else if (sev === "high") severity = "high";
-    else if (sev === "low") severity = "low";
+  if (row.Severity && row.Severity.trim()) {
+    const sev = row.Severity.trim().toLowerCase();
+    if (sev.includes("critical")) severity = "critical";
+    else if (sev.includes("high")) severity = "high";
+    else if (sev.includes("low")) severity = "low";
+    else if (sev.includes("medium")) severity = "medium";
   }
 
   let status: "open" | "in-progress" | "resolved" = "open";
