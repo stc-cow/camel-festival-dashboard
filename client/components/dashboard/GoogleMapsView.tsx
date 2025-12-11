@@ -243,6 +243,20 @@ export function GoogleMapsView({
     }, 5000);
   };
 
+  if (mapError) {
+    return (
+      <div className="w-full h-full overflow-hidden rounded-xl border border-purple-200/30 bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center p-6">
+        <div className="bg-white rounded-lg p-6 max-w-md border border-red-300 shadow-lg">
+          <div className="text-lg font-bold text-red-600 mb-3">Map Configuration Error</div>
+          <p className="text-sm text-gray-700 mb-4">{mapError}</p>
+          <div className="bg-gray-50 p-3 rounded text-xs text-gray-600 border border-gray-200 font-mono">
+            Set VITE_GOOGLE_MAPS_API_KEY in your .env file with a valid Google Maps API key
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-full overflow-hidden rounded-xl border border-purple-200/30 bg-gradient-to-br from-slate-100 to-slate-200 relative">
       <div
