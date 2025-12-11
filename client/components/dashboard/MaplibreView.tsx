@@ -154,16 +154,27 @@ export function MaplibreView({
   useEffect(() => {
     // Suppress MapLibre AbortError from unhandled promise rejections
     const unhandledRejectionHandler = (event: PromiseRejectionEvent) => {
-      if (event.reason?.message?.includes?.("AbortError")) {
+      if (event.reason?.message?.includes?.("AbortError") || event.reason?.name === "AbortError") {
         event.preventDefault();
       }
     };
 
     // Also suppress AbortError from regular error events
     const errorHandler = (event: ErrorEvent) => {
-      if (event.message?.includes?.("AbortError")) {
+      if (event.message?.includes?.("AbortError") || event.error?.name === "AbortError") {
         event.preventDefault();
         return true;
+      }
+    };
+
+    // Intercept console.error to suppress AbortError logs
+    const originalConsoleError = console.error;
+    (console as any).error = function(...args: any[]) {
+      const errorString = args
+        .map((arg) => (typeof arg === "string" ? arg : String(arg)))
+        .join(" ");
+      if (!errorString.includes("AbortError")) {
+        originalConsoleError.apply(console, args);
       }
     };
 
