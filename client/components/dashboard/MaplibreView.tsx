@@ -510,24 +510,24 @@ export function MaplibreView({
     svg.setAttribute("height", "20");
     svg.setAttribute("fill", "none");
     svg.setAttribute("stroke", "#22c55e");
-    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-width", "2.5");
     svg.setAttribute("stroke-linecap", "round");
     svg.setAttribute("stroke-linejoin", "round");
 
-    // Left arc
+    // Left arc (upward curve to the left)
     const leftArc = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    leftArc.setAttribute("d", "M8 12c0 2.2 1.8 4 4 4");
+    leftArc.setAttribute("d", "M7 14Q7 8 12 8");
     leftArc.setAttribute("stroke", "#22c55e");
 
-    // Right arc
+    // Right arc (upward curve to the right)
     const rightArc = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    rightArc.setAttribute("d", "M16 12c0 2.2-1.8 4-4 4");
+    rightArc.setAttribute("d", "M17 14Q17 8 12 8");
     rightArc.setAttribute("stroke", "#22c55e");
 
     // Center circle
     const centerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     centerCircle.setAttribute("cx", "12");
-    centerCircle.setAttribute("cy", "12");
+    centerCircle.setAttribute("cy", "16");
     centerCircle.setAttribute("r", "2.5");
     centerCircle.setAttribute("fill", "#22c55e");
 
