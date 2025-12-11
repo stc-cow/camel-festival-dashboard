@@ -241,15 +241,6 @@ export function MaplibreView({
       fitMapToSites(map);
     });
 
-    // Handle unhandled promise rejections from maplibre tile aborts
-    map.on("error", (error: any) => {
-      if (error?.error?.message?.includes?.("AbortError")) {
-        // Silently ignore abort errors - they're expected when resizing or loading tiles
-        return;
-      }
-      console.error("Map error:", error);
-    });
-
     mapInstanceRef.current = map;
   };
 
