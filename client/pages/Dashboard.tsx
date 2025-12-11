@@ -41,9 +41,22 @@ export default function Dashboard() {
       originalWarn.apply(console, args);
     };
 
+    // Add global error handler for ResizeObserver errors thrown as exceptions
+    const handleError = (event: ErrorEvent) => {
+      const message = event.message || "";
+      if (/ResizeObserver/i.test(message)) {
+        event.preventDefault();
+        return true;
+      }
+      return false;
+    };
+
+    window.addEventListener("error", handleError, true);
+
     return () => {
       (console as any).error = originalError;
       (console as any).warn = originalWarn;
+      window.removeEventListener("error", handleError, true);
     };
   }, []);
 
