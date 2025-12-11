@@ -103,19 +103,19 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
                 >
                   {/* Ticket ID */}
                   <td className="px-6 py-3">
-                    <code className="text-xs font-mono text-blue-400">
+                    <code className="text-xs font-mono text-purple-600">
                       {ticket.id}
                     </code>
                   </td>
 
                   {/* Site Name */}
                   <td className="px-6 py-3">
-                    <div className="text-white font-medium">{ticket.siteName}</div>
+                    <div className="text-slate-800 font-medium">{ticket.siteName}</div>
                   </td>
 
                   {/* Issue */}
                   <td className="px-6 py-3 max-w-xs">
-                    <p className="text-slate-300 truncate">{ticket.issue}</p>
+                    <p className="text-slate-700 truncate">{ticket.issue}</p>
                   </td>
 
                   {/* Severity */}
