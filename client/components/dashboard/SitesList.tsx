@@ -98,8 +98,8 @@ export function SitesList({ sites, onSiteSelect }: SitesListProps) {
               </div>
 
               {/* Last update */}
-              <div className="mt-2 pt-2 border-t border-slate-700/20">
-                <p className="text-xs text-slate-500">
+              <div className="mt-2 pt-2 border-t border-purple-200/30">
+                <p className="text-xs text-slate-600">
                   Updated: {new Date(site.lastUpdate).toLocaleTimeString()}
                 </p>
               </div>
