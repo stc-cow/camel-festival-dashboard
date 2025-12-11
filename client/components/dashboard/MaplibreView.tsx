@@ -146,76 +146,15 @@ export function MaplibreView({
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
+  const isMountedRef = useRef(true);
+  const pendingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [currentLayer, setCurrentLayer] = useState<MapLayerStyle>("hybrid");
   const [isLayerSelectorOpen, setIsLayerSelectorOpen] = useState(false);
 
   // Load Maplibre GL library
   useEffect(() => {
-    // Suppress MapLibre AbortError from unhandled promise rejections
-    const unhandledRejectionHandler = (event: PromiseRejectionEvent) => {
-      const reason = event.reason || {};
-      const reasonStr = String(reason);
-      const message = reason?.message || "";
-      const name = reason?.name || "";
-
-      if (/abort/i.test(reasonStr) ||
-          /abort/i.test(message) ||
-          /abort/i.test(name)) {
-        event.preventDefault();
-      }
-    };
-
-    // Also suppress AbortError from regular error events
-    const errorHandler = (event: ErrorEvent) => {
-      const message = event.message || "";
-      const errorName = event.error?.name || "";
-      const errorMsg = event.error?.message || "";
-      const stackTrace = event.error?.stack || "";
-
-      if (/abort/i.test(message) ||
-          /abort/i.test(errorName) ||
-          /abort/i.test(errorMsg) ||
-          /abort/i.test(stackTrace)) {
-        event.preventDefault();
-        return true;
-      }
-    };
-
-    // Intercept console.error and console.warn to suppress AbortError logs
-    const originalConsoleError = console.error;
-    const originalConsoleWarn = console.warn;
-
-    const isAbortError = (...args: any[]): boolean => {
-      return args.some((arg) => {
-        if (typeof arg === "string") {
-          return /abort/i.test(arg);
-        }
-        if (arg instanceof Error) {
-          return /abort/i.test(arg.name) || /abort/i.test(arg.message);
-        }
-        if (arg && typeof arg === "object") {
-          const str = String(arg);
-          return /abort/i.test(str);
-        }
-        return false;
-      });
-    };
-
-    (console as any).error = function(...args: any[]) {
-      if (!isAbortError(...args)) {
-        originalConsoleError.apply(console, args);
-      }
-    };
-
-    (console as any).warn = function(...args: any[]) {
-      if (!isAbortError(...args)) {
-        originalConsoleWarn.apply(console, args);
-      }
-    };
-
-    window.addEventListener("unhandledrejection", unhandledRejectionHandler);
-    window.addEventListener("error", errorHandler);
+    isMountedRef.current = true;
 
     // Create style link for Maplibre
     const linkEl = document.createElement("link");
@@ -230,30 +169,35 @@ export function MaplibreView({
       "https://cdn.jsdelivr.net/npm/maplibre-gl@4.0.0/dist/maplibre-gl.js";
     scriptEl.async = true;
     scriptEl.onload = () => {
-      initializeMap();
+      if (isMountedRef.current) {
+        initializeMap();
+      }
     };
     scriptEl.onerror = () => {
-      console.error("Failed to load Maplibre GL");
-      setMapLoaded(true);
+      if (isMountedRef.current) {
+        setMapLoaded(true);
+      }
     };
     document.head.appendChild(scriptEl);
 
     return () => {
-      // Restore console methods
-      (console as any).error = originalConsoleError;
-      (console as any).warn = originalConsoleWarn;
+      isMountedRef.current = false;
 
-      // Clean up unhandled rejection handler
-      window.removeEventListener("unhandledrejection", unhandledRejectionHandler);
-      window.removeEventListener("error", errorHandler);
+      // Clear any pending timeouts
+      if (pendingTimeoutRef.current) {
+        clearTimeout(pendingTimeoutRef.current);
+        pendingTimeoutRef.current = null;
+      }
 
-      // Clean up map instance
+      // Clean up map instance carefully
       if (mapInstanceRef.current) {
         try {
+          // Remove all event listeners first
+          mapInstanceRef.current.off();
           mapInstanceRef.current.remove();
           mapInstanceRef.current = null;
         } catch (e) {
-          console.error("Error removing map:", e);
+          // Silently ignore cleanup errors
         }
       }
 
@@ -262,7 +206,7 @@ export function MaplibreView({
         try {
           marker.remove();
         } catch (e) {
-          console.error("Error removing marker:", e);
+          // Silently ignore marker cleanup errors
         }
       });
       markersRef.current.clear();
