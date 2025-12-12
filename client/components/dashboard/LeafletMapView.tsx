@@ -172,42 +172,42 @@ function MarkerLayer({
             <Popup offset={[0, -10]} maxWidth={250}>
               <div style={{ padding: "8px" }}>
                 <h4
-                style={{
-                  margin: "0 0 8px 0",
-                  fontWeight: "bold",
-                  fontSize: "14px",
-                  color: "#1f2937",
-                }}
-              >
-                {site.name}
-              </h4>
-              <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
-                <strong>Location:</strong> {site.location}
-              </p>
-              <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
-                <strong>Technology:</strong> {site.technology}
-              </p>
-              <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
-                <strong>Status:</strong>{" "}
-                <span
                   style={{
-                    color: getStatusColor(site.status),
+                    margin: "0 0 8px 0",
                     fontWeight: "bold",
-                    textTransform: "capitalize",
+                    fontSize: "14px",
+                    color: "#1f2937",
                   }}
                 >
-                  {site.status}
-                </span>
-              </p>
-              <p
-                style={{
-                  margin: "4px 0 0 0",
-                  fontSize: "11px",
-                  color: "#9ca3af",
-                }}
-              >
-                Updated: {new Date(site.lastUpdate).toLocaleTimeString()}
-              </p>
+                  {site.name}
+                </h4>
+                <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
+                  <strong>Location:</strong> {site.location}
+                </p>
+                <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
+                  <strong>Technology:</strong> {site.technology}
+                </p>
+                <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
+                  <strong>Status:</strong>{" "}
+                  <span
+                    style={{
+                      color: getStatusColor(site.status),
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {site.status}
+                  </span>
+                </p>
+                <p
+                  style={{
+                    margin: "4px 0 0 0",
+                    fontSize: "11px",
+                    color: "#9ca3af",
+                  }}
+                >
+                  Updated: {new Date(site.lastUpdate).toLocaleTimeString()}
+                </p>
               </div>
             </Popup>
           </Marker>
