@@ -258,7 +258,7 @@ export function LeafletMapView({
       </div>
 
       {/* Layer Selector - Foldable Icon */}
-      <div className="absolute bottom-2 left-2 z-20">
+      <div className="absolute bottom-2 left-2 z-30 pointer-events-auto">
         {!isLayerSelectorOpen ? (
           <button
             onClick={() => setIsLayerSelectorOpen(true)}
