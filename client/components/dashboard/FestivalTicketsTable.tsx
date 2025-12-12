@@ -121,9 +121,9 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
           {/* Table Body */}
           <tbody>
             {tickets.length > 0 ? (
-              tickets.map((ticket) => (
+              tickets.map((ticket, index) => (
                 <tr
-                  key={ticket.id}
+                  key={`${ticket.id}-${index}`}
                   className="bg-white/20 hover:bg-white/40 transition-colors duration-200"
                 >
                   {/* COWName */}
