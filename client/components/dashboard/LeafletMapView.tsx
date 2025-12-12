@@ -105,32 +105,56 @@ function MarkerLayer({
     const color = getStatusColor(site.status);
     const html = `
       <div style="
-        width: 32px;
-        height: 40px;
-        background-color: ${color};
-        border: 2px solid white;
-        border-radius: 50% 50% 50% 0;
-        transform: rotate(-45deg);
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        gap: 4px;
+        cursor: pointer;
       ">
         <div style="
-          width: 8px;
-          height: 8px;
+          width: 32px;
+          height: 40px;
+          background-color: ${color};
+          border: 2px solid white;
+          border-radius: 50% 50% 50% 0;
+          transform: rotate(-45deg);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+          flex-shrink: 0;
+        ">
+          <div style="
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            transform: rotate(45deg);
+          "></div>
+        </div>
+        <div style="
           background-color: white;
-          border-radius: 50%;
-          transform: rotate(45deg);
-        "></div>
+          padding: 2px 4px;
+          border-radius: 3px;
+          font-size: 10px;
+          font-weight: bold;
+          color: #1f2937;
+          white-space: nowrap;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+          max-width: 80px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        ">
+          ${site.name}
+        </div>
       </div>
     `;
 
     return L.divIcon({
       html,
-      iconSize: [32, 40],
-      iconAnchor: [16, 40],
-      popupAnchor: [0, -40],
+      iconSize: [90, 70],
+      iconAnchor: [45, 70],
+      popupAnchor: [0, -70],
       className: "custom-icon",
     });
   };
