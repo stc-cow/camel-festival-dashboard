@@ -209,8 +209,8 @@ function MarkerLayer({
                 Updated: {new Date(site.lastUpdate).toLocaleTimeString()}
               </p>
             </div>
-          </Popup>
-        </Marker>
+            </Popup>
+          </Marker>
         ))}
     </>
   );
