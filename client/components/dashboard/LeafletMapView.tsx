@@ -108,45 +108,29 @@ function MarkerLayer({
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 4px;
+        gap: 2px;
         cursor: pointer;
       ">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F2e346d5e56684e7d8c96ab8186c6b8ba?format=webp&width=800"
+          alt="tower"
+          style="
+            width: 40px;
+            height: 50px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === 'operational' ? '40' : site.status === 'warning' ? '50' : '30'}%);
+            flex-shrink: 0;
+          "
+        />
         <div style="
-          width: 40px;
-          height: 50px;
-          background-color: ${color};
-          border: 2px solid white;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-          flex-shrink: 0;
-          padding: 4px;
-        ">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F2e346d5e56684e7d8c96ab8186c6b8ba?format=webp&width=800"
-            alt="tower"
-            style="
-              width: 100%;
-              height: 100%;
-              object-fit: contain;
-              filter: brightness(0) saturate(100%) invert(100%);
-            "
-          />
-        </div>
-        <div style="
-          background-color: white;
-          padding: 2px 6px;
-          border-radius: 3px;
           font-size: 10px;
           font-weight: bold;
           color: #1f2937;
           white-space: nowrap;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.2);
           max-width: 80px;
           text-overflow: ellipsis;
           overflow: hidden;
+          text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         ">
           ${site.name}
         </div>
@@ -155,9 +139,9 @@ function MarkerLayer({
 
     return L.divIcon({
       html,
-      iconSize: [100, 80],
-      iconAnchor: [50, 80],
-      popupAnchor: [0, -80],
+      iconSize: [80, 70],
+      iconAnchor: [40, 70],
+      popupAnchor: [0, -70],
       className: "custom-icon",
     });
   };
