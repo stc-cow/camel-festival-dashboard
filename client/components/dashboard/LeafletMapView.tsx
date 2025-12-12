@@ -246,7 +246,12 @@ export function LeafletMapView({
       </MapContainer>
 
       {/* Flag Icon - Above Layer Selector */}
-      <div className="absolute top-2 left-2 z-30 pointer-events-auto">
+      <div
+        className="absolute top-2 left-2 pointer-events-auto"
+        style={{
+          zIndex: 10000,
+        }}
+      >
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F816100c27387414c8114242260ac3118?format=webp&width=800"
           alt="Festival Camel Riders"
