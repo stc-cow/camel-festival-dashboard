@@ -237,7 +237,7 @@ export function LeafletMapView({
       <MapContainer
         center={[26.6868, 37.9833]}
         zoom={12}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", position: "relative", zIndex: 1 }}
         scrollWheelZoom={true}
       >
         <TileLayer url={tileStyle.url} attribution={tileStyle.attribution} />
@@ -246,11 +246,14 @@ export function LeafletMapView({
       </MapContainer>
 
       {/* Flag Icon - Above Layer Selector */}
-      <div className="absolute top-2 left-2 z-20">
+      <div className="absolute top-2 left-2 z-30 pointer-events-auto">
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F816100c27387414c8114242260ac3118?format=webp&width=800"
           alt="Festival Camel Riders"
           className="w-64 h-64 object-contain drop-shadow-md"
+          style={{
+            filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
+          }}
         />
       </div>
 
