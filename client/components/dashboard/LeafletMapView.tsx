@@ -112,29 +112,32 @@ function MarkerLayer({
         cursor: pointer;
       ">
         <div style="
-          width: 32px;
-          height: 40px;
+          width: 40px;
+          height: 50px;
           background-color: ${color};
           border: 2px solid white;
-          border-radius: 50% 50% 50% 0;
-          transform: rotate(-45deg);
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+          box-shadow: 0 2px 6px rgba(0,0,0,0.4);
           flex-shrink: 0;
+          padding: 4px;
         ">
-          <div style="
-            width: 8px;
-            height: 8px;
-            background-color: white;
-            border-radius: 50%;
-            transform: rotate(45deg);
-          "></div>
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F2e346d5e56684e7d8c96ab8186c6b8ba?format=webp&width=800"
+            alt="tower"
+            style="
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              filter: brightness(0) saturate(100%) invert(100%);
+            "
+          />
         </div>
         <div style="
           background-color: white;
-          padding: 2px 4px;
+          padding: 2px 6px;
           border-radius: 3px;
           font-size: 10px;
           font-weight: bold;
@@ -152,9 +155,9 @@ function MarkerLayer({
 
     return L.divIcon({
       html,
-      iconSize: [90, 70],
-      iconAnchor: [45, 70],
-      popupAnchor: [0, -70],
+      iconSize: [100, 80],
+      iconAnchor: [50, 80],
+      popupAnchor: [0, -80],
       className: "custom-icon",
     });
   };
