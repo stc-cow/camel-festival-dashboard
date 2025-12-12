@@ -169,7 +169,7 @@ function MarkerLayer({
               },
             }}
           >
-          <Popup offset={[0, -10]} maxWidth={250}>
+            <Popup offset={[0, -10]} maxWidth={250}>
             <div style={{ padding: "8px" }}>
               <h4
                 style={{
