@@ -148,17 +148,27 @@ function MarkerLayer({
 
   return (
     <>
-      {sites.map((site) => (
-        <Marker
-          key={site.id}
-          position={[site.latitude, site.longitude]}
-          icon={createCustomIcon(site)}
-          eventHandlers={{
-            click: () => {
-              onSiteSelect?.(site);
-            },
-          }}
-        >
+      {sites
+        .filter(
+          (site) =>
+            site.latitude !== undefined &&
+            site.latitude !== null &&
+            site.longitude !== undefined &&
+            site.longitude !== null &&
+            !isNaN(site.latitude) &&
+            !isNaN(site.longitude)
+        )
+        .map((site) => (
+          <Marker
+            key={site.id}
+            position={[site.latitude, site.longitude]}
+            icon={createCustomIcon(site)}
+            eventHandlers={{
+              click: () => {
+                onSiteSelect?.(site);
+              },
+            }}
+          >
           <Popup offset={[0, -10]} maxWidth={250}>
             <div style={{ padding: "8px" }}>
               <h4
