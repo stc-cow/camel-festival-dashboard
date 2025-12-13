@@ -81,19 +81,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen w-full bg-white overflow-hidden">
-      {/* Background Logo - Full coverage */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          opacity: 0.2,
-          backgroundImage:
-            "url('https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F05f4fcc453d9459f8f665ef4cbf3168c?format=webp&width=800')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
-
       {/* Main Container */}
       <div className="relative z-10 w-full h-screen flex flex-col">
         {/* Header */}
