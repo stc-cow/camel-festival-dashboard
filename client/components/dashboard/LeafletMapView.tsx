@@ -115,10 +115,10 @@ function MarkerLayer({
           src="https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F2e346d5e56684e7d8c96ab8186c6b8ba?format=webp&width=800"
           alt="tower"
           style="
-            width: 40px;
-            height: 50px;
+            width: 24px;
+            height: 30px;
             object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === 'operational' ? '40' : site.status === 'warning' ? '50' : '30'}%);
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === 'operational' ? '40' : site.status === 'warning' ? '50' : '30'}%);
             flex-shrink: 0;
           "
         />
