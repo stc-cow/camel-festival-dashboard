@@ -139,9 +139,9 @@ function MarkerLayer({
 
     return L.divIcon({
       html,
-      iconSize: [80, 70],
-      iconAnchor: [40, 70],
-      popupAnchor: [0, -70],
+      iconSize: [50, 45],
+      iconAnchor: [25, 45],
+      popupAnchor: [0, -45],
       className: "custom-icon",
     });
   };
