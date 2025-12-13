@@ -55,32 +55,6 @@ const MAP_STYLES: Record<
   },
 };
 
-function MapController({
-  sites,
-  currentLayer,
-}: {
-  sites: FestivalSite[];
-  currentLayer: MapLayerStyle;
-}) {
-  const map = useMap();
-
-  useEffect(() => {
-    if (sites.length === 0) return;
-
-    const lats = sites.map((site) => site.latitude);
-    const lngs = sites.map((site) => site.longitude);
-
-    const bounds = L.latLngBounds(
-      [Math.min(...lats), Math.min(...lngs)],
-      [Math.max(...lats), Math.max(...lngs)]
-    );
-
-    map.fitBounds(bounds, { padding: [50, 50] });
-  }, [sites, map]);
-
-  return null;
-}
-
 function MarkerLayer({
   sites,
   onSiteSelect,
