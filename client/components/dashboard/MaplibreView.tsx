@@ -570,15 +570,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
 
     try {
       addMarkers();
-      // Fit to bounds whenever markers update
-      if (pendingTimeoutRef.current) {
-        clearTimeout(pendingTimeoutRef.current);
-      }
-      pendingTimeoutRef.current = setTimeout(() => {
-        if (isMountedRef.current && mapInstanceRef.current) {
-          fitMapToSites(mapInstanceRef.current);
-        }
-      }, 100);
+      // Auto zoom removed - map stays at initial zoom level
     } catch (e) {
       // Silently ignore update errors
     }
