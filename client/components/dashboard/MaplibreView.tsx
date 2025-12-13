@@ -582,7 +582,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     container.style.display = "flex";
     container.style.flexDirection = "column";
     container.style.alignItems = "center";
-    container.style.gap = "2px";
+    container.style.gap = "1px";
 
     // Create mobile tower icon
     const img = document.createElement("img");
