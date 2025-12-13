@@ -245,7 +245,6 @@ export function LeafletMapView({
       >
         <TileLayer url={tileStyle.url} attribution={tileStyle.attribution} />
         <MarkerLayer sites={sites} onSiteSelect={onSiteSelect} />
-        <MapController sites={sites} currentLayer={currentLayer} />
       </MapContainer>
 
       {/* Flag Icon - Above Layer Selector */}
