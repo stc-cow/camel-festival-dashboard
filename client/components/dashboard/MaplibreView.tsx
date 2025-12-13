@@ -420,7 +420,6 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       }
       if (isMountedRef.current && mapInstanceRef.current) {
         addMarkers();
-        fitMapToSites(mapInstanceRef.current);
       }
     };
 
