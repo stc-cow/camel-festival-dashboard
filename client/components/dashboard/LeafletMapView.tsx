@@ -234,8 +234,14 @@ export function LeafletMapView({
       <MapContainer
         center={[26.6868, 37.9833]}
         zoom={12}
+        minZoom={5}
+        maxZoom={20}
         style={{ width: "100%", height: "100%", position: "relative", zIndex: 1 }}
         scrollWheelZoom={true}
+        zoomControl={true}
+        doubleClickZoom={true}
+        touchZoom={true}
+        dragging={true}
       >
         <TileLayer url={tileStyle.url} attribution={tileStyle.attribution} />
         <MarkerLayer sites={sites} onSiteSelect={onSiteSelect} />
