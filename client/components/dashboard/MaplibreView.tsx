@@ -585,52 +585,31 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     container.style.gap = "2px";
 
     // Create mobile tower icon
-    const iconContainer = document.createElement("div");
-    iconContainer.style.position = "relative";
-    iconContainer.style.width = "28px";
-    iconContainer.style.height = "28px";
-    iconContainer.style.filter = "drop-shadow(0 2px 4px rgba(0,0,0,0.3))";
-    iconContainer.style.display = "flex";
-    iconContainer.style.alignItems = "center";
-    iconContainer.style.justifyContent = "center";
-
-    // Create image element with mobile tower icon
     const img = document.createElement("img");
     img.src =
-      "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F66c1a170eb074992ac9bd6a2c264983e?format=webp&width=800";
+      "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2F2e346d5e56684e7d8c96ab8186c6b8ba?format=webp&width=800";
     img.alt = site.name;
-    img.style.width = "100%";
-    img.style.height = "100%";
+    img.style.width = "24px";
+    img.style.height = "30px";
     img.style.objectFit = "contain";
     img.style.pointerEvents = "none";
     img.style.userSelect = "none";
+    img.style.filter = `drop-shadow(0 1px 2px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === 'operational' ? '40' : site.status === 'warning' ? '50' : '30'}%)`;
 
-    // Apply color filter based on status
-    const colorFilters: Record<string, string> = {
-      operational:
-        "brightness(0) saturate(100%) invert(75%) sepia(96%) saturate(491%) hue-rotate(108deg) brightness(105%) contrast(104%)", // green
-      warning:
-        "brightness(0) saturate(100%) invert(73%) sepia(83%) saturate(478%) hue-rotate(3deg) brightness(106%) contrast(105%)", // amber
-      critical:
-        "brightness(0) saturate(100%) invert(36%) sepia(88%) saturate(1567%) hue-rotate(359deg) brightness(102%) contrast(106%)", // red
-    };
+    container.appendChild(img);
 
-    img.style.filter = colorFilters[site.status] || colorFilters.operational;
-
-    iconContainer.appendChild(img);
-    container.appendChild(iconContainer);
-
-    // Add site name label - not bold, smaller
+    // Add site name label - text only
     const nameLabel = document.createElement("div");
     nameLabel.textContent = site.name;
-    nameLabel.style.fontSize = "6px";
-    nameLabel.style.fontWeight = "normal";
-    nameLabel.style.color = "#000";
+    nameLabel.style.fontSize = "8px";
+    nameLabel.style.fontWeight = "bold";
+    nameLabel.style.color = "#1f2937";
     nameLabel.style.textAlign = "center";
     nameLabel.style.maxWidth = "50px";
-    nameLabel.style.whiteSpace = "normal";
+    nameLabel.style.whiteSpace = "nowrap";
     nameLabel.style.pointerEvents = "none";
     nameLabel.style.lineHeight = "1";
+    nameLabel.style.textShadow = "0 1px 2px rgba(255,255,255,0.8)";
     container.appendChild(nameLabel);
 
     return container;
