@@ -108,7 +108,7 @@ function MarkerLayer({
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 2px;
+        gap: 1px;
         cursor: pointer;
       ">
         <img
