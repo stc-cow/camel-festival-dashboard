@@ -123,11 +123,11 @@ function MarkerLayer({
           "
         />
         <div style="
-          font-size: 10px;
+          font-size: 8px;
           font-weight: bold;
           color: #1f2937;
           white-space: nowrap;
-          max-width: 80px;
+          max-width: 50px;
           text-overflow: ellipsis;
           overflow: hidden;
           text-shadow: 0 1px 2px rgba(255,255,255,0.8);
