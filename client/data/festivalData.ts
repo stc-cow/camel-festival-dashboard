@@ -5,7 +5,7 @@ export interface FestivalSite {
   location: string;
   latitude: number;
   longitude: number;
-  technology: "2G" | "4G" | "5G";
+  technology: string;
   status: "operational" | "warning" | "critical";
   lastUpdate: string;
 }
