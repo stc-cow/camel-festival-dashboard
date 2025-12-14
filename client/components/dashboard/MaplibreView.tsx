@@ -682,7 +682,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     // Create mobile tower icon
     const img = document.createElement("img");
     img.src =
-      "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2Ffbe5cde45b474d52ba6107df37b9a263?format=webp&width=800";
+      "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2Fb51d842eb58544bd9b77331a4b882ad4?format=webp&width=800";
     img.alt = site.name;
     img.style.width = "72px";
     img.style.height = "90px";
