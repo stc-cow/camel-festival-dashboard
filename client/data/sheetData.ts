@@ -80,8 +80,8 @@ function parseCSV(csv: string): SheetRow[] {
 
 // Map sheet data to FestivalSite
 function sheetRowToSite(row: SheetRow): FestivalSite {
-  // Parse technology (extract individual techs from "2G/4G/5G" format)
-  const primaryTech = row.Tech.split("/")[0] || "4G";
+  // Use the full Tech value from column B
+  const technology = row.Tech || "4G";
 
   // Map network status to site status
   let status: "operational" | "warning" | "critical" = "operational";
@@ -99,7 +99,7 @@ function sheetRowToSite(row: SheetRow): FestivalSite {
     location: row.COWName, // Using COWName as location since no location field exists
     latitude: parseFloat(row.Lat),
     longitude: parseFloat(row.Long),
-    technology: (primaryTech as "2G" | "4G" | "5G") || "4G",
+    technology: technology as any,
     status: status,
     lastUpdate: row.LastUpdate || new Date().toISOString(),
   };
