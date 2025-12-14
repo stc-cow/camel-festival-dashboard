@@ -122,7 +122,7 @@ export default function Dashboard() {
             />
 
             {/* KPI Overlay - Top Right */}
-            <div className="absolute top-2 right-2 z-20">
+            <div className="absolute top-2 right-2 z-20 flex flex-col gap-2 max-w-xs">
               <div className="bg-transparent">
                 <KPIGauge
                   value={parseInt(stats.availability) || 0}
@@ -131,6 +131,7 @@ export default function Dashboard() {
                   threshold={{ excellent: 90, good: 75, warning: 50 }}
                 />
               </div>
+              <OngoingTicketsCard tickets={tickets} />
             </div>
           </div>
 
