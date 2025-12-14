@@ -189,8 +189,8 @@ export async function fetchSheetData(): Promise<{
 
     return generateStats(sites, tickets);
   } catch (error) {
-    console.warn("Failed to fetch sheet data, using mock data:", error);
-    return generateStats(MOCK_DATA.sites, MOCK_DATA.tickets);
+    console.warn("Failed to fetch sheet data:", error);
+    return generateStats([], []);
   }
 }
 
