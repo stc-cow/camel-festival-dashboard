@@ -249,10 +249,41 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       }
     };
 
-    // Wrap Promise.prototype.then/catch to suppress AbortErrors at source
+    // Wrap Promise constructor to suppress AbortErrors at creation
+    const OriginalPromise = window.Promise;
     const originalThen = Promise.prototype.then;
     const originalCatch = Promise.prototype.catch;
     const originalFinally = Promise.prototype.finally;
+
+    (window as any).Promise = function (executor: any) {
+      const wrappedExecutor = (resolve: any, reject: any) => {
+        const wrappedReject = (reason: any) => {
+          const isAbort =
+            reason?.name === "AbortError" ||
+            /abort/i.test(String(reason || "")) ||
+            /signal is aborted/i.test(String(reason || ""));
+          if (!isAbort) {
+            reject(reason);
+          }
+        };
+        executor(resolve, wrappedReject);
+      };
+      return new OriginalPromise(wrappedExecutor);
+    };
+
+    // Copy static methods
+    (window.Promise as any).resolve = OriginalPromise.resolve.bind(
+      OriginalPromise,
+    );
+    (window.Promise as any).reject = OriginalPromise.reject.bind(
+      OriginalPromise,
+    );
+    (window.Promise as any).all = OriginalPromise.all.bind(OriginalPromise);
+    (window.Promise as any).race = OriginalPromise.race.bind(OriginalPromise);
+    (window.Promise as any).allSettled = OriginalPromise.allSettled.bind(
+      OriginalPromise,
+    );
+    (window.Promise as any).any = OriginalPromise.any.bind(OriginalPromise);
 
     Promise.prototype.then = function (onFulfilled?: any, onRejected?: any) {
       const wrappedRejected =
