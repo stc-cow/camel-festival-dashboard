@@ -667,7 +667,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
 
     try {
       addMarkers();
-      // Auto zoom removed - map stays at initial zoom level
+      fitMapToSites(mapInstanceRef.current);
     } catch (e) {
       // Silently ignore update errors
     }
