@@ -97,7 +97,7 @@ export default function Dashboard() {
           {/* Center: Title */}
           <div className="flex-1 text-center min-w-0">
             <h1 className="text-xs sm:text-sm font-bold text-white truncate">
-              King Abdalaziz Camel Festival Tickets Performance Dashboard
+              <p>King Abdalaziz Camel Festival Network Insights</p>
             </h1>
           </div>
 
