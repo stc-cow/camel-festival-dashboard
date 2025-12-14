@@ -330,7 +330,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
           /abort/i.test(String(error?.message || "")) ||
           /signal is aborted/i.test(String(error?.message || ""));
         if (isAbort) {
-          return Promise.resolve(new Response("", { status: 0 }));
+          return Promise.resolve(new Response("", { status: 204 }));
         }
         throw error;
       });
