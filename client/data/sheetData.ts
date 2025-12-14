@@ -99,7 +99,7 @@ function sheetRowToSite(row: SheetRow): FestivalSite {
     location: row.COWName, // Using COWName as location since no location field exists
     latitude: parseFloat(row.Lat),
     longitude: parseFloat(row.Long),
-    technology: technology as any,
+    technology: technology,
     status: status,
     lastUpdate: row.LastUpdate || new Date().toISOString(),
   };
