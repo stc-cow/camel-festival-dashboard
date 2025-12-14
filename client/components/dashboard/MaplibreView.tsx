@@ -166,7 +166,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       });
     };
 
-    // Suppress AbortError from unhandled promise rejections
+    // Suppress AbortError from unhandled promise rejections - CRITICAL
     const unhandledRejectionHandler = (event: PromiseRejectionEvent) => {
       const reason = event.reason || {};
       const reasonStr = String(reason);
@@ -188,7 +188,6 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
 
       if (isAbort) {
         event.preventDefault();
-        // Return early to prevent any further processing
         return;
       }
     };
@@ -248,6 +247,62 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       if (!shouldSuppress(...args)) {
         originalConsoleLog.apply(console, args);
       }
+    };
+
+    // Wrap Promise.prototype.then/catch to suppress AbortErrors at source
+    const originalThen = Promise.prototype.then;
+    const originalCatch = Promise.prototype.catch;
+    const originalFinally = Promise.prototype.finally;
+
+    Promise.prototype.then = function (onFulfilled?: any, onRejected?: any) {
+      const wrappedRejected =
+        onRejected &&
+        ((reason: any) => {
+          const isAbort =
+            reason?.name === "AbortError" ||
+            /abort/i.test(String(reason || "")) ||
+            /signal is aborted/i.test(String(reason || ""));
+          if (!isAbort) {
+            return onRejected(reason);
+          }
+        });
+
+      return originalThen.call(this, onFulfilled, wrappedRejected);
+    };
+
+    Promise.prototype.catch = function (onRejected?: any) {
+      const wrappedRejected =
+        onRejected &&
+        ((reason: any) => {
+          const isAbort =
+            reason?.name === "AbortError" ||
+            /abort/i.test(String(reason || "")) ||
+            /signal is aborted/i.test(String(reason || ""));
+          if (!isAbort) {
+            return onRejected(reason);
+          }
+        });
+
+      return originalCatch.call(this, wrappedRejected);
+    };
+
+    Promise.prototype.finally = function (onFinally?: any) {
+      return originalFinally.call(this, onFinally);
+    };
+
+    // Wrap fetch to suppress AbortErrors from tile requests
+    const originalFetch = window.fetch;
+    (window as any).fetch = function (...args: any[]) {
+      return originalFetch.apply(window, args).catch((error: any) => {
+        const isAbort =
+          error?.name === "AbortError" ||
+          /abort/i.test(String(error?.message || "")) ||
+          /signal is aborted/i.test(String(error?.message || ""));
+        if (isAbort) {
+          return Promise.resolve(new Response("", { status: 0 }));
+        }
+        throw error;
+      });
     };
 
     window.addEventListener(
