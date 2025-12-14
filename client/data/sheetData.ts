@@ -177,8 +177,8 @@ export async function fetchSheetData(): Promise<{
     const rows = parseCSV(csv);
 
     if (rows.length === 0) {
-      console.warn("No data found in sheet, using mock data");
-      return generateStats(MOCK_DATA.sites, MOCK_DATA.tickets);
+      console.warn("No data found in sheet");
+      return generateStats([], []);
     }
 
     // Convert rows to sites and tickets
