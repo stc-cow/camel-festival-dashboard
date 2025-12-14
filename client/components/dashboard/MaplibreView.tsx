@@ -396,7 +396,8 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       (console as any).warn = originalConsoleWarn;
       (console as any).log = originalConsoleLog;
 
-      // Restore Promise methods
+      // Restore Promise constructor and methods
+      (window as any).Promise = OriginalPromise;
       Promise.prototype.then = originalThen;
       Promise.prototype.catch = originalCatch;
       Promise.prototype.finally = originalFinally;
