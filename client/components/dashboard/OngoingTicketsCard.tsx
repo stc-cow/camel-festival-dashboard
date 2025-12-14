@@ -10,7 +10,9 @@ export function OngoingTicketsCard({ tickets }: OngoingTicketsCardProps) {
   };
 
   const getTotalOutageTickets = () => {
-    return tickets.filter((t) => t.severity === "critical" || t.severity === "high").length;
+    return tickets.filter(
+      (t) => t.severity === "critical" || t.severity === "high",
+    ).length;
   };
 
   const getTotalPowerTickets = () => {
@@ -20,15 +22,35 @@ export function OngoingTicketsCard({ tickets }: OngoingTicketsCardProps) {
   const getSeverityColor = (severity: string) => {
     switch (severity) {
       case "critical":
-        return { bg: "bg-red-500/30", text: "text-red-600", border: "border-red-400" };
+        return {
+          bg: "bg-red-500/30",
+          text: "text-red-600",
+          border: "border-red-400",
+        };
       case "high":
-        return { bg: "bg-orange-500/30", text: "text-orange-600", border: "border-orange-400" };
+        return {
+          bg: "bg-orange-500/30",
+          text: "text-orange-600",
+          border: "border-orange-400",
+        };
       case "medium":
-        return { bg: "bg-amber-500/30", text: "text-amber-600", border: "border-amber-400" };
+        return {
+          bg: "bg-amber-500/30",
+          text: "text-amber-600",
+          border: "border-amber-400",
+        };
       case "low":
-        return { bg: "bg-blue-500/30", text: "text-blue-600", border: "border-blue-400" };
+        return {
+          bg: "bg-blue-500/30",
+          text: "text-blue-600",
+          border: "border-blue-400",
+        };
       default:
-        return { bg: "bg-slate-500/30", text: "text-slate-600", border: "border-slate-400" };
+        return {
+          bg: "bg-slate-500/30",
+          text: "text-slate-600",
+          border: "border-slate-400",
+        };
     }
   };
 
@@ -75,7 +97,9 @@ export function OngoingTicketsCard({ tickets }: OngoingTicketsCardProps) {
       <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-red-200/50 shadow-md p-3">
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-bold text-black">Total Outage Tickets</h3>
-          <div className="text-2xl font-bold text-red-600">{getTotalOutageTickets()}</div>
+          <div className="text-2xl font-bold text-red-600">
+            {getTotalOutageTickets()}
+          </div>
         </div>
       </div>
 
@@ -83,7 +107,9 @@ export function OngoingTicketsCard({ tickets }: OngoingTicketsCardProps) {
       <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-purple-200/50 shadow-md p-3">
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-bold text-black">Total Power Tickets</h3>
-          <div className="text-2xl font-bold text-purple-600">{getTotalPowerTickets()}</div>
+          <div className="text-2xl font-bold text-purple-600">
+            {getTotalPowerTickets()}
+          </div>
         </div>
       </div>
     </div>

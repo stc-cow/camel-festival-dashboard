@@ -59,7 +59,10 @@ export function FestivalTicketsTable({ tickets }: FestivalTicketsTableProps) {
       </div>
 
       {/* Table */}
-      <div className="overflow-y-auto border-0" style={{ maxHeight: "calc(100% - 48px)" }}>
+      <div
+        className="overflow-y-auto border-0"
+        style={{ maxHeight: "calc(100% - 48px)" }}
+      >
         <table
           className="w-full text-sm"
           style={{ borderCollapse: "collapse" }}

@@ -272,17 +272,14 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     };
 
     // Copy static methods
-    (window.Promise as any).resolve = OriginalPromise.resolve.bind(
-      OriginalPromise,
-    );
-    (window.Promise as any).reject = OriginalPromise.reject.bind(
-      OriginalPromise,
-    );
+    (window.Promise as any).resolve =
+      OriginalPromise.resolve.bind(OriginalPromise);
+    (window.Promise as any).reject =
+      OriginalPromise.reject.bind(OriginalPromise);
     (window.Promise as any).all = OriginalPromise.all.bind(OriginalPromise);
     (window.Promise as any).race = OriginalPromise.race.bind(OriginalPromise);
-    (window.Promise as any).allSettled = OriginalPromise.allSettled.bind(
-      OriginalPromise,
-    );
+    (window.Promise as any).allSettled =
+      OriginalPromise.allSettled.bind(OriginalPromise);
     (window.Promise as any).any = OriginalPromise.any.bind(OriginalPromise);
 
     Promise.prototype.then = function (onFulfilled?: any, onRejected?: any) {
@@ -692,7 +689,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     img.style.objectFit = "contain";
     img.style.pointerEvents = "none";
     img.style.userSelect = "none";
-    img.style.filter = `drop-shadow(0 1px 2px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === 'operational' ? '40' : site.status === 'warning' ? '50' : '30'}%)`;
+    img.style.filter = `drop-shadow(0 1px 2px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === "operational" ? "40" : site.status === "warning" ? "50" : "30"}%)`;
 
     container.appendChild(img);
 

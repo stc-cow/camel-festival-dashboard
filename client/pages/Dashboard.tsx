@@ -27,7 +27,11 @@ export default function Dashboard() {
     (console as any).error = function (...args: any[]) {
       const message = args.map((arg) => String(arg)).join(" ");
       // Suppress ResizeObserver warnings and WebGL context errors
-      if (/ResizeObserver loop|maxTextureDimension2D|WebGLCanvasContext|cannot read properties|reading 'max/i.test(message)) {
+      if (
+        /ResizeObserver loop|maxTextureDimension2D|WebGLCanvasContext|cannot read properties|reading 'max/i.test(
+          message,
+        )
+      ) {
         return;
       }
       originalError.apply(console, args);
@@ -36,7 +40,11 @@ export default function Dashboard() {
     (console as any).warn = function (...args: any[]) {
       const message = args.map((arg) => String(arg)).join(" ");
       // Suppress benign warnings
-      if (/ResizeObserver loop|maxTextureDimension2D|WebGLCanvasContext/i.test(message)) {
+      if (
+        /ResizeObserver loop|maxTextureDimension2D|WebGLCanvasContext/i.test(
+          message,
+        )
+      ) {
         return;
       }
       originalWarn.apply(console, args);
@@ -45,7 +53,9 @@ export default function Dashboard() {
     // Add global error handler for benign errors
     const handleError = (event: ErrorEvent) => {
       const message = event.message || "";
-      if (/ResizeObserver|maxTextureDimension2D|WebGLCanvasContext/i.test(message)) {
+      if (
+        /ResizeObserver|maxTextureDimension2D|WebGLCanvasContext/i.test(message)
+      ) {
         event.preventDefault();
         return true;
       }
@@ -116,10 +126,7 @@ export default function Dashboard() {
         <div className="flex-1 overflow-hidden flex flex-col gap-1">
           {/* Map Container - Slightly reduced height */}
           <div className="flex-[0.68] min-h-[55%] overflow-hidden relative">
-            <MaplibreView
-              sites={sites}
-              onSiteSelect={setSelectedSite}
-            />
+            <MaplibreView sites={sites} onSiteSelect={setSelectedSite} />
 
             {/* KPI Overlay - Top Right */}
             <div className="absolute top-2 right-2 z-20 flex flex-col gap-2 max-w-xs">

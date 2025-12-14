@@ -8,7 +8,8 @@ import type { FestivalSite } from "@/data/festivalData";
 if (typeof window !== "undefined") {
   const link = document.createElement("link");
   link.rel = "stylesheet";
-  link.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+  link.href =
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
   document.head.appendChild(link);
 }
 
@@ -30,30 +31,28 @@ interface LeafletMapViewProps {
 
 type MapLayerStyle = "satellite" | "street" | "hybrid" | "terrain";
 
-const MAP_STYLES: Record<
-  MapLayerStyle,
-  { url: string; attribution: string }
-> = {
-  satellite: {
-    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    attribution:
-      '© <a href="https://www.esri.com/">Esri</a>, DigitalGlobe, Earthstar Geographics',
-  },
-  street: {
-    url: "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
-    attribution: "© CARTO, © OpenStreetMap contributors",
-  },
-  hybrid: {
-    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    attribution:
-      '© <a href="https://www.esri.com/">Esri</a>, DigitalGlobe, Earthstar Geographics',
-  },
-  terrain: {
-    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
-    attribution:
-      '© <a href="https://www.esri.com/">Esri</a>, National Geographic, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA',
-  },
-};
+const MAP_STYLES: Record<MapLayerStyle, { url: string; attribution: string }> =
+  {
+    satellite: {
+      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      attribution:
+        '© <a href="https://www.esri.com/">Esri</a>, DigitalGlobe, Earthstar Geographics',
+    },
+    street: {
+      url: "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+      attribution: "© CARTO, © OpenStreetMap contributors",
+    },
+    hybrid: {
+      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      attribution:
+        '© <a href="https://www.esri.com/">Esri</a>, DigitalGlobe, Earthstar Geographics',
+    },
+    terrain: {
+      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+      attribution:
+        '© <a href="https://www.esri.com/">Esri</a>, National Geographic, Garmin, HERE, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA',
+    },
+  };
 
 function MarkerLayer({
   sites,
@@ -92,7 +91,7 @@ function MarkerLayer({
             width: 24px;
             height: 30px;
             object-fit: contain;
-            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === 'operational' ? '40' : site.status === 'warning' ? '50' : '30'}%);
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === "operational" ? "40" : site.status === "warning" ? "50" : "30"}%);
             flex-shrink: 0;
           "
         />
@@ -130,7 +129,7 @@ function MarkerLayer({
             site.longitude !== undefined &&
             site.longitude !== null &&
             !isNaN(site.latitude) &&
-            !isNaN(site.longitude)
+            !isNaN(site.longitude),
         )
         .map((site) => (
           <Marker
@@ -155,13 +154,31 @@ function MarkerLayer({
                 >
                   {site.name}
                 </h4>
-                <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
+                <p
+                  style={{
+                    margin: "4px 0",
+                    fontSize: "12px",
+                    color: "#4b5563",
+                  }}
+                >
                   <strong>Location:</strong> {site.location}
                 </p>
-                <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
+                <p
+                  style={{
+                    margin: "4px 0",
+                    fontSize: "12px",
+                    color: "#4b5563",
+                  }}
+                >
                   <strong>Technology:</strong> {site.technology}
                 </p>
-                <p style={{ margin: "4px 0", fontSize: "12px", color: "#4b5563" }}>
+                <p
+                  style={{
+                    margin: "4px 0",
+                    fontSize: "12px",
+                    color: "#4b5563",
+                  }}
+                >
                   <strong>Status:</strong>{" "}
                   <span
                     style={{
@@ -190,16 +207,14 @@ function MarkerLayer({
   );
 }
 
-export function LeafletMapView({
-  sites,
-  onSiteSelect,
-}: LeafletMapViewProps) {
+export function LeafletMapView({ sites, onSiteSelect }: LeafletMapViewProps) {
   const [currentLayer, setCurrentLayer] = useState<MapLayerStyle>("hybrid");
   const [isLayerSelectorOpen, setIsLayerSelectorOpen] = useState(false);
   const tileStyle = MAP_STYLES[currentLayer];
 
   return (
-    <div className="w-full h-full relative rounded-lg overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200"
+    <div
+      className="w-full h-full relative rounded-lg overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200"
       style={{
         border: "2px solid rgb(168, 85, 247)",
         boxShadow: "inset 0 0 0 1px rgb(236, 72, 153)",
@@ -210,7 +225,12 @@ export function LeafletMapView({
         zoom={12}
         minZoom={5}
         maxZoom={20}
-        style={{ width: "100%", height: "100%", position: "relative", zIndex: 1 }}
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "relative",
+          zIndex: 1,
+        }}
         scrollWheelZoom={true}
         zoomControl={true}
         doubleClickZoom={true}
