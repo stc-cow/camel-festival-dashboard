@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MaplibreView } from "@/components/dashboard/MaplibreView";
 import { KPIGauge } from "@/components/dashboard/KPIGauge";
+import { OngoingTicketsCard } from "@/components/dashboard/OngoingTicketsCard";
 import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
 import { fetchSheetData } from "@/data/sheetData";
 import type { FestivalSite, FestivalTicket } from "@/data/festivalData";
