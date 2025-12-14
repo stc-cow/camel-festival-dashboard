@@ -150,7 +150,6 @@ function sheetRowToTicket(row: SheetRow): FestivalTicket | null {
   };
 }
 
-
 // Fetch and parse sheet data
 export async function fetchSheetData(): Promise<{
   sites: FestivalSite[];
