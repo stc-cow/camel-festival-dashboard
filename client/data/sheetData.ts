@@ -150,54 +150,6 @@ function sheetRowToTicket(row: SheetRow): FestivalTicket | null {
   };
 }
 
-// Mock data fallback
-const MOCK_DATA = {
-  sites: [
-    {
-      id: "CWH001",
-      name: "CWH001",
-      location: "Al Ula",
-      latitude: 26.6868,
-      longitude: 37.9833,
-      technology: "5G" as const,
-      status: "operational" as const,
-      lastUpdate: new Date().toISOString(),
-    },
-    {
-      id: "CWH002",
-      name: "CWH002",
-      location: "Al Ula",
-      latitude: 26.7,
-      longitude: 38.0,
-      technology: "4G" as const,
-      status: "operational" as const,
-      lastUpdate: new Date().toISOString(),
-    },
-    {
-      id: "CWH003",
-      name: "CWH003",
-      location: "Al Ula",
-      latitude: 26.65,
-      longitude: 37.95,
-      technology: "5G" as const,
-      status: "warning" as const,
-      lastUpdate: new Date().toISOString(),
-    },
-  ] as FestivalSite[],
-  tickets: [
-    {
-      id: "TKT001",
-      siteId: "CWH001",
-      siteName: "CWH001",
-      issue: "Signal strength low",
-      severity: "medium" as const,
-      status: "open" as const,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      dispatcherNotes: "Scheduled for maintenance",
-    },
-  ] as FestivalTicket[],
-};
 
 // Fetch and parse sheet data
 export async function fetchSheetData(): Promise<{
