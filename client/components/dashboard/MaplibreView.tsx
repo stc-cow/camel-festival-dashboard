@@ -689,7 +689,7 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     img.style.objectFit = "contain";
     img.style.pointerEvents = "none";
     img.style.userSelect = "none";
-    img.style.filter = `drop-shadow(0 1px 2px rgba(0,0,0,0.3)) brightness(0) saturate(100%) invert(${site.status === "operational" ? "40" : site.status === "warning" ? "50" : "30"}%)`;
+    img.style.filter = "drop-shadow(0 1px 2px rgba(0,0,0,0.3))";
 
     container.appendChild(img);
 
