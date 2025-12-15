@@ -512,9 +512,6 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
       }
       if (isMountedRef.current && mapInstanceRef.current) {
         addMarkers();
-        if (sites.length > 0) {
-          fitMapToSites(mapInstanceRef.current);
-        }
       }
     };
 
@@ -664,7 +661,6 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
 
     try {
       addMarkers();
-      fitMapToSites(mapInstanceRef.current);
     } catch (e) {
       // Silently ignore update errors
     }
