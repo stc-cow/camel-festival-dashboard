@@ -680,8 +680,8 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     img.src =
       "https://cdn.builder.io/api/v1/image/assets%2Fabc8ab05f7d144f289a582747d3e5ca3%2Fb51d842eb58544bd9b77331a4b882ad4?format=webp&width=800";
     img.alt = site.name;
-    img.style.width = "72px";
-    img.style.height = "90px";
+    img.style.width = "60px";
+    img.style.height = "75px";
     img.style.objectFit = "contain";
     img.style.pointerEvents = "none";
     img.style.userSelect = "none";
