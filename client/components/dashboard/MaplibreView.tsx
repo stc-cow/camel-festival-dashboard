@@ -693,7 +693,13 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
 
     container.appendChild(img);
 
-    // Add site name label - text only
+    // Add site name label with green circle indicator
+    const labelContainer = document.createElement("div");
+    labelContainer.style.display = "flex";
+    labelContainer.style.alignItems = "center";
+    labelContainer.style.gap = "4px";
+    labelContainer.style.justifyContent = "center";
+
     const nameLabel = document.createElement("div");
     nameLabel.textContent = site.name;
     nameLabel.style.fontSize = "8px";
@@ -705,7 +711,18 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     nameLabel.style.pointerEvents = "none";
     nameLabel.style.lineHeight = "1";
     nameLabel.style.textShadow = "0 1px 2px rgba(255,255,255,0.8)";
-    container.appendChild(nameLabel);
+
+    const greenCircle = document.createElement("div");
+    greenCircle.style.width = "6px";
+    greenCircle.style.height = "6px";
+    greenCircle.style.backgroundColor = "#10B981";
+    greenCircle.style.borderRadius = "50%";
+    greenCircle.style.flexShrink = "0";
+    greenCircle.style.pointerEvents = "none";
+
+    labelContainer.appendChild(nameLabel);
+    labelContainer.appendChild(greenCircle);
+    container.appendChild(labelContainer);
 
     return container;
   };
