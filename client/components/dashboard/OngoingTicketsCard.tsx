@@ -123,6 +123,26 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
           </div>
         </div>
       </div>
+
+      {/* Total Sites */}
+      <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-blue-200/50 shadow-md p-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-xs font-bold text-black">Total Sites</h3>
+          <div className="text-2xl font-bold text-blue-600">
+            {getTotalSites()}
+          </div>
+        </div>
+      </div>
+
+      {/* Degraded Tickets */}
+      <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-orange-200/50 shadow-md p-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-xs font-bold text-black">Degraded Tickets</h3>
+          <div className="text-2xl font-bold text-orange-600">
+            {getDegradedTickets()}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
