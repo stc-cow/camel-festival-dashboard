@@ -1,4 +1,4 @@
-import type { FestivalTicket, FestivalSite } from "@/data/festivalData";
+import type { FestivalTicket } from "@/data/festivalData";
 
 interface OngoingTicketsCardProps {
   tickets: FestivalTicket[];
