@@ -15,92 +15,99 @@ export function KPIGauge({
   unit = "%",
   threshold = { excellent: 90, good: 70, warning: 50 },
 }: KPIGaugeProps) {
-  // Determine color based on value
-  const getColor = () => {
-    if (value >= threshold.excellent) {
-      return {
-        main: "#10B981",
-        light: "#D1FAE5",
-        label: "Excellent",
-      };
-    } else if (value >= threshold.good) {
-      return {
-        main: "#3B82F6",
-        light: "#DBEAFE",
-        label: "Good",
-      };
-    } else if (value >= threshold.warning) {
-      return {
-        main: "#F59E0B",
-        light: "#FEF3C7",
-        label: "Warning",
-      };
-    } else {
-      return {
-        main: "#EF4444",
-        light: "#FEE2E2",
-        label: "Critical",
-      };
-    }
-  };
-
-  const color = getColor();
-  const radius = 45;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (value / 100) * circumference;
+  // Calculate needle rotation: -90 degrees at 0, 90 degrees at 100
+  const rotation = ((value / 100) * 180) - 90;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-transparent backdrop-blur-none rounded-xl border-0 p-0">
-      {/* SVG Gauge - Smaller size */}
-      <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 flex-shrink-0">
+    <div className="flex flex-col items-center justify-center h-full w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 p-4" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
+      {/* SVG Needle Gauge */}
+      <div className="relative w-32 h-20 flex-shrink-0">
         <svg
-          className="w-full h-full transform -rotate-90"
-          viewBox="0 0 100 100"
+          className="w-full h-full"
+          viewBox="0 0 200 120"
+          preserveAspectRatio="xMidYMid meet"
         >
-          {/* Background circle */}
-          <circle
-            cx="50"
-            cy="50"
-            r={radius}
+          {/* Gauge background arc (0-180 degrees) */}
+          <path
+            d="M 30 100 A 70 70 0 0 1 170 100"
             fill="none"
-            stroke="rgba(148, 163, 184, 0.2)"
-            strokeWidth="3"
-          />
-
-          {/* Progress circle */}
-          <circle
-            cx="50"
-            cy="50"
-            r={radius}
-            fill="none"
-            stroke={color.main}
-            strokeWidth="3"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
+            stroke="rgba(148, 163, 184, 0.3)"
+            strokeWidth="6"
             strokeLinecap="round"
-            className="transition-all duration-500"
           />
 
-          {/* Center circle for 3D effect - transparent */}
-          <circle cx="50" cy="50" r="35" fill="rgba(255, 255, 255, 0.3)" />
+          {/* Colored arc segments */}
+          {/* Red zone (0-30) */}
+          <path
+            d="M 30 100 A 70 70 0 0 1 55 48"
+            fill="none"
+            stroke="#EF4444"
+            strokeWidth="6"
+            strokeLinecap="round"
+          />
+
+          {/* Yellow zone (30-60) */}
+          <path
+            d="M 55 48 A 70 70 0 0 1 100 31"
+            fill="none"
+            stroke="#F59E0B"
+            strokeWidth="6"
+            strokeLinecap="round"
+          />
+
+          {/* Green zone (60-100) */}
+          <path
+            d="M 100 31 A 70 70 0 0 1 170 100"
+            fill="none"
+            stroke="#10B981"
+            strokeWidth="6"
+            strokeLinecap="round"
+          />
+
+          {/* Scale markers */}
+          <text x="20" y="110" fontSize="10" fill="#1f2937" textAnchor="middle" fontWeight="bold">0</text>
+          <text x="100" y="15" fontSize="10" fill="#1f2937" textAnchor="middle" fontWeight="bold">50</text>
+          <text x="180" y="110" fontSize="10" fill="#1f2937" textAnchor="middle" fontWeight="bold">100</text>
+
+          {/* Needle/Pointer */}
+          <g
+            style={{
+              transform: `rotate(${rotation}deg)`,
+              transformOrigin: "100px 100px",
+              transition: "transform 0.5s ease-out",
+            }}
+          >
+            {/* Needle line */}
+            <line
+              x1="100"
+              y1="100"
+              x2="100"
+              y2="35"
+              stroke="#10B981"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+
+            {/* Needle tip circle */}
+            <circle cx="100" cy="35" r="4" fill="#10B981" />
+          </g>
+
+          {/* Center circle */}
+          <circle cx="100" cy="100" r="6" fill="#10B981" />
         </svg>
 
-        {/* Center text - % on same line */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="flex items-baseline">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">
-              {value}
-            </div>
-            <div className="text-xs sm:text-sm md:text-base text-black font-bold ml-0.5">
-              {unit}
-            </div>
+        {/* Center text - % value */}
+        <div className="absolute inset-0 flex items-end justify-center pb-2">
+          <div className="flex items-baseline gap-0.5">
+            <div className="text-xl font-bold text-black">{value}</div>
+            <div className="text-xs font-bold text-black">{unit}</div>
           </div>
         </div>
       </div>
 
       {/* Availability Label */}
-      <div className="text-center text-xs sm:text-sm font-bold text-black mt-1">
-        Availability
+      <div className="text-center text-xs font-bold text-black mt-2">
+        {label}
       </div>
     </div>
   );
