@@ -20,15 +20,6 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
     return tickets.length;
   };
 
-  const getTotalSites = () => {
-    return sites.length;
-  };
-
-  const getDegradedTickets = () => {
-    return tickets.filter(
-      (t) => t.severity === "medium" || t.severity === "high" || t.severity === "critical",
-    ).length;
-  };
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
