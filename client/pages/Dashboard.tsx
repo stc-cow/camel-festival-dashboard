@@ -138,7 +138,7 @@ export default function Dashboard() {
                   threshold={{ excellent: 90, good: 75, warning: 50 }}
                 />
               </div>
-              <OngoingTicketsCard tickets={tickets} />
+              <OngoingTicketsCard tickets={tickets} sites={sites} />
             </div>
           </div>
 
