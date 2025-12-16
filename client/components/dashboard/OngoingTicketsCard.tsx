@@ -1,10 +1,11 @@
-import type { FestivalTicket } from "@/data/festivalData";
+import type { FestivalTicket, FestivalSite } from "@/data/festivalData";
 
 interface OngoingTicketsCardProps {
   tickets: FestivalTicket[];
+  sites?: FestivalSite[];
 }
 
-export function OngoingTicketsCard({ tickets }: OngoingTicketsCardProps) {
+export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardProps) {
   const getSeverityCount = (severity: string) => {
     return tickets.filter((t) => t.severity === severity).length;
   };
@@ -17,6 +18,16 @@ export function OngoingTicketsCard({ tickets }: OngoingTicketsCardProps) {
 
   const getTotalPowerTickets = () => {
     return tickets.length;
+  };
+
+  const getTotalSites = () => {
+    return sites.length;
+  };
+
+  const getDegradedTickets = () => {
+    return tickets.filter(
+      (t) => t.severity === "medium" || t.severity === "high" || t.severity === "critical",
+    ).length;
   };
 
   const getSeverityColor = (severity: string) => {
