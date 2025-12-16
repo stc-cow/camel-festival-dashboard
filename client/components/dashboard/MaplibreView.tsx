@@ -740,8 +740,8 @@ export function MaplibreView({ sites, onSiteSelect }: MaplibreViewProps) {
     <div
       className="w-full h-full overflow-hidden rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 relative"
       style={{
-        border: "2px solid rgb(168, 85, 247)",
-        boxShadow: "inset 0 0 0 1px rgb(236, 72, 153)",
+        border: "2px solid rgba(255, 255, 255, 0.8)",
+        boxShadow: "0 0 20px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)",
       }}
     >
       <style>{`
