@@ -19,9 +19,9 @@ export function KPIGauge({
   const rotation = ((value / 100) * 180) - 90;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 p-4" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
+    <div className="flex flex-col items-center justify-center h-full w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 p-6" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
       {/* SVG Needle Gauge */}
-      <div className="relative w-32 h-20 flex-shrink-0">
+      <div className="relative w-48 h-32 flex-shrink-0">
         <svg
           className="w-full h-full"
           viewBox="0 0 200 120"
@@ -32,7 +32,7 @@ export function KPIGauge({
             d="M 30 100 A 70 70 0 0 1 170 100"
             fill="none"
             stroke="rgba(148, 163, 184, 0.3)"
-            strokeWidth="6"
+            strokeWidth="8"
             strokeLinecap="round"
           />
 
@@ -42,7 +42,7 @@ export function KPIGauge({
             d="M 30 100 A 70 70 0 0 1 55 48"
             fill="none"
             stroke="#EF4444"
-            strokeWidth="6"
+            strokeWidth="8"
             strokeLinecap="round"
           />
 
@@ -51,7 +51,7 @@ export function KPIGauge({
             d="M 55 48 A 70 70 0 0 1 100 31"
             fill="none"
             stroke="#F59E0B"
-            strokeWidth="6"
+            strokeWidth="8"
             strokeLinecap="round"
           />
 
@@ -60,14 +60,14 @@ export function KPIGauge({
             d="M 100 31 A 70 70 0 0 1 170 100"
             fill="none"
             stroke="#10B981"
-            strokeWidth="6"
+            strokeWidth="8"
             strokeLinecap="round"
           />
 
           {/* Scale markers */}
-          <text x="20" y="110" fontSize="10" fill="#1f2937" textAnchor="middle" fontWeight="bold">0</text>
-          <text x="100" y="15" fontSize="10" fill="#1f2937" textAnchor="middle" fontWeight="bold">50</text>
-          <text x="180" y="110" fontSize="10" fill="#1f2937" textAnchor="middle" fontWeight="bold">100</text>
+          <text x="20" y="110" fontSize="12" fill="#1f2937" textAnchor="middle" fontWeight="bold">0</text>
+          <text x="100" y="15" fontSize="12" fill="#1f2937" textAnchor="middle" fontWeight="bold">50</text>
+          <text x="180" y="110" fontSize="12" fill="#1f2937" textAnchor="middle" fontWeight="bold">100</text>
 
           {/* Needle/Pointer */}
           <g
@@ -84,29 +84,29 @@ export function KPIGauge({
               x2="100"
               y2="35"
               stroke="#10B981"
-              strokeWidth="4"
+              strokeWidth="5"
               strokeLinecap="round"
             />
 
             {/* Needle tip circle */}
-            <circle cx="100" cy="35" r="4" fill="#10B981" />
+            <circle cx="100" cy="35" r="5" fill="#10B981" />
           </g>
 
           {/* Center circle */}
-          <circle cx="100" cy="100" r="6" fill="#10B981" />
+          <circle cx="100" cy="100" r="8" fill="#10B981" />
         </svg>
 
         {/* Center text - % value */}
-        <div className="absolute inset-0 flex items-end justify-center pb-2">
-          <div className="flex items-baseline gap-0.5">
-            <div className="text-xl font-bold text-black">{value}</div>
-            <div className="text-xs font-bold text-black">{unit}</div>
+        <div className="absolute inset-0 flex items-end justify-center pb-3">
+          <div className="flex items-baseline gap-1">
+            <div className="text-4xl font-bold text-black">{value}</div>
+            <div className="text-sm font-bold text-black">{unit}</div>
           </div>
         </div>
       </div>
 
       {/* Availability Label */}
-      <div className="text-center text-xs font-bold text-black mt-2">
+      <div className="text-center text-sm font-bold text-black mt-3">
         {label}
       </div>
     </div>
