@@ -82,14 +82,19 @@ export function KPIGauge({
               x1="100"
               y1="100"
               x2="100"
-              y2="35"
+              y2="40"
               stroke="#10B981"
               strokeWidth="5"
               strokeLinecap="round"
             />
 
-            {/* Needle tip circle */}
-            <circle cx="100" cy="35" r="5" fill="#10B981" />
+            {/* Arrow head pointing up */}
+            <path
+              d="M 100 30 L 92 45 L 108 45 Z"
+              fill="#10B981"
+              stroke="#10B981"
+              strokeWidth="1"
+            />
           </g>
 
           {/* Center circle */}
