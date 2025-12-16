@@ -73,16 +73,16 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
   ];
 
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className="w-full flex flex-col gap-3">
       {/* Ongoing Power Tickets */}
-      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-3" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-5" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
         {/* Title */}
-        <h3 className="text-xs font-bold text-black mb-2 whitespace-nowrap">
+        <h3 className="text-sm font-bold text-black mb-3 whitespace-nowrap">
           Ongoing Power Tickets:
         </h3>
 
         {/* Severity Cards Grid */}
-        <div className="grid grid-cols-2 gap-1.5">
+        <div className="grid grid-cols-2 gap-2">
           {severities.map((sev) => {
             const count = getSeverityCount(sev.value);
             const colors = getSeverityColor(sev.value);
@@ -90,12 +90,12 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
             return (
               <div
                 key={sev.value}
-                className={`${colors.bg} border ${colors.border} rounded px-2 py-1.5 text-center`}
+                className={`${colors.bg} border ${colors.border} rounded px-3 py-2 text-center`}
               >
-                <div className={`text-xs font-bold ${colors.text}`}>
+                <div className={`text-sm font-bold ${colors.text}`}>
                   {sev.label}
                 </div>
-                <div className={`text-lg font-bold ${colors.text}`}>
+                <div className={`text-2xl font-bold ${colors.text}`}>
                   {count}
                 </div>
               </div>
@@ -105,40 +105,40 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
       </div>
 
       {/* Total Outage Tickets */}
-      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-3" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-5" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
         <div className="flex items-center justify-between">
-          <h3 className="text-xs font-bold text-black">Total Outage Tickets</h3>
-          <div className="text-2xl font-bold text-red-600">
+          <h3 className="text-sm font-bold text-black">Total Outage Tickets</h3>
+          <div className="text-3xl font-bold text-red-600">
             {getTotalOutageTickets()}
           </div>
         </div>
       </div>
 
       {/* Total Power Tickets */}
-      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-3" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-5" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
         <div className="flex items-center justify-between">
-          <h3 className="text-xs font-bold text-black">Total Power Tickets</h3>
-          <div className="text-2xl font-bold text-purple-600">
+          <h3 className="text-sm font-bold text-black">Total Power Tickets</h3>
+          <div className="text-3xl font-bold text-purple-600">
             {getTotalPowerTickets()}
           </div>
         </div>
       </div>
 
       {/* Total Sites */}
-      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-3" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-5" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
         <div className="flex items-center justify-between">
-          <h3 className="text-xs font-bold text-black">Total Sites</h3>
-          <div className="text-2xl font-bold text-blue-600">
+          <h3 className="text-sm font-bold text-black">Total Sites</h3>
+          <div className="text-3xl font-bold text-blue-600">
             {getTotalSites()}
           </div>
         </div>
       </div>
 
       {/* Degraded Tickets */}
-      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-3" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/80 shadow-lg p-5" style={{ boxShadow: "0 0 12px rgba(168, 85, 247, 0.6), inset 0 0 0 1px rgba(168, 85, 247, 0.4)" }}>
         <div className="flex items-center justify-between">
-          <h3 className="text-xs font-bold text-black">Degraded Tickets</h3>
-          <div className="text-2xl font-bold text-orange-600">
+          <h3 className="text-sm font-bold text-black">Degraded Tickets</h3>
+          <div className="text-3xl font-bold text-orange-600">
             {getDegradedTickets()}
           </div>
         </div>
