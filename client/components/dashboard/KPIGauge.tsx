@@ -101,17 +101,16 @@ export function KPIGauge({
           <circle cx="100" cy="100" r="8" fill="#10B981" />
         </svg>
 
-        {/* Center text - % value */}
-        <div className="absolute inset-0 flex items-end justify-center pb-3">
-          <div className="flex items-baseline gap-1">
-            <div className="text-4xl font-bold text-black">{value}</div>
-            <div className="text-sm font-bold text-black">{unit}</div>
-          </div>
-        </div>
+      </div>
+
+      {/* Value Display - Below Gauge */}
+      <div className="flex items-baseline justify-center gap-1 mt-3">
+        <div className="text-4xl font-bold text-black">{value}</div>
+        <div className="text-sm font-bold text-black">{unit}</div>
       </div>
 
       {/* Availability Label */}
-      <div className="text-center text-sm font-bold text-black mt-3">
+      <div className="text-center text-sm font-bold text-black mt-1">
         {label}
       </div>
     </div>
