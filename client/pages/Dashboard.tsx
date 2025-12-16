@@ -139,7 +139,7 @@ export default function Dashboard() {
                   threshold={{ excellent: 90, good: 75, warning: 50 }}
                 />
               </div>
-              <OngoingTicketsCard tickets={tickets} sites={sites} />
+              <OngoingTicketsCard tickets={tickets} />
             </div>
 
             {/* Site Metrics - Top Left */}
