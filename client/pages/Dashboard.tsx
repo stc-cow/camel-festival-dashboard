@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { MaplibreView } from "@/components/dashboard/MaplibreView";
 import { KPIGauge } from "@/components/dashboard/KPIGauge";
 import { OngoingTicketsCard } from "@/components/dashboard/OngoingTicketsCard";
+import { SiteMetricsCard } from "@/components/dashboard/SiteMetricsCard";
 import { FestivalTicketsTable } from "@/components/dashboard/FestivalTicketsTable";
 import { fetchSheetData } from "@/data/sheetData";
 import type { FestivalSite, FestivalTicket } from "@/data/festivalData";
@@ -139,6 +140,11 @@ export default function Dashboard() {
                 />
               </div>
               <OngoingTicketsCard tickets={tickets} sites={sites} />
+            </div>
+
+            {/* Site Metrics - Top Left */}
+            <div className="absolute top-64 left-2 z-20">
+              <SiteMetricsCard sites={sites} tickets={tickets} />
             </div>
           </div>
 
