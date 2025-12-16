@@ -75,7 +75,7 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
   return (
     <div className="w-full flex flex-col gap-2">
       {/* Ongoing Power Tickets */}
-      <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-purple-200/50 shadow-md p-3">
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-purple-200/50 shadow-md p-3">
         {/* Title */}
         <h3 className="text-xs font-bold text-black mb-2 whitespace-nowrap">
           Ongoing Power Tickets:
@@ -105,7 +105,7 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
       </div>
 
       {/* Total Outage Tickets */}
-      <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-red-200/50 shadow-md p-3">
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-red-200/50 shadow-md p-3">
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-bold text-black">Total Outage Tickets</h3>
           <div className="text-2xl font-bold text-red-600">
@@ -115,7 +115,7 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
       </div>
 
       {/* Total Power Tickets */}
-      <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-purple-200/50 shadow-md p-3">
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-purple-200/50 shadow-md p-3">
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-bold text-black">Total Power Tickets</h3>
           <div className="text-2xl font-bold text-purple-600">
@@ -125,7 +125,7 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
       </div>
 
       {/* Total Sites */}
-      <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-blue-200/50 shadow-md p-3">
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-blue-200/50 shadow-md p-3">
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-bold text-black">Total Sites</h3>
           <div className="text-2xl font-bold text-blue-600">
@@ -135,7 +135,7 @@ export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardPr
       </div>
 
       {/* Degraded Tickets */}
-      <div className="w-full bg-white/80 backdrop-blur-sm rounded-lg border border-orange-200/50 shadow-md p-3">
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg border border-orange-200/50 shadow-md p-3">
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-bold text-black">Degraded Tickets</h3>
           <div className="text-2xl font-bold text-orange-600">
