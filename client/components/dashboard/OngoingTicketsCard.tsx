@@ -5,7 +5,7 @@ interface OngoingTicketsCardProps {
   sites?: FestivalSite[];
 }
 
-export function OngoingTicketsCard({ tickets, sites = [] }: OngoingTicketsCardProps) {
+export function OngoingTicketsCard({ tickets }: OngoingTicketsCardProps) {
   const getSeverityCount = (severity: string) => {
     return tickets.filter((t) => t.severity === severity).length;
   };
